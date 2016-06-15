@@ -8,30 +8,68 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Background Estimation}\label{background}
   \subsubsection{Beam Induced Dirt Background}
+    Discuss dirt neutrons, how they happen and estimated rates and energy
+    distributions.  Show how well we can seperate or understand them. Show any
+    sort of data-driven correction we did to dirt neutron background and how it
+    affects our uncertainty. Talk about how well we can tag cryostat neutrons
+    with the PMTs.
   \subsubsection{Beam Induced TPC Background}
+    Talk about neutral-current elastic neutrons that are produced in the TPC
+    and how their distributions differ from NCEp ones.
   \subsubsection{Cosmic Background}
+    Discuss the difference between cosmic tracks and beam proton tracks. How do
+    we separate them? What is the rate?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Sources of Measurement Uncertainty
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Sources of Measurement Uncertainty}\label{uncertainties}
+  \subsubsection{TPC Efficiency}
+    The actual physical efficiency. If ionization electrons actually reach the
+    TPC and leave a signal.
+  \subsubsection{PMT Efficiency}
+    Talk here about efficiency of PMT software trigger. Show studies that have
+    been done for single proton efficiency. Show efficiency of protons in data.
+  \subsubsection{Reconstruction Efficiency}
+    Here show reconstruction efficiency.  Efficiency of track algorithms
+    finding protons at all and then talk about using BDTs or some other cuts.
+  \subsubsection{Nuclear Effects and Final State Interactions}
+    Describe what Nuclear effects and fsi are. Emphasize the parts that will
+    actually remain after taking the ratio (any sort of energy shift or
+        something).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ratio of Cross Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ratio of NCEp to CCQEn Cross Sections}\label{ratios}
+  Show how the ratio gets rid of a lot of measurement uncertainty like beam
+  flux and efficiencies. Give exact equation that we will be using for
+  analysis. Show how $\Delta s$ is still large at low $Q^2$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Quantifying Error on Ratio
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Quantifying Error on Ratio}\label{errorcalc}
+\subsection{Quantifying Uncertainty on Ratio}\label{errorcalc}
+  Calculate exact uncertainty and show it here.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Joint Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Joint Estimation of $M_A$ and $\Delta s$}\label{deltas}
+  Here is where we do the actual MCMC.
   \subsubsection{Probability of $\theta$ given D}
+    Walk through the Bayesian math. Start with wanting the probability of
+    $\theta$ given the data and the model and get final equation. Then show how
+    to combine with previous experiments. Should give detail for each factor in
+    equation (prior, likelihood, posterior, evidence). Should especially give
+    detail on how we choose priors. Maybe talk about model selection when
+    talking about the evidence.
   \subsubsection{Markov Chain Monte Carlo}
+    Go through detail on our implementation of MCMC. Discuss how Markov Chains
+    work in general. Then describe affine invariance and parallel tempering.
+    Explain that parallel tempering would allow us to do model selection.
   \subsubsection{Results}
+    Lots of plots! $\Delta s$!
+
 
 %This is the end of analysis section

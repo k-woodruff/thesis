@@ -5,45 +5,69 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Booster Neutrino Beam}\label{beam}
   \subsubsection{Protons}
-    Write about where the protons come from, how they get accelerated, and what their final energy distribution is. Also write about bunch and spill structure.
+    Write about where the protons come from, how they get accelerated, and what
+    their final energy distribution is. Also write about bunch and spill
+    structure.
   \subsubsection{Target and Horn}
-    Write about target, mesons that are created, how they're focused, and what the decay chain is with how many of each particle is created. 
+    Write about target, mesons that are created, how they're focused, and what
+    the decay chain is with how many of each particle is created. 
   \subsubsection{Neutrino Flux at MicroBooNE}
-    Write about how neutrinos go through dirt to experiments. Explain all the details of neutrino beam at MicroBooNE including total flux, energy shape, timing structure, expected number of events (both for total numu ints and for NCEp).
+    Write about how neutrinos go through dirt to experiments. Explain all the
+    details of neutrino beam at MicroBooNE including total flux, energy shape,
+    timing structure, expected number of events (both for total numu ints and
+        for NCEp).
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MicroBooNE LArTPC and PMTs
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MicroBooNE LArTPC and PMTs}\label{tpc}
   \subsubsection{LArTPCs}
-    Explain LArTPCs in general: how argon ionizes and electrons drift through electric field. Also explain why liquid argon is used as opposed to another liquid.
+    Explain LArTPCs in general: how argon ionizes and electrons drift through
+    electric field. Also explain why liquid argon is used as opposed to another
+    liquid.
   \subsubsection{MicroBooNE TPC}
-    Give MicroBooNE specs including dimensions, number of wires, electric field, drift speed, etc.
+    Give MicroBooNE specs including dimensions, number of wires, electric
+    field, drift speed, etc.
   \subsubsection{MicroBooNE PMT System}
-    Write about how argon also scintillates and that can be used for timing cosmic rejection.
+    Write about how argon also scintillates and that can be used for timing
+    cosmic rejection.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DAQ and Trigger
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Data Acquisition and Trigger}\label{daq}
   \subsubsection{TPC Readout Electronics}
-    Describe cold electronics (front end ASIC preamplifies and shapes), warm interface electronics (intermediate amplifier for transmission over 20 m. long cable), and digitizing electronics (TPC readout board in crate continuously samples received signals and passing from ADC to FPGA for processing, reducing, and storage). Maybe also talk about cabling and signal feedthrough. Also discuss specs like sampling rate.
+    Describe cold electronics (front end ASIC preamplifies and shapes), warm
+    interface electronics (intermediate amplifier for transmission over 20 m.
+        long cable), and digitizing electronics (TPC readout board in crate
+          continuously samples received signals and passing from ADC to FPGA
+          for processing, reducing, and storage). Maybe also talk about cabling
+        and signal feedthrough. Also discuss specs like sampling rate.
   \subsubsection{PMT Readout Electronics and Trigger}
-    Consist of signal shaper boards, an FEM modified from TPC version, PMT feedthrough, HV/signal splitters, and a triigger board. Write about optical flash reconstruction.
+    Consist of signal shaper boards, an FEM modified from TPC version, PMT
+    feedthrough, HV/signal splitters, and a trigger board. Write about optical
+    flash reconstruction.
   \subsubsection{DAQ System}
-    Receives and buffers data from TPC and PMT readout system, then builds and records event based on trigger decision. Write about SEBs and EVB and passing data between. Should go into detail here about trigger algorithm and trigger efficiency for protons in our energy range.
+    Receives and buffers data from TPC and PMT readout system, then builds and
+    records event based on trigger decision. Write about SEBs and EVB and
+    passing data between. Should go into detail here about trigger algorithm.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Simulation and Reconstruction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Simulation and Reconstruction}\label{reco}
   \subsubsection{Simulation}
-    Describe all 3 stages of simulations: Genie (generation), Geant4 (propogation), and detector simulation.
+    Describe all 3 stages of simulations: Genie (generation), Geant4
+    (propogation), and detector simulation.
   \subsubsection{Noise Filters and Hits}
-    Write about filtering raw signal and hit finding algorithm used (gaushit?). I think give efficiencies at this stage.
+    Write about filtering raw signal and hit finding algorithm used (gaushit?).
+    I think give efficiencies at this stage.
   \subsubsection{Clusters and Tracks}
-    Explain how hits are clustered and then combined into tracks or showers. Explain algorithm used and give efficiencies at this stage. Also include cosmic tagging and calorimetry.
+    Explain how hits are clustered and then combined into tracks or showers.
+    Explain algorithm used and give efficiencies at this stage. Also include
+    cosmic tagging and calorimetry.
   \subsubsection{Particle Identification}
-    Explain BDTs (if used) and how well they do at separating protons from different backgrounds.
+    Explain BDTs (if used) and how well they do at separating protons from
+    different backgrounds.
 
 %This is the end of detector section
