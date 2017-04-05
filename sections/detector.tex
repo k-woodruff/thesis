@@ -39,10 +39,10 @@
   \subsubsection{TPC Readout Electronics}
     Describe cold electronics (front end ASIC preamplifies and shapes), warm
     interface electronics (intermediate amplifier for transmission over 20 m.
-        long cable), and digitizing electronics (TPC readout board in crate
-          continuously samples received signals and passing from ADC to FPGA
-          for processing, reducing, and storage). Maybe also talk about cabling
-        and signal feedthrough. Also discuss specs like sampling rate.
+    long cable), and digitizing electronics (TPC readout board in crate
+    continuously samples received signals and passing from ADC to FPGA for
+    processing, reducing, and storage). Maybe also talk about cabling and
+    signal feedthrough. Also discuss specs like sampling rate.
   \subsubsection{PMT Readout Electronics and Trigger}
     Consist of signal shaper boards, an FEM modified from TPC version, PMT
     feedthrough, HV/signal splitters, and a trigger board. Write about optical
@@ -56,18 +56,25 @@
 % Simulation and Reconstruction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Simulation and Reconstruction}\label{reco}
+  The entire experimental process from the neutrino interactions in and around
+  the detector to electronic signal readout to particle identification is
+  simulated in software. To interface the software packages needed to simulate
+  each step, a liquid argon software framework (LArSoft) was developed at
+  Fermilab.
   \subsubsection{Simulation}
+    The initial neutrino interactions are simulated using the GENIE Neutrino
+    Monte Carlo Generator~\cite{Andreopoulos:2009rq,Andreopoulos:2015wxa}.
     Describe all 3 stages of simulations: Genie (generation), Geant4
     (propogation), and detector simulation.
   \subsubsection{Noise Filters and Hits}
-    Write about filtering raw signal and hit finding algorithm used (gaushit?).
+    Write about filtering raw signal and hit finding algorithm used.
     I think give efficiencies at this stage.
   \subsubsection{Clusters and Tracks}
     Explain how hits are clustered and then combined into tracks or showers.
     Explain algorithm used and give efficiencies at this stage. Also include
     cosmic tagging and calorimetry.
   \subsubsection{Particle Identification}
-    Explain BDTs (if used) and how well they do at separating protons from
+    Explain BDTs and how well they do at separating protons from
     different backgrounds.
 
 %This is the end of detector section
