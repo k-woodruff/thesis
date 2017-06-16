@@ -8,8 +8,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Spin Structure of Nucleons}
   Proton spin: \\
-  --- spin vector s\_mu from forward matrix element of axial vector current \\
+  --- spin vector $s_{\mu}$ from forward matrix element of axial vector current \\
   --- derive axial charges \\
+  From Bass 1.1 (need to fill in with Peskin): \\
+  Forward matrix element of the axial current vector (derive from peskin):
+  \[
+      2Ms_{\mu} = <p,s|\bar{\psi}\gamma_{\mu} \gamma_{5} \psi|p,s>
+  \]
+  where $s_{\mu}$ is the proton's spin vector, $\psi$ is the proton field
+  vector and $M$ is the proton mass. The quark axial charges measure
+  information about the quark ``spin content".
+  \[
+    2Ms_{\mu}\Delta q = <p,s| \bar{q}\gamma_{\mu}\gamma_{5}q|p,s> \,,
+  \]
+  where $q$ is the quark field operator and $\Delta q$ is the quark
+  flavor-dependent axial charge, $\Delta u$, $\Delta d$, or $\Delta s$. The
+  isovector, SU(3) octet, and flavor-singlet axial charges, $g_A^{(3)}$,
+  $g_A^{(8)}$, and $g_A^{(0)}$, respectively, can be written as linear
+  combinations of the quark axial charges (derive from Peskin)
+  \begin{align}
+      g_A^{(3)} &= \Delta u - \Delta d \\
+      g_A^{(8)} &= \Delta u + \Delta d - 2\Delta s \\
+      g_A^{(0)} &= \Delta u + \Delta d + \Delta s \,.
+  \end{align}
+  Can be interpreted semi-classically as amount of spin carried by quarks and
+  antiquarks of flavor $q$.
+
+
   --- expectation of axial charges from non-relativistic quark model
   --- scaling and Regge theory?
   \subsubsection{Proton spin puzzle}
@@ -19,21 +44,148 @@
   \subsubsection{Nucleon Form Factors}
     Talk about how to parameterize the nucleon in terms of the form factors
     Discuss Dirac, Pauli, electric, and magnetic.
+    %%% starting text %%%
+    From Thomas, we derive elastic lepton-nucleon scattering starting with
+    conservation of energy and momentum. \\
+    Section 2.1: \\
+    Elastic scattering means that the nucleon remains in it's ground state so
+    that the energy transfer is
+    \[
+        \nu = \epsilon - \epsilon' = E' - E,
+     \]
+    where $\epsilon$ is energy of incident electron, E is energy of the nucleon.
+    Also, three-momentum transfer is
+    \[
+        \bar{q} = \bar{p} - \bar{p}' = \bar{P}' - \bar{P} \,.
+    \]
+    So, squared four-momentum is
+    \[
+        q^2 = \nu^2 - \bar{q}^2 = -Q^2 < 0
+    \]
+    which is Lorentz invariant.
+    From energy and momentum conservation, we get
+    \[
+        \epsilon' = \frac{\epsilon}{1+\frac{2\epsilon}{M}\mathrm{sin}^2\frac{\theta}{2}}
+    \]
+    and
+    \[
+        Q^2 = 4\epsilon \epsilon' \mathrm{sin}^2 \frac{\theta}{2} \,.
+    \]
+    This leads to the Mott differential cross section (pointlike, spinless)
+    \[
+        \left(\frac{d\sigma}{d\Omega} \right)_\textrm{Mott} = \frac{\alpha^2}{4\epsilon^2 \textrm{sin}^4\frac{\theta}{2}}\frac{\epsilon'}{\epsilon}\textrm{cos}^2\frac{\theta}{2} \,.
+    \]
+    If we make it spin 1/2 with a normal (Dirac) magnetic moment (still pointlike), we get an additional term (increases backwards angles):
+    \[
+        \frac{d\sigma}{d\Omega} = \left(\frac{d\sigma}{d\Omega} \right)_\textrm{Mott} \left[ 1 + \frac{Q^2}{4M^2}2\mathrm{tan}^2\frac{\theta}{2} \right] \,.
+    \]
+    Now we just need to add finite structure and anomolous magnetic moment,
+    \[
+        \frac{d\sigma}{d\Omega} = \left(\frac{d\sigma}{d\Omega} \right)_\textrm{Mott} 
+        \left(F_1^2(Q^2) +\frac{Q^2}{4M}\left[F_2^2(Q^2)+2(F_1(Q^2)+F_2(Q^2))^2\,\textrm{tan}^2\frac{\theta}{2} \right] \right) \,.
+    \]
+    The Dirac and Pauli form factors, $F_1$ and $F_2$ respectively, can be parameterized as the electric and magnetic, or Sachs, form factors
+    \begin{align}
+        G_E(Q^2) &= F_1(Q^2) - \frac{Q^2}{4M}F_2(Q^2) \\
+        G_M(Q^2) &= F_1(Q^2) + F_2(Q^2) \,.
+    \end{align}
+    Low $Q^2$ data. Sachs form factors when $Q^2$ goes to zero. Three dimensional fourier integral and slopes go to mean squared radii.
+
   \subsubsection{The Axial Form Factor}
     Derive the axial form factor. Discuss different axial form factor models
     (dipole...). Show that you can determine $\Delta s$. Make explicit that
     this is the same $\Delta s$ from first subsubsection.
+  \subsubsection{Previous measurements}
+    Polarized lepton-nucleon inclusive DIS \\
+    SIDIS
+    
+
   
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neutrinos as Nucleon Probes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Neutrino Cross Sections}\label{probe}
+  \subsubsection{Weak interactions and the Axial Form Factor}
+    Why are neutrinos better probes than electrons or photons?
   \subsubsection{Electroweak Interactions}
     Go from electroweak lagrangean to weak current matrix elements to actual
     cross sections. Show both neutral-current and charged-current version of
     elastic scattering cross section.
-  \subsubsection{Weak interactions and the Axial Form Factor}
-    Why are neutrinos better probes than electrons or photons?
+
+  %%% starting text %%%
+  From Alberico, starting with 2.3: \\
+  The NC lagrangean is (interaction of leptons and quarks with $Z^0$:
+  \[
+      \mathcal{L}^{NC} = -\frac{g}{2\textrm{cos}\theta_W}j_{\alpha}^{NC}Z^{\alpha},
+  \]
+  where $j_{\alpha}^{NC}$ is \textit{the} neutral current. Since unification of
+  weak and electromagnetic is required, we get
+  \[
+    j_{\alpha}^{NC} = 2j_{\alpha}^3 - 2\textrm{sin}^2\theta_W j_{\alpha}^{em},
+  \]
+  where $j_{\alpha}^{em}$ is electromagnetic current and $j_{\alpha}^3$ is some
+  sort of isovector component?
+  \[
+      j_{\alpha}^{em} = \sum_{l = e,\mu,\tau} (-1)\bar{l}\gamma_{\alpha}l + \sum_{q=u,d,...}e_q\bar{q}\gamma_{\alpha}q
+  \]
+  and
+  \[
+    j_{\alpha}^i = \sum_a \bar{\psi}_{aL} \gamma_{\alpha}\frac{1}{2} \tau^i \psi_{aL} \,,
+  \]
+  and $\psi_{aL} = \frac{1}{2}(1-\gamma_5)\psi_a$ are the left-handed doublets
+  of the SU(2)xU(1) gauge group of the standard model, and I don't know what $\tau$ is.
+  So, we get
+  \begin{align*}
+      j_{\alpha}^{NC} &= \sum_{q=u,c,t}\bar{q}\gamma_{\alpha}(1-\gamma_5)\frac{1}{2}q
+                       + \sum_{q=d,s,b}\bar{q}\gamma_{\alpha}(1-\gamma_5)\left(-\frac{1}{2}\right)q \\
+                      &+ \sum_{l=e,\mu,\tau}\bar{\nu_l}\gamma_{\alpha}(1-\gamma_5)\frac{1}{2}\nu_l
+                       + \sum_{l=e,\mu,\tau}\bar{l}\gamma_{\alpha}(1-\gamma_5)\left(-\frac{1}{2}\right)l \\
+                      &- 2\mathrm{sin}^2\theta_W j_{\alpha}^{em} \,.
+  \end{align*}
+  It's convenient to separate the contributions from the light ($u,d$) and
+  heavy ($s,c,...$) quarks. We get
+  \[
+    \j_{\alpha}^{NC;q} = v_{\alpha}^3 - a_{\alpha}^3 - \frac{1}{2}(v_{\alpha}^s - a_{\alpha}^s) - 2\mathrm{sin}^2\theta_W j_{\alpha}^{em} \,,
+  \]
+  where we define
+  \begin{align*}
+      v_{\alpha}^3 &= \bar{u}\gamma_{\alpha}\frac{1}{2}u - \bar{d}\gamma_{\alpha}\frac{1}{2}d \equiv \bar{N} \gamma_{\alpha}\frac{1}{2}\tau_3 N \\
+      a_{\alpha}^3 &= \bar{u}\gamma_{\alpha}\gamma_5\frac{1}{2}u - \bar{d}\gamma_{\alpha}\gamma_5\frac{1}{2}d \equiv \bar{N} \gamma_{\alpha}\gamma_5\frac{1}{2}\tau_3 N \,.
+  \end{align*}
+  where $N = \left(\begin{matrix}{u}\\{d}\end{matrix} \right)$ is the isotopic
+  SU(2) group doublet and the currents $v_{\alpha}^3$ and $a_{\alpha}^3$
+  are the third components of the isovectors
+  \begin{align*}
+      v_{\alpha}^i &= \bar{N} \gamma_{\alpha}\frac{1}{2}\tau^i N \\
+      a_{\alpha}^i &= \bar{N} \gamma_{\alpha}\gamma_5\frac{1}{2}\tau^i N \,.
+  \end{align*}
+  On the other hand, $v_{\alpha}^s$ and $a_{\alpha}^s$ are isoscalars. They
+  represent the heavier quark contirbution to $j_{\alpha}^{NC;q}$. If we only
+  include the strange quark, we have
+  \begin{align*}
+      v_{\alpha}^s &= \bar{s}\gamma_{\alpha}s \\
+      a_{\alpha}^s &= \bar{s}\gamma_{\alpha}\gamma_5 s \,.
+  \end{align*}
+  The quark part of the electromagnetic current is
+  \[
+    j_{\alpha}^{em;q} = \sum_{q=u,d,...} e_q\bar{q} \gamma_{\alpha}q \,,
+  \]
+  which we can also separate between light and heavy contributions
+  \[
+    j_{\alpha}^{em;q} = v_{\alpha}^3 + v_{\alpha}^0 \,.
+  \]
+  where $v_{\alpha}^0$ is the isoscalar current which is given by
+  \[
+    v_{\alpha}^0 = \frac{1}{6}\bar{N}\gamma_{\alpha}N + \left(-\frac{1}{3}\right)\bar{s}\gamma_{\alpha}s \,,
+  \]
+  if we ignore charm and up.
+
+  Time for one-nucleon matrix elements! 
+
+  %%% ending text %%%
+
+  \subsubsection{Previous measurements}
+    E734
 
 %This is the end of nu-n cross sections section
