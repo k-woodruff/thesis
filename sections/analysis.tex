@@ -4,6 +4,15 @@
 \hspace{\parindent}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Event Selection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Event selection}
+  Need to select both NCE and CCQE events.
+  \subsubsection{}
+  Use particle ID plus reconstructed flashes.
+  Exactly how we select NCE events 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Background Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Background Estimation}\label{background}
@@ -21,36 +30,26 @@
     we separate them? What is the rate?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Sources of Measurement Uncertainty
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Sources of Measurement Uncertainty}\label{uncertainties}
-  \subsubsection{TPC Efficiency}
-    The actual physical efficiency. If ionization electrons actually reach the
-    TPC and leave a signal.
-  \subsubsection{PMT Efficiency}
-    Talk here about efficiency of PMT software trigger. Show studies that have
-    been done for single proton efficiency. Show efficiency of protons in data.
-  \subsubsection{Reconstruction Efficiency}
-    Here show reconstruction efficiency.  Efficiency of track algorithms
-    finding protons at all and then talk about using BDTs or some other cuts.
-  \subsubsection{Nuclear Effects and Final State Interactions}
-    Describe what Nuclear effects and fsi are. Emphasize the parts that will
-    actually remain after taking the ratio (any sort of energy shift or
-        something).
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ratio of Cross Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Ratio of NCEp to CCQEn Cross Sections}\label{ratios}
   Show how the ratio gets rid of a lot of measurement uncertainty like beam
   flux and efficiencies. Give exact equation that we will be using for
   analysis. Show how $\Delta s$ is still large at low $Q^2$.
+  \subsubsection{Sources of Measurement Uncertainty}
+    TPC efficiency: If ionization electrons actually reach the
+    TPC and leave a signal.
+    PMT trigger efficiency: Refer back to PMT trigger studies. Give uncertainty due to on signal.
+    Reconstruction efficiency: Refer back. Give uncertainty on signal.
+  \subsubsection{Quantifying Uncertainty on Ratio}\label{errorcalc}
+    Calculate exact uncertainty and show it here.
+  \subsubsection{}
+    Nuclear effects and FSI. Discuss 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Quantifying Error on Ratio
+% Comparison to Simulation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Quantifying Uncertainty on Ratio}\label{errorcalc}
-  Calculate exact uncertainty and show it here.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Joint Estimation
