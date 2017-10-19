@@ -46,23 +46,59 @@
 \subsection{Simulation and Reconstruction}\label{reco}
   The entire experimental process from the neutrino interactions in and around
   the detector to electronic signal readout to particle identification is
-  simulated in software. To interface the software packages needed to simulate
-  each step, a liquid argon software framework (LArSoft) was developed at
-  Fermilab.
+  simulated in software. To interface different the software packages needed to
+  simulate each step, a liquid argon software framework (LArSoft)~\cite{larsoft}
+  was developed at Fermilab. Within the LArSoft framework, the simulation is
+  divided into three steps: generation, propagation, and detector simulation.
+  The simulated data output from the detector simulation stage is designed to
+  match the real data output from the detector as closely as possible. Event
+  reconstruction is also handled within LArSoft, and the same algorithms can be
+  applied to both real data and data simulated through the detector simulation
+  stage in an identical way. This section describes all three stages of
+  simulation and reconstruction, including TPC particle track and optical flash
+  reconstruction.
   \subsubsection{Simulation}
     The initial neutrino interactions are simulated using the GENIE Neutrino
     Monte Carlo Generator~\cite{Andreopoulos:2009rq,Andreopoulos:2015wxa}.
-    Describe all 3 stages of simulations: Genie (generation), Geant4
-    (propagation), and detector simulation.
-  \subsubsection{Flash reconstruction}
-    Describe simpleFlash algorithm.
-  \subsubsection{Noise Filters and Hits}
+    Assuming a given neutrino flux, genie simulates the interaction of the
+    neutrino with the nucleons inside of an Argon atom. It also simulates the
+    intranuclear interactions that occur while the nucleons and pions from the
+    initial neutrino-nucleon interaction traverse the Argon nucleus.  Within
+    GENIE the nuclear models and neutrino-nucleon cross sections are
+    configurable by the user.  MicroBooNE uses the GENIE version v2\_12\_2
+    default settings with the addition of the empirical MEC cross section model
+    to be described in section~\ref{ratios}.
+
+    The simulated final state particles from GENIE are passed to the
+    GEANT4~\cite{geant4} software package to be propagated through the
+    simulated geometry geometry. The Entire MicroBooNE detector system, the
+    surrounding detector hall, and fifty feet of dirt are all included in the
+    GEANT4 simulation. Both the ionization and scintillation of the liquid
+    argon is simulated, and the resulting photons and electrons are propagated
+    to the sensitive detectors.
+
+    After the simulated particles interact with the TPC or PMT system, the
+    detector response is simulated. The detector simulation section includes
+    the analog to digital conversion of the PMT and TPC signals and the
+    simulation and application of the beam and optical trigger. The detector
+    noise and unresponsive TPC wires are also included at this stage of the
+    simulation. At this point, the simulated data resembles the actual detector
+    data as closely as possible.
+
+  \subsubsection{TPC event reconstruction}
+    The event reconstruction steps are applied identically to detector data and
+    the simulated data that is output from the detector simulation stage.
+    First, software filters are applied to reduce the electronic noise on the
+    wire signal. 
+
     Write about filtering raw signal and hit finding algorithm used.
     I think give efficiencies at this stage.
-  \subsubsection{Clusters and Tracks}
     Explain how hits are clustered and then combined into tracks or showers.
     Explain algorithm used and give efficiencies at this stage. Also include
     cosmic tagging and calorimetry.
+  \subsubsection{Flash reconstruction}
+    Describe simpleFlash algorithm.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Particle Identification
