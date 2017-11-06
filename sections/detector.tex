@@ -21,24 +21,12 @@
     PMT layout, timing, TPB.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% DAQ and Trigger
+% Software Trigger
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Data Acquisition and Trigger}\label{daq}
-  \subsubsection{PMT Readout Electronics and Trigger}
-    Consist of signal shaper boards, an FEM modified from TPC version, PMT
-    feedthrough, HV/signal splitters, and a trigger board. Write about optical
-    flash reconstruction.
-  \subsubsection{TPC Readout Electronics}
-    Describe cold electronics (front end ASIC preamplifies and shapes), warm
-    interface electronics (intermediate amplifier for transmission over 20 m.
-    long cable), and digitizing electronics (TPC readout board in crate
-    continuously samples received signals and passing from ADC to FPGA for
-    processing, reducing, and storage). Maybe also talk about cabling and
-    signal feedthrough. Also discuss specs like sampling rate.
-  \subsubsection{DAQ System}
-    Receives and buffers data from TPC and PMT readout system, then builds and
-    records event based on trigger decision. Write about SEBs and EVB and
-    passing data between. Should go into detail here about trigger algorithm.
+\subsection{PMT trigger}\label{daq}
+  \subsubsection{PMT Readout Electronics}
+  \subsubsection{BNB signal}
+  \subsubsection{Software trigger}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Simulation and Reconstruction
@@ -89,30 +77,44 @@
     The event reconstruction steps are applied identically to detector data and
     the simulated data that is output from the detector simulation stage.
     First, software filters are applied to reduce the electronic noise on the
-    wire signal. 
+    wire signal.
 
-    Write about filtering raw signal and hit finding algorithm used.
-    I think give efficiencies at this stage.
-    Explain how hits are clustered and then combined into tracks or showers.
-    Explain algorithm used and give efficiencies at this stage. Also include
-    cosmic tagging and calorimetry.
+    Here describe noise deconvolution as it is in MCC8 and the hit finding
+    algorithm. The hit-finding will be gaushit, need to read about how it
+    works.
+
+    Here describe the cluster and track finding algorithms that you end up
+    using. Need to wait for MCC8 to finish to decide. Should give a lot of
+    information about the final efficiency on MC data for the tracking
+    algorithm. Give efficiency for protons and muons as a function of length,
+    position, angle.
+
+    Calorimetric information is extracted when the reconstructed track objects
+    are created. The calorimetric information that we calculate and use is
+    related to the energy loss of the particle that created the track along its
+    trajectory. At each point along the track, the difference in the total
+    charge between the current point and the previous trajectory point is
+    calculated. This gives us the change in charge as a function of distance
+    along the track, which we label dQ/dx. The change in charge is determined
+    by adding the total charge of each of the reconstructed wire hits between
+    the two points on the track. The charge difference and the dQ/dx values are
+    found for each of the three wire planes. The dQ/dx values can be converted
+    to energy loss per unit distance, dE/dx, by multiplying the dQ/dx by a
+    measured conversion factor. This conversion factor depends on the strength
+    of the electric field and the gain of the readout electronics and is
+    determined empirically. 
+
   \subsubsection{Flash reconstruction}
-    Describe simpleFlash algorithm.
 
+    In additional to the TPC signals, the optical information needs to be
+    reconstructed. Again, the optical flash reconstruction is handled in the
+    same way for both simulation and detector data.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Particle Identification
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Particle Identification}
-  Classification goals (cosmic rejection and neutrino-induced particle type).
-  \subsubsection{Reconstructed track features}
-    Itemize and discuss every feature used as inuot to classifier.
-    Separate into cosmic rejection and particle ID.
-  \subsubsection{Boosted decision trees}
-    Decision trees, tree boosting, xgboost.
-  \subsubsection{Performance}
-    Show efficiency, accuracy, itemize backgrounds.
-    Discuss reasons for different backgrounds.
+    Similar to TPC reconstruction, the first step in optical reconstruction is
+    to find peaks in the electronic signals read out from the PMTs. We call the
+    algorithm used to find these peak \textit{OpHit}. 
+
+  \subsubsection{Cosmic tagging}
 
 
 %This is the end of detector section
