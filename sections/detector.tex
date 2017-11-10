@@ -5,7 +5,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Booster Neutrino Beam and the MicroBooNE detector}\label{beam}
   \subsubsection{The neutrino beam}
-    Where do the proton come from, how do they get accelerated, what is their final energy distribution.
+    Where do the proton come from, how do they get accelerated, what is their
+    final energy distribution.
     Bunches and spills.
     The target/horn, it's shape and materials.
     The decay chain of particles coming out of the target (mention dirt).
@@ -17,16 +18,45 @@
     LAr properties (density, ionization, scintillation).
     MicroBooNE electric field, drift time/distance.
     MicroBooNE specs (dimensions, wire counts).
-  \subsubsection{MicroBooNE PMT system}
-    PMT layout, timing, TPB.
+  \subsubsection{MicroBooNE light collection system and event trigger}
+    Liquid argon also produces scintillation light. About 24,000 photons are
+    produced per MeV of deposited energy ~\cite{detectorpaper}. The
+    scintillation photons have a wavelength of 128 nm and can not re-interact
+    with the argon. The light collection system in MicroBooNE consists of
+    thirty-two photomultiplier tubes (PMTs) outside of the anode side of the
+    TPC. Each PMT is shielded by an acrylic plate coated in
+    tetraphenyl-butadiene (TPB) that shifts the ultraviolet photons to the
+    visible spectrum before interacting with the PMT.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Software Trigger
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{PMT trigger}\label{daq}
-  \subsubsection{PMT Readout Electronics}
-  \subsubsection{BNB signal}
-  \subsubsection{Software trigger}
+    The light collection system in MicroBooNE is particularly useful for timing
+    information. Since each TPC event is readout over several milliseconds, it
+    is difficult to determine which events have activity inside the neutrino
+    beam time window. The PMTs have nanosecond timing resolution which allows
+    us to only consider events that have optical activity during a time window
+    surrounding the 1.6 microsecond neutrino beam spill. 
+
+    A PMT trigger is implemented in the data acquisition (DAQ) software that
+    determines whether an event is saved. Events are only read into the DAQ
+    when a neutrino beam-spill signal is received. Each event includes a
+    23~microsecond window of PMT data that includes the time of the beam spill.
+    This 23~microseconds of data is used to form a PMT software trigger. First,
+    pulses are found on the individual PMT signals. The pulses are found using
+    constant-fraction discriminators that open a 100~nanoseconds discriminator
+    window. The discriminator difference required to open a discriminator
+    window is 10 ADC counts which corresponds to approximately a 0.5
+    photoelectron (PE) signal in the PMT. The largest discriminator difference
+    during the discriminator window is saved as the pulse height. A new
+    discriminator window cannot be initiated until the current one has close
+    and there has been a 15~nanoseconds period without the discriminator
+    firing.  Next, coincident pulses across the different PMTs are found and
+    combined.  Pulse windows that are coincident in time are combined and their
+    pulse heights are summed. If the sum of the coincident pulse heights is
+    above 20 ADC counts, corresponding to approximately 6.5 PE, and the time of
+    the coincident pulses is within the neutrino beam-spill window, the event
+    is saved.
+
+    
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Simulation and Reconstruction
