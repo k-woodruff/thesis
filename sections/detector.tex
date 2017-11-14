@@ -3,7 +3,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MicroBooNE and Neutrino Beam
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Booster Neutrino Beam and the MicroBooNE detector}\label{beam}
+\subsection{The Booster Neutrino Beam and the MicroBooNE detector}\label{sec:beam}
   \subsubsection{The neutrino beam}
     Where do the proton come from, how do they get accelerated, what is their
     final energy distribution.
@@ -12,13 +12,16 @@
     The decay chain of particles coming out of the target (mention dirt).
     The final neutrino flux at MicroBooNE (also mention uncertainty ==> hence ratio).
     Expected number of neutrino interactions, expected NCE interactions.
+
   \subsubsection{Dirt neutrons}
-  \subsubsection{MicroBooNE LArTPC}
+
+  \subsubsection{MicroBooNE LArTPC}\label{sec:lartpc}
     Liquid argon target and TPC.
     LAr properties (density, ionization, scintillation).
     MicroBooNE electric field, drift time/distance.
     MicroBooNE specs (dimensions, wire counts).
-  \subsubsection{MicroBooNE light collection system and event trigger}
+
+  \subsubsection{MicroBooNE light collection system and event trigger}\label{sec:swtrigger}
     Liquid argon also produces scintillation light. About 24,000 photons are
     produced per MeV of deposited energy ~\cite{detectorpaper}. The
     scintillation photons have a wavelength of 128 nm and can not re-interact
@@ -61,7 +64,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Simulation and Reconstruction
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Simulation and Reconstruction}\label{reco}
+\subsection{Simulation and Reconstruction}\label{sec:simreco}
   The entire experimental process from the neutrino interactions in and around
   the detector to electronic signal readout to particle identification is
   simulated in software. To interface different the software packages needed to
@@ -75,7 +78,8 @@
   stage in an identical way. This section describes all three stages of
   simulation and reconstruction, including TPC particle track and optical flash
   reconstruction.
-  \subsubsection{Simulation}
+
+  \subsubsection{Event generation and cross section model}
     The initial neutrino interactions are simulated using the GENIE Neutrino
     Monte Carlo Generator~\cite{Andreopoulos:2009rq,Andreopoulos:2015wxa}.
     Assuming a given neutrino flux, genie simulates the interaction of the
@@ -84,40 +88,93 @@
     initial neutrino-nucleon interaction traverse the Argon nucleus.  Within
     GENIE the nuclear models and neutrino-nucleon cross sections are
     configurable by the user.  MicroBooNE uses the GENIE version v2\_12\_2
-    default settings with the addition of the empirical MEC cross section model
-    to be described in section~\ref{ratios}.
+    default settings with the addition of the empirical MEC cross section model.
 
+    Need to add: Corsika, cryostat volume, 5e12 POT, cross section and nuclear
+    model, streams (BNB,BNB+cosmic,NuMI,intime-cosmic)
+
+  \subsubsection{Detector simulation}
     The simulated final state particles from GENIE are passed to the
     GEANT4~\cite{geant4} software package to be propagated through the
-    simulated geometry geometry. The Entire MicroBooNE detector system, the
-    surrounding detector hall, and fifty feet of dirt are all included in the
-    GEANT4 simulation. Both the ionization and scintillation of the liquid
-    argon is simulated, and the resulting photons and electrons are propagated
-    to the sensitive detectors.
+    simulated geometry geometry. The entire MicroBooNE detector system, the
+    detector hall, and fifty feet of dirt surrounding the detector hall are all
+    included in the GEANT4 simulation. This includes the electric field and the
+    detector electronics. The particles are stepped through the geometry with
+    the possible physics processes simulated at each step. The particles are
+    allowed to interact electromagnetically and hadronically with other
+    particles and the detector system or decay through one of the physically
+    possible decay modes. Additionally, the energy loss through ionization and
+    scintillation is simulated for all particles traversing the detector
+    geometry. In the case of the ionization of the liquid argon, the resulting
+    electrons are propagated through the electric field to the wire readouts.
+    For the scintillation of the argon, a photon library was generated for each
+    position in the liquid cryostat. At each step particle takes through the
+    liquid argon, the resulting photons that would interact in the PMTs are
+    determined from a look-up table that was generated in a previous full
+    optical simulation. 
 
     After the simulated particles interact with the TPC or PMT system, the
-    detector response is simulated. The detector simulation section includes
-    the analog to digital conversion of the PMT and TPC signals and the
-    simulation and application of the beam and optical trigger. The detector
-    noise and unresponsive TPC wires are also included at this stage of the
-    simulation. At this point, the simulated data resembles the actual detector
-    data as closely as possible.
+    detector response is simulated. The detector-simulation stage includes the
+    electronic responses of the sensitive detectors and reproduces the
+    electronic signals from the TPC and PMT systems. First, the PMT signal is
+    digitized and the PMT software trigger described in
+    Sec.~\ref{sec:swtrigger} is fully simulated. Events that do not pass the
+    PMT trigger are dropped. The TPC electronics, including the electronic
+    noise on the wires and unresponsive wires, are also included at this stage.
+    At this point, the simulated data resembles the actual raw detector data as
+    closely as possible.
+
+  \subsubsection{Flash reconstruction}
+    The optical flash reconstruction algorithm is applied identically to
+    detector data and the simulated data that is output from the detector
+    simulation stage.  The first step is to find pulses on the electronic
+    signals read out from each of the 32 PMTs. This is done using a peak
+    finding algorithm on the digitized signal. The time, amplitude, width, and
+    area under the pulses are stored per pulse. Next, the flash reconstruction
+    algorithm looks for coincident pulses across PMTs. The individual pulses
+    are sorted by size, and all of the pulses that are within 30 nanoseconds of
+    the largest pulse are collected. If there are at least three pulses in that
+    time window and the sum of the pulse areas is at least 6~PE, it is considered a
+    flash and saved. The peak time, width, position, and size are reconstructed
+    and saved along with information about the pulses in the individual PMTs
+    that contributed to the flash. This process is repeated starting with the
+    next largest remaining pulse until there are none left. An individual pulse
+    can only contribute to one flash in an event.
 
   \subsubsection{TPC event reconstruction}
-    The event reconstruction steps are applied identically to detector data and
-    the simulated data that is output from the detector simulation stage.
-    First, software filters are applied to reduce the electronic noise on the
-    wire signal.
+    Reconstructing TPC events involves more steps than the PMTs since there are
+    thousands of wires being read out for milliseconds resulting in
+    approximately 30~MB of raw data per event. The reconstruction algorithms
+    are again applied identically to detector data and the simulated data that
+    is output from the detector simulated stage. First, a noise-deconvultion
+    filter is passed over the digitized wire signals. Then, similar to the
+    optical reconstruction, pulses, or \textit{hits}, are found on individual
+    wires which are used as base building blocks for reconstructing 3D particle
+    tracks across wires and wire planes.
 
-    Here describe noise deconvolution as it is in MCC8 and the hit finding
-    algorithm. The hit-finding will be gaushit, need to read about how it
-    works.
+    The 1D hit finding algorithm starts by walking along a wire signal until
+    the value is above a given threshold. The point where the signal goes above
+    the threshold is considered the start of the pulse, and the end of the
+    pulse is defined as the point where the signal goes back down below the
+    threshold.  Then, local minima and maxima are found between the start and
+    end of the pulse which are used to determined where there are peaks within
+    the pulse.  Adjacent pulses are merged if they are close enough in time.
+    Once the pulse and the number of peaks is established, the algorithm
+    attempts to fit Gaussians to the pulse. The hypothesis signal is composed
+    of one Gaussian per peak from the previous step. The mean and amplitude of
+    each Gaussian is initially centered at the existing peaks and is allowed to
+    float. If the residuals of the fit are sufficiently small, each Gaussian
+    peak is saved as a 1D \textit{hit} with an amplitude, width, and time given
+    by the fit. The hit finding is repeating along the length of the wire for
+    each wire on all three planes.
 
     Here describe the cluster and track finding algorithms that you end up
     using. Need to wait for MCC8 to finish to decide. Should give a lot of
     information about the final efficiency on MC data for the tracking
     algorithm. Give efficiency for protons and muons as a function of length,
     position, angle.
+
+    Need to add: pandoraCosmic and flash matching/cosmic hit removal
 
     Calorimetric information is extracted when the reconstructed track objects
     are created. The calorimetric information that we calculate and use is
@@ -133,18 +190,6 @@
     measured conversion factor. This conversion factor depends on the strength
     of the electric field and the gain of the readout electronics and is
     determined empirically. 
-
-  \subsubsection{Flash reconstruction}
-
-    In additional to the TPC signals, the optical information needs to be
-    reconstructed. Again, the optical flash reconstruction is handled in the
-    same way for both simulation and detector data.
-
-    Similar to TPC reconstruction, the first step in optical reconstruction is
-    to find peaks in the electronic signals read out from the PMTs. We call the
-    algorithm used to find these peak \textit{OpHit}. 
-
-  \subsubsection{Cosmic tagging}
 
 
 %This is the end of detector section
