@@ -1,4 +1,5 @@
 \section{The MicroBooNE experiment}\label{microboone}
+Outline the MicroBooNE section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MicroBooNE and Neutrino Beam
@@ -13,9 +14,12 @@
     The final neutrino flux at MicroBooNE (also mention uncertainty ==> hence ratio).
     Expected number of neutrino interactions, expected NCE interactions.
 
-  \subsubsection{Dirt neutrons}
+  \subsubsection{Dirt interactions}
 
   \subsubsection{MicroBooNE LArTPC}\label{sec:lartpc}
+    MicroBooNE is a liquid argon time projection chamber (LArTPC) with an
+    additional light collection system.
+
     Liquid argon target and TPC.
     LAr properties (density, ionization, scintillation).
     MicroBooNE electric field, drift time/distance.
@@ -58,8 +62,6 @@
     the coincident pulses is within the neutrino beam-spill window, the event
     is saved.
 
-    
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Simulation and Reconstruction
@@ -79,7 +81,7 @@
   simulation and reconstruction, including TPC particle track and optical flash
   reconstruction.
 
-  \subsubsection{Event generation and cross section model}
+  \subsubsection{Cross section model and event generation}
     The initial neutrino interactions are simulated using the GENIE Neutrino
     Monte Carlo Generator~\cite{Andreopoulos:2009rq,Andreopoulos:2015wxa}.
     Assuming a given neutrino flux, genie simulates the interaction of the
@@ -90,8 +92,42 @@
     configurable by the user.  MicroBooNE uses the GENIE version v2\_12\_2
     default settings with the addition of the empirical MEC cross section model.
 
-    Need to add: Corsika, cryostat volume, 5e12 POT, cross section and nuclear
-    model, streams (BNB,BNB+cosmic,NuMI,intime-cosmic)
+    Need to add: cross section and nuclear model
+
+    In addition to simulating neutrino events, cosmic ray events are also
+    simulated. The CORSIKA~\cite{corsika} cosmic ray generator is used to
+    generate these interactions. To simulate real detector events as closely as
+    possible, both neutrino and cosmic ray interactions can be generated in the
+    same simulation. They can also be generated in separate events in order to
+    isolate effects.
+
+    Only neutrino interactions in the liquid argon filled cryostat are
+    generated in the standard simulation. Special samples can be and are made
+    to study how secondary particles from neutrino interactions outside the
+    cryostat contribute to our signal background. One special sample that we
+    generate is a large \textit{dirt} sample where neutrino interactions that
+    happen in the dirt and detector hall outside of the cryostat are generated.
+    The neutrino interactions are allowed to happen anywhere in the fifty feet
+    of simulated dirt outside of the detector hall or anywhere in the detector
+    hall outside of the cryostat. These are known as beam-induced, TPC-external
+    (BITE) events.
+
+    All of the Monte Carlo samples that are generated are listed here.
+    \begin{enumerate}
+      \item Neutrino-only interactions in the cryostat. This sample is to study
+      exactly what neutrino signals would look like if there were no cosmic
+      background.
+      \item Neutrino plus cosmic interactions in the cryostat. This sample
+      very closely represents the actual detector conditions when there is a
+      neutrino interaction in MicroBooNE.
+      \item BITE plus cosmic interactions. This sample contains all known
+      backgrounds to neutrino events in the TPC.
+      \item In-time cosmic only. This sample simulates events where cosmic
+      interactions happen in time with the beam. This is the most problematic
+      background because both the TPC and PMT signals looks very similar to
+      neutrino events. It also occurs at a rate about ten times as large as the
+      triggered neutrino event rate in MicroBooNE.
+    \end{enumerate}
 
   \subsubsection{Detector simulation}
     The simulated final state particles from GENIE are passed to the
@@ -141,7 +177,7 @@
     next largest remaining pulse until there are none left. An individual pulse
     can only contribute to one flash in an event.
 
-  \subsubsection{TPC event reconstruction}
+  \subsubsection{TPC event reconstruction}\label{sec:tpcreco}
     Reconstructing TPC events involves more steps than the PMTs since there are
     thousands of wires being read out for milliseconds resulting in
     approximately 30~MB of raw data per event. The reconstruction algorithms
@@ -160,21 +196,71 @@
     end of the pulse which are used to determined where there are peaks within
     the pulse.  Adjacent pulses are merged if they are close enough in time.
     Once the pulse and the number of peaks is established, the algorithm
-    attempts to fit Gaussians to the pulse. The hypothesis signal is composed
-    of one Gaussian per peak from the previous step. The mean and amplitude of
-    each Gaussian is initially centered at the existing peaks and is allowed to
-    float. If the residuals of the fit are sufficiently small, each Gaussian
-    peak is saved as a 1D \textit{hit} with an amplitude, width, and time given
-    by the fit. The hit finding is repeating along the length of the wire for
-    each wire on all three planes.
+    attempts to fit Gaussian peaks to the pulse. The hypothesis signal is
+    composed of one Gaussian per peak from the previous step. The mean and
+    amplitude of each Gaussian is initially centered at the existing peaks and
+    is allowed to float. If the residuals of the fit are sufficiently small,
+    each Gaussian peak is saved as a 1D \textit{hit} with an amplitude, width,
+    and time given by the fit. The hit finding is repeating along the length of
+    the wire for each wire on all three planes.
+
+    The 3D track finding algorithm is separated into two distinct parts. The
+    first part attempts to reconstruct and tag as many cosmic-induced tracks.
+    The hits associated with these tracks are then removed from the set of hits
+    that are available to reconstruct neutrino-induced tracks in the second
+    part. 
+
+    The algorithm used to preferentially reconstruct cosmic tracks is called
+    \textit{PandoraCosmic}. It is implemented in the Pandora Software
+    Development Kit~\cite{Pandora} used by MicroBooNE. In PandoraCosmic, 1D
+    hits are first clustered in 2D per wire readout plane. All of the
+    reconstructed hits output by the hit finding algorithm on a given wire
+    plane are used as input. The hits are clustered into unambiguous,
+    continuous lines of hits. These initial clusters are meant to have a high
+    purity, meaning all of the hits in the cluster were induced by the same
+    true particle. The clusters in a 2D plane are then merged pairwise in an
+    attempt to improve the completeness of the cluster, meaning most of the
+    hits on that wire plane induced by a true particle are included in a single
+    merged cluster. The 2D clusters are then matched across the three wire
+    planes. The 3D track reconstruction algorithm attempts to find a cluster on
+    each plane that each corresponds to the same true particle. All possible
+    combinations of 2D cluster matching are considered by the algorithm. The
+    most suitable set of cluster combinations are projected into 3D and saved
+    as reconstructed track objects.
+
+    Next, the reconstructed tracks from PandoraCosmic are passed to a cosmic
+    tagging stage. There are two algorithms used to identify cosmic-induced
+    tracks. The first is a geometry tagger that looks for tracks that are not
+    fully contained in the TPC during the event, and the second is a
+    flash-matching algorithm that looks for tracks that are inconsistent with
+    any flashes in the beam spill window. Both of the cosmic tagging algorithms
+    try to remove as few neutrino-induced tracks as possible and only remove
+    tracks that are very likely cosmic-induced.
+    
+    The geometry tagger starts by locating any TPC wire hits that are
+    reconstructed before of after the 1.6 millisecond readout frame. Any tracks
+    that contain these hits are tagged as cosmic. Any tracks whose
+    reconstructed start or end points are located within a given distance from
+    the TPC boundary are also tagged. If both of the start and end points are
+    near a TPC boundary, the track is given a cosmic score of 1. If only one of
+    the start or end points is near a boundary, the track is given a cosmic
+    score of 0.5.
+    
+    The flash-matching algorithm creates a hypothesis flash for each
+    reconstructed track based on its position, size, and energy deposited. It
+    then compares the hypothesis flash to each of the reconstructed flashes in
+    the beam spill window. If a hypothesis flash is sufficiently incompatible
+    with all true flashes in the window, the track is tagged as cosmic. After
+    the cosmic tagging, all reconstructed hits associated with any of the
+    tracks tagged as cosmic are removed from the set of possible hits that are
+    used to reconstruct neutrino-induced tracks. This is refered to as the
+    cosmic hit removal stage.
 
     Here describe the cluster and track finding algorithms that you end up
     using. Need to wait for MCC8 to finish to decide. Should give a lot of
     information about the final efficiency on MC data for the tracking
     algorithm. Give efficiency for protons and muons as a function of length,
     position, angle.
-
-    Need to add: pandoraCosmic and flash matching/cosmic hit removal
 
     Calorimetric information is extracted when the reconstructed track objects
     are created. The calorimetric information that we calculate and use is
@@ -189,7 +275,26 @@
     to energy loss per unit distance, dE/dx, by multiplying the dQ/dx by a
     measured conversion factor. This conversion factor depends on the strength
     of the electric field and the gain of the readout electronics and is
-    determined empirically. 
+    determined empirically.
+
+    There are also two different algorithms that parameterize the dE/dx curves
+    into single parameters to easily evaluate how closely the dE/dx curve of a
+    reconstructed track resembles the expected dE/dx curve for a given particle
+    type. The first is PIDA which represents the magnitude of the dE/dx curve
+    near the end of the track, and the second is PID $\chi^2$ which represents
+    the difference between the dE/dx curve and the expected template. The PIDA
+    algorithm uses an idealized power law parameterization, $dE/dx = AR^{-b}$,
+    where $R$ is the residual range (distance to the end of the track) and $A$
+    and $b$ are fit parameters. In the algorithm, $b$ is set to $-0.42$ and $A$
+    is calculated at every step along the reconstructed track. All of the
+    calculated $A$-values for a given track are fit with a Gaussian hypothesis,
+    and the mean of the fit is the output PIDA parameter. The PID $\chi^2$
+    algorithm calculates the $\chi^2$ residuals between the dE/dx curve of the
+    reconstructed track and each of four template dE/dx curves. There is a
+    template curve for a proton, kaon, pion, and muon hypothesis. The template
+    curve with the lowest $\chi^2$ value is the most similar to the
+    reconstructed track. All four template $\chi^2$ values are saved for each
+    reconstructed track.
 
 
 %This is the end of detector section
