@@ -1,20 +1,49 @@
 \section{The MicroBooNE experiment}\label{microboone}
-Outline the MicroBooNE section.
+MicroBooNE is an accelerator neutrino experiment at Fermilab. This means that
+the experiment measures neutrino physics properties by studying neutrino
+interactions from neutrinos produced by Fermilab accelerators. The MicroBooNE
+detector is a liquid argon time projection chamber (LArTPC). LArTPC technology
+is relatively new, and allows for high-resolution imaging of the neutrino
+interactions in the liquid argon. In order to understand how different physics
+models affect what we would see in the detector, a lot of work goes in to Monte
+Carlo simulations of the beam and the detector. These simulations also allow us
+to develop and test algorithms that reconstruct the underlying neutrino
+interaction based on what particles are seen in the detector. The production of
+the neutrino beam, the MicroBooNE detector, and the simulation and
+reconstruction algorithms are described in this section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MicroBooNE and Neutrino Beam
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Booster Neutrino Beam and the MicroBooNE detector}\label{sec:beam}
+
   \subsubsection{The neutrino beam}
-    Where do the proton come from, how do they get accelerated, what is their
-    final energy distribution.
-    Bunches and spills.
+    The neutrino beam used by the MicroBooNE experiment is produced using proton
+    accelerators that were already in use. In fact, the proton beam that is
+    extracted to go to the proton target used by MicroBooNE to produce neutrinos,
+    is the same initial proton beam used by every other accelerator experiment at
+    Fermilab. The Booster Neutrino experiments, which include MicroBooNE, are the
+    first set of experiments on the proton accelerator line.
+
+    The first step in creating the Booster Neutrino beam (BNB) is to accelerate
+    negatively ionized hydrogen through a linear accelerator, or Linac. The
+    Linac is 500~ft long and accelerates the hydrogen ions to 400~MeV using
+    radio frequency (RF) cavities. The hydrogen ions are then injected into the
+    Booster accelerator. During injection, the ions pass through a foil that
+    strips both electrons leaving only the positive proton. The
+    1500-ft-circumference Booster is a synchrotron that accelerates the protons
+    from 400~MeV to 8~GeV in less than 67~ms. At this stage, a fraction of the
+    8~GeV protons are extracted to be sent to the Booster Neutrino target . The
+    remaining protons are sent sent to an additional accelerator to eventually
+    be used in other Fermilab experiments.
+
+    Need to add: Bunches and spills.
+
     The target/horn, it's shape and materials.
     The decay chain of particles coming out of the target (mention dirt).
-    The final neutrino flux at MicroBooNE (also mention uncertainty ==> hence ratio).
+    The final neutrino flux at MicroBooNE (also mention uncertainty $\Rightarrow$ hence ratio).
     Expected number of neutrino interactions, expected NCE interactions.
-
-  \subsubsection{Dirt interactions}
+    Dirt interactions.
 
   \subsubsection{MicroBooNE LArTPC}\label{sec:lartpc}
     MicroBooNE is a liquid argon time projection chamber (LArTPC) with an
@@ -90,16 +119,94 @@ Outline the MicroBooNE section.
     initial neutrino-nucleon interaction traverse the Argon nucleus.  Within
     GENIE the nuclear models and neutrino-nucleon cross sections are
     configurable by the user.  MicroBooNE uses the GENIE version v2\_12\_2
-    default settings with the addition of the empirical MEC cross section model.
+    default settings with the addition of the empirical MEC cross section
+    model. The details of the physics models for each of the four processes
+    (the nuclear physics model, the cross section model, the neutrino-induced
+    hadron production model, and the intranuclear hadron transport model)
+    within GENIE as well as the simulated cosmic ray generation are described
+    in this section.
 
-    Need to add: cross section and nuclear model
+    First, the relativistic Fermi gas (RFG) nuclear model is used for all
+    processes. It has been modified in GENIE to incorporate short-range
+    nucleon-nucleon correlations using the model by Bodek and
+    Ritchie~\cite{BodekrRitchie}. The mass density for the argon nucleus is
+    taken from review articles~\cite{nucdensity} and the two-parameter
+    Woods-Saxon density function is used~\cite{WoodsSaxon}
+    \begin{equation}\label{eq:woodssaxon}
+      \rho(r) = N_0\frac{1}{1+e^{(r-c)/z}} \,,
+    \end{equation}
+    where $\rho$ is the density, $r$ is the distance from the center of the
+    nucleus, $c$ describes the size of the nucleus, and $z$ describes the width
+    of the surface. For argon, GENIE uses $c=3.53$ and $z=0.54$.  For elastic
+    nucleon scattering in the nucleus, Pauli blocking is
+    applied~\cite{PauliBlock}.
+    
+    Next, in the case of elastic (and quasi-elastic) neutrino-nucleon
+    scattering, the free-nucleon cross section is calculated. For
+    neutral-current elastic scattering, the differential cross section model
+    described by Ahrens et al.~\cite{Ahrens} is used. The vector form
+    factors, $F_1$ and $F_2$ are given by
+    \begin{equation}
+      F_1(Q^2) = \frac{1}{2}\frac{(1+\sin^2\theta_W)(1+\frac{Q^2}{4M_p^2}(1+\mu_p)) 
+        - (1-3\sin^2\theta_W)\mu_n}
+        {(1+\frac{Q^2}{4M_p^2})(1+\frac{Q^2}{M_V^2})^2} \,,
+    \end{equation}
+    \begin{equation}
+      F_2(Q^2) = \frac{1}{2}\frac{(1-3\sin^2\theta_W)\mu_p - (1+\sin^2\theta_W)\mu_n}
+         {(1+\frac{Q^2}{4M_p^2})(1+\frac{Q^2}{M_V^2})^2} \,,
+    \end{equation}
+    where $\theta_W$ is the Weinberg angle, $Q^2$ is the momentum transfer,
+    $M_p$ is the mass of the proton, $\mu_p$ and $\mu_n$ are the nucleon
+    anomalous magnetic moments, and $M_V$ is the vector mass, all described in
+    Sec.~\ref{sec:theory}. The dipole representation is used for the axial
+    form factor, as well:
+    \begin{equation}
+      G_A(Q^2) = \frac{1}{2}\frac{g_A - \Delta s}{(1+\frac{Q^2}{M_A^2})^2} \,,
+    \end{equation}
+    where $g_A$ is the isovector axial charge and $M_A$ is the axial mass, both
+    also described in Sec.~\ref{sec:theory}. For charged-current quasi-elastic
+    scattering, the differential cross section model described by
+    Llewellyn-Smith~\cite{Llewellyn} is used. The BBA2005~\cite{BBA05} vector
+    form factors are used, and the same dipole axial form factor used in
+    neutral-current elastic scattering is used here. Other neutrino-nucleon
+    interactions are simulated and contribute to the elastic scattering
+    backgrounds. They are described in detail by Andreopoulos et
+    al.~\cite{Andreopoulos:2015wxa}.
+
+    The hadrons produced in neutrino-nucleon interactions in a nucleus are
+    modeled separately from the nuclear model and the free-nucleon cross
+    section model. This is because hadron production in empirical neutrino
+    scattering measurements does not match nuclear and neutrino-nucleon cross
+    section models. The hadron discrepancy is corrected for in GENIE using the
+    AGKY model~\cite{AGKY} that was developed to account for the data seen in
+    the MINOS~\cite{MINOS} neutrino scattering experiment and tuned using
+    bubble chamber experimental data.
+
+    Finally, the transport of the final state hadrons through the argon atom is
+    modeled. The hadrons produced in the neutrino-nucleon interactions can
+    rescatter as the exit the nucleus which changes the observable final state
+    particle distributions. The intranuclear transport model is implemented by
+    the GENIE subpackage called INTRANUKE. INTRANUKE uses a cascade model in
+    which the hadron sees a nucleus of isolated nucleons. The interaction
+    probability is calculated based on the free nucleon cross section and the
+    nucleon density~\cite{Andreopoulos:2015wxa}
+    \begin{equation}
+      \lambda(E,r) = \frac{1}{\sigma_{hN,tot} \rho(r)} \,,
+    \end{equation}
+    where $\lambda$ is the hadron interaction probability, $E$ is the hadron
+    energy, $r$ is the distance from the center of the nucleus,
+    $\sigma_{hN,tot}$ is the total \textit{free} nucleon cross section, and
+    $\rho$ is the density of the argon nucleus. The free nucleon cross section
+    is different for protons, neutrons, and pions. The density of the argon
+    nucleus is again determined by equation~\ref{eq:woodssaxon}.
 
     In addition to simulating neutrino events, cosmic ray events are also
     simulated. The CORSIKA~\cite{corsika} cosmic ray generator is used to
-    generate these interactions. To simulate real detector events as closely as
-    possible, both neutrino and cosmic ray interactions can be generated in the
-    same simulation. They can also be generated in separate events in order to
-    isolate effects.
+    generate these interactions. CORSIKA uses the FLUKA cosmic ray model and
+    models the flux of protons, He, N, Mg, and Fe on the atmosphere.  To
+    simulate real detector events as closely as possible, both neutrino and
+    cosmic ray interactions can be generated in the same simulation. They can
+    also be generated in separate events in order to isolate effects.
 
     Only neutrino interactions in the liquid argon filled cryostat are
     generated in the standard simulation. Special samples can be and are made
