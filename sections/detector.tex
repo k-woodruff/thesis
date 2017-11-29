@@ -25,25 +25,71 @@ reconstruction algorithms are described in this section.
     Fermilab. The Booster Neutrino experiments, which include MicroBooNE, are the
     first set of experiments on the proton accelerator line.
 
-    The first step in creating the Booster Neutrino beam (BNB) is to accelerate
-    negatively ionized hydrogen through a linear accelerator, or Linac. The
-    Linac is 500~ft long and accelerates the hydrogen ions to 400~MeV using
-    radio frequency (RF) cavities. The hydrogen ions are then injected into the
-    Booster accelerator. During injection, the ions pass through a foil that
-    strips both electrons leaving only the positive proton. The
-    1500-ft-circumference Booster is a synchrotron that accelerates the protons
-    from 400~MeV to 8~GeV in less than 67~ms. At this stage, a fraction of the
-    8~GeV protons are extracted to be sent to the Booster Neutrino target . The
-    remaining protons are sent sent to an additional accelerator to eventually
-    be used in other Fermilab experiments.
+    The first step in creating the Booster Neutrino Beamline (BNB) is to
+    accelerate negatively ionized hydrogen through a linear accelerator, or
+    Linac. The Linac is 500~ft long and accelerates the hydrogen ions to
+    400~MeV using radio frequency (RF) cavities. The hydrogen ions are then
+    injected into the Booster accelerator. During injection, the ions pass
+    through a foil that strips both electrons leaving only the positive proton.
+    The Booster~\cite{MinibooneBeam} is a 474-meter-circumference, 15~Hz
+    synchrotron that accelerates the protons from 400~MeV to 8~GeV. The proton
+    beam leaving the Booster has a bunched structure. Each turn contains 81
+    proton bunches that are 2~ns wide and 19~ns apart. At this stage, a
+    fraction of the 8~GeV protons are extracted to be sent to the Booster
+    neutrino target. A kicker magnet is used to extract all 81 proton bunches
+    in a turn which we refer to as a spill. One spill is 1.6~$\mu$s long and
+    contains $5\times 10^{12}$ protons.
 
-    Need to add: Bunches and spills.
+    The proton target is a beryllium cylinder 71.1~cm long and 0.51~cm thick
+    that is aligned with the proton beam. The interaction of the protons in the
+    beryllium produce charged pions that are focused by an pulsed toroidal
+    electromagnet. The magnet can operate at a maximum frequency of 5~Hz which
+    is the limiting factor in the beam spill frequency. In neutrino mode, the
+    magnet focuses positive pions and defocuses negative pions. The positive
+    pions then pass through an air-filled decay pipe where they quickly decay
+    into positive muons (anti-muons) and neutrinos. In anti-neutrino mode,
+    which is not used in this analysis, negative pions are focused which decay
+    into negative muons and anti-neutrinos. The anti-muons and neutrinos next
+    pass through a beam stop made of steel and concrete to filter out remaining
+    protons, pions, and kaons. Finally, the anti-muons and neutrinos pass
+    through almost 500~meters of dirt where the anti-muons decay and a (mostly)
+    pure neutrino beam remains. The predicted neutrino flux at MicroBooNE is
+    shown in Fig.~\ref{fig:beamflux}.
 
-    The target/horn, it's shape and materials.
-    The decay chain of particles coming out of the target (mention dirt).
-    The final neutrino flux at MicroBooNE (also mention uncertainty $\Rightarrow$ hence ratio).
-    Expected number of neutrino interactions, expected NCE interactions.
-    Dirt interactions.
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/detector/beam/FluxPrediction.pdf}
+      \caption{Predicted neutrino beam flux at MicroBooNE.}
+      \label{fig:beamflux}
+    \end{figure}
+
+    Neutrinos from the BNB can interact in the dirt upstream of the MicroBooNE
+    detector. Most of these interactions have no effect in the detector because
+    the secondary particles do not travel far enough to pass through the dirt
+    and enter the detector. However, secondary neutrons that are produced in
+    the dirt near the detector can enter the detector at a significant rate.
+    Figure~\ref{fig:dirtstart} shows the position of all of simulated neutrino
+    interactions in the dirt surrounding MicroBooNE. The details of the
+    simulation are described in Sec.~\ref{sec:simreco}. If one of these
+    neutrons interacts in the MicroBooNE detector and scatters a single proton,
+    the signal could look indistinguishable from a neutral-current elastic
+    neutrino interaction that occurred in the detector.
+
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/detector/beam/DirtStart_ZY.png}
+        \caption{Side view of dirt interaction positions.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/detector/beam/DirtStart_ZX.png}
+        \caption{Top down view of dirt interaction positions.}
+      \end{subfigure}
+      \caption{Gray is all simulated dirt interactions. Red is simulated
+      interaction positions where neutron enters the TPC.}
+      \label{fig:dirtstart}
+    \end{figure}
 
   \subsubsection{MicroBooNE LArTPC}\label{sec:lartpc}
     MicroBooNE is a liquid argon time projection chamber (LArTPC) with an
@@ -59,7 +105,7 @@ reconstruction algorithms are described in this section.
     produced per MeV of deposited energy ~\cite{detectorpaper}. The
     scintillation photons have a wavelength of 128 nm and can not re-interact
     with the argon. The light collection system in MicroBooNE consists of
-    thirty-two photomultiplier tubes (PMTs) outside of the anode side of the
+    32 photomultiplier tubes (PMTs) outside of the anode side of the
     TPC. Each PMT is shielded by an acrylic plate coated in
     tetraphenyl-butadiene (TPB) that shifts the ultraviolet photons to the
     visible spectrum before interacting with the PMT.
@@ -69,27 +115,26 @@ reconstruction algorithms are described in this section.
     is difficult to determine which events have activity inside the neutrino
     beam time window. The PMTs have nanosecond timing resolution which allows
     us to only consider events that have optical activity during a time window
-    surrounding the 1.6 microsecond neutrino beam spill. 
+    surrounding the 1.6~$\mu$s neutrino beam spill. 
 
     A PMT trigger is implemented in the data acquisition (DAQ) software that
     determines whether an event is saved. Events are only read into the DAQ
     when a neutrino beam-spill signal is received. Each event includes a
-    23~microsecond window of PMT data that includes the time of the beam spill.
-    This 23~microseconds of data is used to form a PMT software trigger. First,
+    23~$\mu$s window of PMT data that includes the time of the beam spill.
+    This 23~$\mu$s of data is used to form a PMT software trigger. First,
     pulses are found on the individual PMT signals. The pulses are found using
-    constant-fraction discriminators that open a 100~nanoseconds discriminator
-    window. The discriminator difference required to open a discriminator
-    window is 10 ADC counts which corresponds to approximately a 0.5
-    photoelectron (PE) signal in the PMT. The largest discriminator difference
-    during the discriminator window is saved as the pulse height. A new
-    discriminator window cannot be initiated until the current one has close
-    and there has been a 15~nanoseconds period without the discriminator
-    firing.  Next, coincident pulses across the different PMTs are found and
-    combined.  Pulse windows that are coincident in time are combined and their
-    pulse heights are summed. If the sum of the coincident pulse heights is
-    above 20 ADC counts, corresponding to approximately 6.5 PE, and the time of
-    the coincident pulses is within the neutrino beam-spill window, the event
-    is saved.
+    constant-fraction discriminators that open a 100~ns discriminator window.
+    The discriminator difference required to open a discriminator window is 10
+    ADC counts which corresponds to approximately a 0.5 photoelectron (PE)
+    signal in the PMT. The largest discriminator difference during the
+    discriminator window is saved as the pulse height. A new discriminator
+    window cannot be initiated until the current one has close and there has
+    been a 15~ns period without the discriminator firing.  Next, coincident
+    pulses across the different PMTs are found and combined.  Pulse windows
+    that are coincident in time are combined and their pulse heights are
+    summed. If the sum of the coincident pulse heights is above 20 ADC counts,
+    corresponding to approximately 6.5 PE, and the time of the coincident
+    pulses is within the neutrino beam-spill window, the event is saved.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +155,7 @@ reconstruction algorithms are described in this section.
   simulation and reconstruction, including TPC particle track and optical flash
   reconstruction.
 
-  \subsubsection{Cross section model and event generation}
+  \subsubsection{Cross section model}
     The initial neutrino interactions are simulated using the GENIE Neutrino
     Monte Carlo Generator~\cite{Andreopoulos:2009rq,Andreopoulos:2015wxa}.
     Assuming a given neutrino flux, genie simulates the interaction of the
@@ -200,7 +245,11 @@ reconstruction algorithms are described in this section.
     is different for protons, neutrons, and pions. The density of the argon
     nucleus is again determined by equation~\ref{eq:woodssaxon}.
 
-    In addition to simulating neutrino events, cosmic ray events are also
+  \subsubsection{Event generation}
+    The GENIE neutrino events are generated in LArSoft based on the neutrino
+    flux described in Sec.~\ref{sec:beam}. The spill structure with 1.6~$\mu$s
+    long spill containing $5\times 10^{12}$ protons on target is simulated.  In
+    addition to simulating neutrino events, cosmic ray events are also
     simulated. The CORSIKA~\cite{corsika} cosmic ray generator is used to
     generate these interactions. CORSIKA uses the FLUKA cosmic ray model and
     models the flux of protons, He, N, Mg, and Fe on the atmosphere.  To
