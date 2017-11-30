@@ -2,29 +2,29 @@
 MicroBooNE is an accelerator neutrino experiment at Fermilab. This means that
 the experiment measures neutrino physics properties by studying neutrino
 interactions from neutrinos produced by Fermilab accelerators. The MicroBooNE
-detector is a liquid argon time projection chamber (LArTPC). LArTPC technology
-is relatively new, and allows for high-resolution imaging of the neutrino
-interactions in the liquid argon. In order to understand how different physics
-models affect what we would see in the detector, a lot of work goes in to Monte
-Carlo simulations of the beam and the detector. These simulations also allow us
-to develop and test algorithms that reconstruct the underlying neutrino
-interaction based on what particles are seen in the detector. The production of
-the neutrino beam, the MicroBooNE detector, and the simulation and
-reconstruction algorithms are described in this section.
+detector is a liquid argon time projection chamber (LArTPC) with an additional
+light collection system. LArTPC technology is relatively new, and allows for
+high-resolution imaging of the neutrino interactions in the liquid argon. In
+order to understand how different physics models affect what we would see in
+the detector, a lot of work goes in to Monte Carlo simulations of the beam and
+the detector. These simulations also allow us to develop and test algorithms
+that reconstruct the underlying neutrino interaction based on what particles
+are seen in the detector. The production of the neutrino beam, the MicroBooNE
+detector, and the simulation and reconstruction algorithms are described in
+this section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % MicroBooNE and Neutrino Beam
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Booster Neutrino Beam and the MicroBooNE detector}\label{sec:beam}
+  The neutrino beam used by the MicroBooNE experiment is produced using proton
+  accelerators that were already in use. In fact, the proton beam that is
+  extracted to go to the proton target used by MicroBooNE to produce neutrinos,
+  is the same initial proton beam used by every other accelerator experiment at
+  Fermilab. The Booster Neutrino experiments, which include MicroBooNE, are the
+  first set of experiments on the proton accelerator line.
 
   \subsubsection{The neutrino beam}
-    The neutrino beam used by the MicroBooNE experiment is produced using proton
-    accelerators that were already in use. In fact, the proton beam that is
-    extracted to go to the proton target used by MicroBooNE to produce neutrinos,
-    is the same initial proton beam used by every other accelerator experiment at
-    Fermilab. The Booster Neutrino experiments, which include MicroBooNE, are the
-    first set of experiments on the proton accelerator line.
-
     The first step in creating the Booster Neutrino Beamline (BNB) is to
     accelerate negatively ionized hydrogen through a linear accelerator, or
     Linac. The Linac is 500~ft long and accelerates the hydrogen ions to
@@ -69,11 +69,13 @@ reconstruction algorithms are described in this section.
     and enter the detector. However, secondary neutrons that are produced in
     the dirt near the detector can enter the detector at a significant rate.
     Figure~\ref{fig:dirtstart} shows the position of all of simulated neutrino
-    interactions in the dirt surrounding MicroBooNE. The details of the
-    simulation are described in Sec.~\ref{sec:simreco}. If one of these
-    neutrons interacts in the MicroBooNE detector and scatters a single proton,
-    the signal could look indistinguishable from a neutral-current elastic
-    neutrino interaction that occurred in the detector.
+    interactions in the dirt surrounding MicroBooNE in gray and the subset of
+    those interactions that produce a neutron which enters the MicroBooNE TPC
+    in red from two different angles. The details of the simulation are
+    described in Sec.~\ref{sec:simreco}. If one of these neutrons interacts in
+    the MicroBooNE detector and scatters a single proton, the signal could look
+    indistinguishable from a neutral-current elastic neutrino interaction that
+    occurred in the detector.
 
     \begin{figure}[h]
       \centering
@@ -92,13 +94,57 @@ reconstruction algorithms are described in this section.
     \end{figure}
 
   \subsubsection{MicroBooNE LArTPC}\label{sec:lartpc}
-    MicroBooNE is a liquid argon time projection chamber (LArTPC) with an
-    additional light collection system.
+    The MicroBooNE LArTPC~\cite{detector} acts as both a target for the
+    neutrino beam and a detector for the charged particles produced in the
+    neutrino-argon interactions. The MicroBooNE TPC is submerged in 170~tons of
+    liquid argon, of which 87~tons is actually contained inside the TPC. All of
+    this is contained within a cylindrical cryostat.
+    
+    Liquid argon is used as the detector material for several reasons. Like all
+    noble liquids, argon produces both ionization charge and scintillation
+    light when stimulated.  The ionization electrons do not recombine easily,
+    so they are able to pass through the liquid argon to be detected.
+    Additionally, argon is transparent to its own scintillation light, again
+    making it detectable. Noble liquids also have good dielectric properties
+    allowing them to withstand high voltages without breaking down. Liquid
+    argon is also relatively dense at 1.4~g/cm$^3$, making it a good target for
+    neutrinos which interact extremely rarely. Lastly, argon is very abundant.
+    It makes up 1\% of Earth's atmosphere and is therefore an affordable option
+    compared to heaver noble elements.
 
-    Liquid argon target and TPC.
-    LAr properties (density, ionization, scintillation).
-    MicroBooNE electric field, drift time/distance.
-    MicroBooNE specs (dimensions, wire counts).
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=5in]{figures/detector/tpc/LArTPC_Concept.png}
+      \caption{Representation of the operational principle of the MicroBooNE
+      LArTPC. The process is described in the text.}
+      \label{fig:tpccartoon}
+    \end{figure}
+
+    The MicroBooNE time projection chamber (TPC) uses a uniform electric field
+    to guide the electrons that are produced when the liquid argon is ionized
+    to an anode. The electrons are drifted horizontally, perpendicular to the
+    beam direction. To produce this uniform, horizontal electric field, a
+    10~m$\times$2.6~m cathode plane makes up one face of the TPC. This face is
+    vertical and parallel to the beam. A voltage of -70~kV is applied to the
+    anode plane which results in a 273~V/cm electric field across the 2.3~m TPC
+    width.  At the anode are three planes, perpendicular to the electron drift
+    direction and parallel to the cathode plane, that are strung with thousands
+    of wires spaced 3~mm apart.  The three planes are all parallel to each
+    other and are also spaced 3~mm apart.  The wires on the first plane have a
+    small negative voltage (-200~V), the middle plane has no voltage, and the
+    last plane has a small positive voltage (+440~V). When the electrons
+    approach the first wire plane, they induce a signal on the closest wires,
+    and are then attracted to the next plane because of its slightly less
+    negative voltage. This is repeated at the second wire plane, and the
+    electrons are terminated at the third plane that we refer to as the
+    collection plane. The electronic signals from all 8256 wires are read out
+    and saved. The wires on each plane are at different angles to allow for an
+    accurate 2-dimensional reconstruction of the event in the detector. The
+    collection plane wires are vertical, and the wires on the two induction
+    planes are at positive and negative 60~degrees. The third dimension,
+    perpendicular to the anode planes, is reconstructed based on the time that
+    the electrons arrived at the wires. A cartoon representation of this
+    process is shown in Fig.~\ref{fig:tpccartoon}. 
 
   \subsubsection{MicroBooNE light collection system and event trigger}\label{sec:swtrigger}
     Liquid argon also produces scintillation light. About 24,000 photons are
