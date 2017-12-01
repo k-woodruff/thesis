@@ -199,12 +199,45 @@ Outline the analysis section.
   we vary the physical parameters whose true values aren't well constrained
   which might have a large effect on the final data. This allows us to quantify
   the uncertainty due to unknown quantities.
-  \subsubsection{Reweighting}
+  \subsubsection{Event reweighting}
     Full Monte Carlo simulations are both time and computing intensive. Instead
     of re-running the simulation for each possible parameter value that we are
     interested in, we can calculate the ratio of the probabilities of each
     interaction occurring given the new values to the probabilities of each
-    interaction occurring for the original simulated parameter values.
+    interaction occurring for the original simulated parameter values. We refer
+    to this ratio as an event weight:
+    \begin{equation}
+      w = \frac{P(\textrm{event}|\theta')}{P(\textrm{event}|\theta)} \,,
+    \end{equation}
+    where $w$ is the event weight for a given event, $P($event$|\theta)$ is the
+    probability of the simulated event given the set of original parameters
+    used in the simulation, $\theta$, and $P($event$|\theta')$ is the
+    probability of the simulated event given a new set of parameters,
+    $\theta'$.
+
+    Since the four parts of GENIE cross section model (the nuclear physics
+    model, the neutrino-nucleon cross section model, the hadron production
+    model, and the intranuclear hadron transport model from
+    Sec.~\ref{sec::geniexsec}) are treated independently in NC elastic
+    events~\cite{GENIE}, the event weight, w, factors:
+    \begin{equation}
+      w = w_{\textrm{nuclear}}\times w_{\textrm{neutrino-nucleon}}\times 
+          w_{\textrm{hadron prod.}}\times w_{\textrm{intranuclear}} \,,
+    \end{equation}
+    where $w_{\textrm{nuclear}}$ is the nuclear physics model weight,
+    $w_{\textrm{neutrino-nucleon}}$ is the neutrino-nucleon cross section model
+    weight, $w_{\textrm{hadron prod.}}$ is the hadron production model weight,
+    and $w_{\textrm{intranuclear}}$ is the intranuclear hadron transport model
+    weight. So, only the NC elastic cross section probability ratio needs to be
+    calculated to see the effect of $\Delta s$ or another cross section
+    parameter of interest.
+
+    The NC elastic weight that we calculate. How it's the cross sections. What
+    do we do? Show plots.
+
+    GENIE systematic weights and multiplying them.
+
+    Summing the event weights to get new data comparison.
 
     Need to add: how to calculate the probabilities. Summing the weights into
     histograms (measure thousands of interactions, want to compare to at least
@@ -213,7 +246,9 @@ Outline the analysis section.
     which parameters we vary. Calculating axial FF weights from cross section.
     Which model is numerator. Show plots of ratio with parameters the same but
     models different.  Multiply weights. 
+
   \subsubsection{Likelihood calculation}
+    
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Joint Estimation
