@@ -93,7 +93,7 @@ Outline the analysis section.
     maximum depth of the tree (how many layers of nodes you will allow), the
     minimum split size (how many data points do you require to keep splitting),
     and minimum leaf size (how small does a leaf have to be before you stop). 
-    \begin{figure}[h]
+    \begin{figure}[ht]
       \centering
       \includegraphics[angle=0,width=4in]{figures/bz.pdf}
       \caption{Graphical example of a decision tree.}
@@ -166,7 +166,7 @@ Outline the analysis section.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Ratio of Cross Sections
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ratio of NCEp to CCQEn Cross Sections}\label{ratios}
+\subsection{Ratio of NCEp to CCQEn Cross Sections}\label{sec:ratios}
   Show how the ratio gets rid of a lot of measurement uncertainty like beam
   flux and efficiencies. Give exact equation that we will be using for
   analysis. Show how $\Delta s$ is still large at low $Q^2$.
@@ -178,7 +178,7 @@ Outline the analysis section.
     Reconstruction efficiency: Refer back. Give uncertainty on signal.
   \subsubsection{Quantifying Uncertainty on Ratio}\label{errorcalc}
     Calculate exact uncertainty and show it here.
-  \subsubsection{Model uncertainty}
+  \subsubsection{Model uncertainty}\label{sec:modeluncertainty}
     Nuclear effects and FSI. Discuss. Discuss which values are varied and by
     how much? Refer to reweighting section. 
 
@@ -199,7 +199,7 @@ Outline the analysis section.
   we vary the physical parameters whose true values aren't well constrained
   which might have a large effect on the final data. This allows us to quantify
   the uncertainty due to unknown quantities.
-  \subsubsection{Event reweighting}
+  \subsubsection{Event reweighting}\label{sec:reweighting}
     Full Monte Carlo simulations are both time and computing intensive. Instead
     of re-running the simulation for each possible parameter value that we are
     interested in, we can calculate the ratio of the probabilities of each
@@ -218,9 +218,9 @@ Outline the analysis section.
     Since the four parts of GENIE cross section model (the nuclear physics
     model, the neutrino-nucleon cross section model, the hadron production
     model, and the intranuclear hadron transport model from
-    Sec.~\ref{sec::geniexsec}) are treated independently in NC elastic
+    Sec.~\ref{sec:geniexsec}) are treated independently in NC elastic
     events~\cite{GENIE}, the event weight, w, factors:
-    \begin{equation}
+    \begin{equation}\label{eq:weights}
       w = w_{\textrm{nuclear}}\times w_{\textrm{neutrino-nucleon}}\times 
           w_{\textrm{hadron prod.}}\times w_{\textrm{intranuclear}} \,,
     \end{equation}
@@ -232,41 +232,258 @@ Outline the analysis section.
     calculated to see the effect of $\Delta s$ or another cross section
     parameter of interest.
 
-    The NC elastic weight that we calculate. How it's the cross sections. What
-    do we do? Show plots.
+    The probability of a neutrino interaction is proportional to the
+    interaction cross section, so the weight, $w_{\textrm{neutrino-nucleon}}$
+    is just a ratio of cross sections
+    \begin{equation}
+      w_{\textrm{neutrino-nucleon}} = w_{\sigma} 
+        = \frac{d^n\sigma'_{\nu}/dK^n}{d^n\sigma_{\nu}/dK^n} \,,
+    \end{equation}
+    where $d^n\sigma/dK^n$ is the differential cross section for the initially
+    simulated neutrino-nucleon interaction, and $d^n\sigma'/dK^n$ is the
+    differential cross section with the modified parameters evaluated at the
+    kinematical phase space $\{K^n\}^3$. The differential cross section is a
+    function of the neutrino energy in the rest frame of the scattered nucleon,
+    $E_{\nu}^{(nRF)}$, the interaction four-momentum transfer, $Q^2$, and the
+    physics model including parameters of the model.
 
-    GENIE systematic weights and multiplying them.
+    To determine the effect of the NC elastic axial form factor parameters
+    $\Delta s$ and $M_A^s$ on the data, we calculate the NC elastic cross
+    section given these new parameters and the cross section given the initial
+    simulation parameters for each NC elastic event in the Monte Carlo
+    simulation. To get an accurate weight, the denominator needs to be
+    calculated exactly as the cross section was calculated in the initial
+    GENIE. However, there is no reason that a different model can't be used for
+    the numerator. For the numerator, we use the LLewellyn-Smith
+    neutrino-nucleon elastic cross section parameterization described in
+    Sec.~\ref{sec:nuxsec}. For the vector form factors, we use the
+    Arrington-Sick model with two-photon exchange (TPE) described in
+    Sec.~\ref{sec:vectorff}. For the NC axial form factor, $G_A^{NC}$, we use a
+    modified dipole form. The up and down quark terms of the axial form factor,
+    $G_A$, have the same form as the Ahrens et al.~\cite{Ahrens}
+    parameterization with the parameter values used in the GENIE
+    implementation. The strange quark term of the axial form factor, $G_A^s$,
+    also has the Ahrens et al. parameterization, but the $M_A$ parameter value
+    is allowed to be different than in the $G_A$ term. We call this new
+    parameter $M_A^s$
+    \begin{align}\label{eq:modifiedaxial}
+      G_A^{NC}(Q^2) = \frac{1}{2}G_A(Q^2) - \frac{1}{2}G_A^s(Q^2) \,,& \\
+      G_A(Q^2) = \frac{g_A}{(1+\frac{Q^2}{M_A})^2} \,,& \\
+      G_A^s(Q^2) = \frac{\Delta s}{(1+\frac{Q^2}{M_A^s})^2} \,.&
+    \end{align}
+    Figure~\ref{fig:ncxseccompare} shows the effect on simulated NC elastic
+    neutrino-proton events due to the updated cross section model,
+    $\left(\frac{d\sigma}{dQ^2}\right)$. In the comparison the cross section
+    parameterization is changed, but the parameter values are the same as the
+    ones used in the GENIE, $\left(\frac{d\sigma}{dQ^2}\right)_{GN}$,
+    parameterization wherever applicable.
+    \begin{figure}[ht]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/comparison/NCxsec_Compare.png}
+        \caption{The X-axis is the value of the NC elastic cross section used
+        in GENIE for each simulated event, and the Y-axis is the value of the
+        NC elastic cross section used in this analysis for the same given
+        event.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/comparison/NCxsec_Compare_Difference.png}
+        \caption{The X-axis is the value of the NC elastic cross section used
+        in GENIE for each simulated event, and the Y-axis is the difference in
+        values of the NC elastic cross section used GENIE to the one used in
+        this analysis for the same given event.}
+      \end{subfigure}
+      \caption{Comparison of simulated events using the Ahrens et
+      al.~\cite{Ahrens} NC elastic cross section parameterization used in GENIE
+      to the NC elastic cross section used in this analysis. Each point
+      represents a single NC elastic neutrino-proton simulated event.}
+      \label{fig:ncxseccompare}
+    \end{figure}
 
-    Summing the event weights to get new data comparison.
+    To determine the effect of a set of NC elastic cross section parameters
+    given our parameterization, we calculate the neutrino-nucleon weight for
+    each NC elastic event
+    \begin{equation}\label{eq:xsecweight}
+      w_\sigma = \frac{\left(\frac{d\sigma}{dQ^2}(\Delta s,M_A^s)\right)}
+                      {\left(\frac{d\sigma}{dQ^2}\right)_{GN}} \,.
+    \end{equation}
 
-    Need to add: how to calculate the probabilities. Summing the weights into
-    histograms (measure thousands of interactions, want to compare to at least
-    that many, reweight each one and combine for the ratio). Generating
-    systematic weights in GENIE. Refer to model uncertainty section and say
-    which parameters we vary. Calculating axial FF weights from cross section.
-    Which model is numerator. Show plots of ratio with parameters the same but
-    models different.  Multiply weights. 
+    Reweighting schemes for various other model parameters have been
+    implemented in the GENIE ReWeight package~\cite{GENIE}. This package
+    calculates a weight for each event given a parameter and a new parameter
+    value. Multiple parameters can be varied concurrently. We use this package
+    determine the effect on the simulated data given the systematic uncertainty
+    due to the parameters described in Sec.~\ref{sec:modeluncertainty}. We
+    sample the probability space by drawing a value of each parameter from its
+    distribution given in Sec.~\ref{sec:modeluncertainty} and giving the entire
+    set of drawn values to the ReWeight package. A single weight per event,
+    $w_{GRW}$ is returned. This is equivalent to sampling the combined,
+    N-dimensional probability space of the systematic parameters of interest,
+    where N is the number of parameters. The parameters that we sample are
+    parameters of the nuclear physics model, the hadron production model, and
+    the intranuclear hadron production transport model
+    \begin{equation}\label{eq:genieweight}
+      w_{GRW} = w_{\textrm{nuclear}}\times w_{\textrm{hadron prod.}}\times
+                w_{\textrm{intranuclear}} \,.
+    \end{equation}
+    Combining Eqns.~\ref{eq:weights},~\ref{eq:xsecweight},
+    and~\ref{eq:genieweight} gives an event weight which combines the effect
+    due to a sample from the model parameter distribution and the values of the
+    strange axial form factor parameters that we want to measure
+    \begin{equation}
+      w = w_{\sigma}\times w_{GRW} \,.
+    \end{equation}
 
-  \subsubsection{Likelihood calculation}
+  \subsubsection{Likelihood calculation}\label{sec:likelihood}
+    To compare the simulation and the weight calculations directly to the data,
+    we sum weights for each $Q^2$ bin in the numerator and denominator of the
+    NC to CC elastic neutrino-proton cross section ratio
+    \begin{equation}\label{eq:expected}
+      R_{\frac{NCE}{CCQE}}(Q^2_i) = \frac{\sum\limits_{j\in NC_i} w_j}{\sum\limits_{k\in CC_i} w_k} \,,
+    \end{equation}
+    where $i$ is the $Q^2$ bin, $NC_i$ is the set of events selected as NC
+    elastic neutrino-proton events in the $i$th $Q^2$ bin, $CC_i$ is the set of
+    events selected as CC quasi-elastic neutrino-neutron events in the $i$th
+    $Q^2$ bin, and $w = w_\sigma\times w_{GRW}$ is the calculated weight of
+    that event. If the event is not a true simulated NC elastic event, then
+    $w_\sigma = 1$. At this point, the Monte Carlo simulated data is directly
+    comparable to the detector data.
+
+    To evaluate how well the model represents the data, we calculate the
+    probability of the observed data given a model and set of parameters.  This
+    probability is called the likelihood. We assume that the measured data is
+    normally distributed, then the likelihood is
+    \begin{equation}\label{eq:likelihood}
+      P(R^{obs}|\theta) = \prod_{i\in I_{Q^2}} P(R^{obs}_i|\theta) = \frac{1}{\sqrt{2\pi \sigma_i^2}}
+             e^{-\frac{1}{2}(R^{obs}_i - R^{exp}_i(\theta))^2/\sigma_i^2} \,,
+    \end{equation}
+    where $R^{obs}$ is the measured ratio of the NC elastic neutrino-proton
+    event distribution to the CC quasi-elastic neutrino-neutron event
+    distribution, $R_{\frac{NCE}{CCQE}}(Q^2)$ described in
+    section~\ref{sec:ratios}, $I_{Q^2}$ is the set of $Q^2$ bins, $R^{obs}_i$
+    is the measured value of that bin, and $\sigma_i$ is the uncertainty of
+    that measured bin value. The expected value of the ratio,
+    $R^{exp}_i(\theta)$, is a function of the model and the set of model
+    parameters, $\theta$. It is equal to $R_{\frac{NCE}{CCQE}}(Q^2_i)$ in
+    Eqn.~\ref{eq:expected}. The set of model parameters, $\theta$, contains the
+    systematic model parameters described in Sec.~\ref{sec:modeluncertainty}
+    and the strange axial form factor parameters, $\Delta s$ and $M_A^s$.
     
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Joint Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Strange axial form factor parameter estimation}\label{deltas}
-  Here is where we do the actual MCMC.
+  The likelihood give the probability of the observed data given a model and a
+  set of parameters. What we are really interested in is the probability of the
+  parameters $\Delta s$ and $M_A^s$ given the observed data and our model. We can
+  determine this probability distribution using Bayesian inference and
+  probability sampling methods.
+
   \subsubsection{Bayesian inference}
-    Walk through the Bayesian math. Start with wanting the probability of
-    $\theta$ given the data and the model and get final equation. Then show how
-    to combine with previous experiments. Should give detail for each factor in
-    equation (prior, likelihood, posterior, evidence). Should especially give
-    detail on how we choose priors. Maybe talk about model selection when
-    talking about the evidence.
+    Bayes' theorem is used to convert between the likelihood and the
+    probability of the $\Delta s$ and $M_A^s$ given the data
+    \begin{equation}
+      P(\theta|R^{obs}) = \frac{P(R^{obs}|\theta)P(\theta)}{P(R^{obs})} \,.
+    \end{equation}
+    The likelihood, $P(R^{obs}|\theta)$, was described in detail in
+    Sec.~\ref{sec:likelihood} and is defined in Eqn.~\ref{eq:likelihood}. The
+    other three factors in Bayes' theorem deserve some explanation.
+    
+    
+    First, the probability of $\theta$ given the observed data,
+    $P(\theta|R^{obs})$, is the probability distribution that we ultimately
+    want to determine. It is referred to as the posterior distribution.
+    Implicit in the notation is the model. If we wanted to write it explicitly,
+    it would be:
+    \begin{equation*}
+      P(\theta|R^{obs})\equiv P(\theta|R^{obs},\mathcal{M}) \,,
+    \end{equation*}
+    where $\mathcal{M}$ represents the physics model. The parameter set
+    $\theta$ is still the set containing $\Delta s$, $M_A^s$, and the GENIE
+    systematic parameters from Sec.~\ref{sec:reweighting}.
+
+    Next, the probability of the parameters, $P(\theta)$, is referred to as the
+    prior distribution. It is also implicitly conditional on the model,
+    $\mathcal{M}$. This is where we include prior information that we know to
+    be true. It is impossible not to include some prior information in
+    inference. For example, using a uniform prior on $\Delta s$ is the same as
+    saying that $\Delta s$ has the same probability of being zero as it does of
+    being infinite. The prior should be used to exclude unphysical parameter
+    values, like negative mass. In a good model with adequate data the
+    posterior distribution should be robust to the choice of a prior. It is
+    always necessary to evaluate the effect of the choice of priors is on the
+    posterior. In Sec.~\ref{sec:results} we show the effect of different
+    priors, including a uniform prior, on the posterior distribution.
+
+    Last, the marginal probability of the observed data $P(R^{obs})$ integrated
+    over all $\theta$ values.  It too is implicitly conditional on
+    $\mathcal{M}$ and is referred to as the evidence of the model. Explicitly,
+    it can be written as
+    \begin{equation*}
+      P(R^{obs}) \equiv P(R^{obs}|\mathcal{M}) 
+          = \int_{\theta}P(R^{obs}|\theta)P(\theta|\mathcal{M})d\theta \,.
+    \end{equation*}
+
   \subsubsection{Markov Chain Monte Carlo}
-    Go through detail on our implementation of MCMC. Discuss how Markov Chains
-    work in general. Describe Metropolis, Gibbs, and our combination of both.
-  \subsubsection{Results}
-    Lots of plots! $\Delta s$!
+    There is no way to calculate an exact solution to our posterior
+    distribution analytically, but it can be estimate it numerically by
+    sampling. Most sampling techniques would be computationally impossible due
+    to the fact that our posterior distribution is X-dimensional ($\Delta s$,
+    $M_A$, and the X-2 GENIE systematic model parameters), and each likelihood
+    calculation requires millions of event weights to be calculated. Markov
+    chain Monte Carlo (MCMC) is a class of methods for sampling
+    multi-dimensional posterior distributions. Two of the most common MCMC
+    algorithms are the Metropolis algorithm~\cite{Metropolis} and Gibbs
+    sampling~\cite{Gibbs}. Both are used in this analysis.
+
+    The Metropolis algorithm is a random walk in the N-dimensional parameter
+    space with a rule to either accept or reject each step in the walk. Each
+    proposed step is drawn from a proposal distribution.  In this analysis, we
+    use a multivariate normal proposal distribution centered at the current
+    position.  The step is accepted if the value of the posterior distribution
+    at the proposed position is greater than at the current position. If the
+    value at the proposed distribution is less than the current value, the
+    proposed step is accepted with a probability equal to the ratio of the
+    value at the proposed position to the value at the current position. The
+    decision to accept or reject a proposed step can be determined entirely by
+    calculating the \textit{ratio} of the posterior values at the proposed and
+    current positions. Since the evidence, $P(R^{obs})$, doesn't depend on
+    $\theta$, it never needs to be calculated. At every proposed step only the
+    likelihood, $P(R^{obs}|\theta)$, and the prior, $P(\theta)$, need to be
+    calculated.
+
+    Gibbs sampling as used in this analysis is also a random walk in the
+    N-dimensional parameter space, but it differs from the Metropolis algorithm
+    in a few ways. First, every proposed step is accepted and the proposal
+    distribution does not depend on the current position. The posterior
+    distribution is essentially being sampled directly. Second, the parameter
+    set is separated into $d$ subsets, and at each iteration the parameter
+    subsets are cycled through. So, each iteration consists of $d$ steps. The
+    likelihood at each subset step is evaluated conditionally on the position
+    of the previous subset.
+
+    Both of these sampling methods are combined for the parameter estimation.
+    First, a Metropolis step is proposed for a new $\Delta s$ and $M_A^s$
+    value. The likelihood value at the proposed position is evaluated
+    conditionally on the current position of the GENIE systematic parameters.
+    Then, a Gibbs step is taken in all of the GENIE systematic parameters at
+    once, and the likelihood is evaluated conditionally on the current position
+    of $\Delta s$ and $M_A^s$. This is repeated iteratively. The main benefit
+    is this is computing time. In Gibbs sampling the proposed step doesn't
+    depend on the current state, so the GENIE ReWeight package can used to
+    generate thousands of systematic parameter weights ($w_{GRW}$ in
+    Sec.~\ref{sec:reweighting}) previous to running the MCMC. The only weights
+    that need to be calculated at each iteration are the NC elastic form factor
+    weights ($w_{\sigma}$ in Sec.~\ref{sec:reweighting}), which is far less
+    computationally intensive.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Joint Estimation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Results}\label{sec:results}
+  Lots of plots! $\Delta s$!
 
 
 %This is the end of analysis section
