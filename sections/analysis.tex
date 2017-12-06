@@ -431,12 +431,12 @@ Outline the analysis section.
     distribution analytically, but it can be estimate it numerically by
     sampling. Most sampling techniques would be computationally impossible due
     to the fact that our posterior distribution is X-dimensional ($\Delta s$,
-    $M_A$, and the X-2 GENIE systematic model parameters), and each likelihood
-    calculation requires millions of event weights to be calculated. Markov
-    chain Monte Carlo (MCMC) is a class of methods for sampling
-    multi-dimensional posterior distributions. Two of the most common MCMC
-    algorithms are the Metropolis algorithm~\cite{Metropolis} and Gibbs
-    sampling~\cite{Gibbs}. Both are used in this analysis.
+    $M_A$, and the X-2 GENIE model parameters which we'll call nuisance
+    parameters), and each likelihood calculation requires millions of event
+    weights to be calculated. Markov chain Monte Carlo (MCMC) is a class of
+    methods for sampling multi-dimensional posterior distributions. Two of the
+    most common MCMC algorithms are the Metropolis algorithm~\cite{Metropolis}
+    and Gibbs sampling~\cite{Gibbs}. Both are used in this analysis.
 
     The Metropolis algorithm is a random walk in the N-dimensional parameter
     space with a rule to either accept or reject each step in the walk. Each
@@ -455,29 +455,45 @@ Outline the analysis section.
     calculated.
 
     Gibbs sampling as used in this analysis is also a random walk in the
-    N-dimensional parameter space, but it differs from the Metropolis algorithm
-    in a few ways. First, every proposed step is accepted and the proposal
-    distribution does not depend on the current position. The posterior
-    distribution is essentially being sampled directly. Second, the parameter
-    set is separated into $d$ subsets, and at each iteration the parameter
-    subsets are cycled through. So, each iteration consists of $d$ steps. The
-    likelihood at each subset step is evaluated conditionally on the position
-    of the previous subset.
+    N-dimensional parameter space, but it samples the posterior directly. We
+    cannot sample the posterior directly for the parameters that we want to
+    infer from the data, $\Delta s$ and $M_A^s$, but we can make an
+    approximation that allows us to use Gibbs sampling for our nuisance
+    parameters. At each Gibbs sampling iteration, subvectors of parameters,
+    $\theta_i \in \theta$, are cycled through and sampled conditionally on the
+    position of the previous subvector
+    $P(\theta_i^t|\theta_{-i}^{t-1},R^{obs})$, where $t$ is the current
+    iteration, $\theta_{-i}^{t-1}$ represents the current position all of the
+    other subvectors, $\theta_{-i}^{t-1} =
+    (\theta_0^t,...,\theta_{i-1}^t,\theta_{i+1}^{t-1},...,\theta_d^{t-1})$, and
+    $d$ is the number of subvectors in $\theta$.  Since the posterior is being
+    sampled directly, the sample is also conditional on the data, $R^{obs}$.
+    This is where the approximation comes in. If we assume that the nuisance
+    parameters are independent of the data, then
+    \begin{equation}\label{eq:gibbsstep}
+      P(\theta_i|\theta_{-i},R^{obs}) \approx P(\theta_i|\theta_{-i}) \,.
+    \end{equation}
+    The assumption being made here is that these parameter distributions, the
+    uncertainty and position of the nuisance parameters, would not change very
+    much based on the data we are comparing to, $R^{obs}$. The reason to make
+    this assumption and use Gibbs sampling for the GENIE nuisance parameters is
+    computational. In Gibbs sampling the proposed step doesn't depend on the
+    current state, so the GENIE ReWeight package can used to generate thousands
+    of systematic parameter weights ($w_{GRW}$ in Sec.~\ref{sec:reweighting})
+    per simulated event previous to running the MCMC. If we used Metropolis for
+    the GENIE nuisance parameters, we would need to run the GENIE ReWeight
+    package to generate an event weight for all X~million simulated events at
+    every step in the random walk.
 
-    Both of these sampling methods are combined for the parameter estimation.
-    First, a Metropolis step is proposed for a new $\Delta s$ and $M_A^s$
-    value. The likelihood value at the proposed position is evaluated
-    conditionally on the current position of the GENIE systematic parameters.
-    Then, a Gibbs step is taken in all of the GENIE systematic parameters at
-    once, and the likelihood is evaluated conditionally on the current position
-    of $\Delta s$ and $M_A^s$. This is repeated iteratively. The main benefit
-    is this is computing time. In Gibbs sampling the proposed step doesn't
-    depend on the current state, so the GENIE ReWeight package can used to
-    generate thousands of systematic parameter weights ($w_{GRW}$ in
-    Sec.~\ref{sec:reweighting}) previous to running the MCMC. The only weights
-    that need to be calculated at each iteration are the NC elastic form factor
-    weights ($w_{\sigma}$ in Sec.~\ref{sec:reweighting}), which is far less
-    computationally intensive.
+    The Metropolis and Gibbs sampling methods are combined for the parameter
+    estimation.  First, a Metropolis step is proposed for a new $\Delta s$ and
+    $M_A^s$ value. The likelihood value at the proposed position is evaluated
+    conditionally on the current position of the GENIE nuisance parameters.
+    Then, a Gibbs step is taken in all of the GENIE nuisance parameters at once
+    ($\theta_i$ is all of the nuisance parameters),
+    and the likelihood is evaluated conditionally on the current position of
+    $\Delta s$ and $M_A^s$. This is repeated iteratively until the posterior
+    distribution has been sufficiently covered.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Joint Estimation
