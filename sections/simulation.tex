@@ -1,0 +1,336 @@
+\section{Simulation and reconstruction}\label{sc:simreco}
+In order to understand how different physics models affect what we would see in
+the detector, a lot of work goes in to Monte Carlo simulations of the beam and
+the detector. These simulations also allow us to develop and test algorithms
+that reconstruct the underlying neutrino interaction based on what particles
+are seen in the detector. The simulation and reconstruction algorithms used by
+MicroBooNE are described in this section.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Monte Carlo Simulation Simulation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Monte Carlo simulation}\label{sec:simulation}
+  The entire experimental process from the neutrino interactions in and around
+  the detector to electronic signal readout to particle identification is
+  simulated in software. To interface different the software packages needed to
+  simulate each step, a liquid argon software framework (LArSoft)~\cite{larsoft}
+  was developed at Fermilab. Within the LArSoft framework, the simulation is
+  divided into three steps: generation, propagation, and detector simulation.
+  The simulated data output from the detector simulation stage is designed to
+  match the real data output from the detector as closely as possible. Event
+  reconstruction is also handled within LArSoft, and the same algorithms can be
+  applied to both real data and data simulated through the detector simulation
+  stage in an identical way. This section describes all three stages of
+  simulation and reconstruction, including TPC particle track and optical flash
+  reconstruction.
+
+  \subsubsection{Cross section model}\label{sec:geniexsec}
+    The initial neutrino interactions are simulated using the GENIE Neutrino
+    Monte Carlo Generator~\cite{Andreopoulos:2009rq,Andreopoulos:2015wxa}.
+    Assuming a given neutrino flux, genie simulates the interaction of the
+    neutrino with the nucleons inside of an Argon atom. It also simulates the
+    intranuclear interactions that occur while the nucleons and pions from the
+    initial neutrino-nucleon interaction traverse the Argon nucleus.  Within
+    GENIE the nuclear models and neutrino-nucleon cross sections are
+    configurable by the user.  MicroBooNE uses the GENIE version v2\_12\_2
+    default settings with the addition of the empirical MEC cross section
+    model. The details of the physics models for each of the four processes
+    (the nuclear physics model, the cross section model, the neutrino-induced
+    hadron production model, and the intranuclear hadron transport model)
+    within GENIE as well as the simulated cosmic ray generation are described
+    in this section.
+
+    First, the relativistic Fermi gas (RFG) nuclear model is used for all
+    processes. It has been modified in GENIE to incorporate short-range
+    nucleon-nucleon correlations using the model by Bodek and
+    Ritchie~\cite{BodekrRitchie}. The mass density for the argon nucleus is
+    taken from review articles~\cite{nucdensity} and the two-parameter
+    Woods-Saxon density function is used~\cite{WoodsSaxon}
+    \begin{equation}\label{eq:woodssaxon}
+      \rho(r) = N_0\frac{1}{1+e^{(r-c)/z}} \,,
+    \end{equation}
+    where $\rho$ is the density, $r$ is the distance from the center of the
+    nucleus, $c$ describes the size of the nucleus, and $z$ describes the width
+    of the surface. For argon, GENIE uses $c=3.53$ and $z=0.54$.  For elastic
+    nucleon scattering in the nucleus, Pauli blocking is
+    applied~\cite{PauliBlock}.
+    
+    Next, in the case of elastic (and quasi-elastic) neutrino-nucleon
+    scattering, the free-nucleon cross section is calculated. For
+    neutral-current elastic scattering, the differential cross section model
+    described by Ahrens et al.~\cite{Ahrens} is used. The vector form
+    factors, $F_1$ and $F_2$ are given by
+    \begin{equation}
+      F_1(Q^2) = \frac{1}{2}\frac{(1+\sin^2\theta_W)(1+\frac{Q^2}{4M_p^2}(1+\mu_p)) 
+        - (1-3\sin^2\theta_W)\mu_n}
+        {(1+\frac{Q^2}{4M_p^2})(1+\frac{Q^2}{M_V^2})^2} \,,
+    \end{equation}
+    \begin{equation}
+      F_2(Q^2) = \frac{1}{2}\frac{(1-3\sin^2\theta_W)\mu_p - (1+\sin^2\theta_W)\mu_n}
+         {(1+\frac{Q^2}{4M_p^2})(1+\frac{Q^2}{M_V^2})^2} \,,
+    \end{equation}
+    where $\theta_W$ is the Weinberg angle, $Q^2$ is the momentum transfer,
+    $M_p$ is the mass of the proton, $\mu_p$ and $\mu_n$ are the nucleon
+    anomalous magnetic moments, and $M_V$ is the vector mass, all described in
+    Sec.~\ref{sec:theory}. The dipole representation is used for the axial
+    form factor, as well:
+    \begin{equation}
+      G_A^{NC}(Q^2) = \frac{1}{2}\frac{g_A - \Delta s}{(1+\frac{Q^2}{M_A^2})^2} \,,
+    \end{equation}
+    where $g_A$ is the isovector axial charge and $M_A$ is the axial mass, both
+    also described in Sec.~\ref{sec:theory}. For charged-current quasi-elastic
+    scattering, the differential cross section model described by
+    Llewellyn-Smith~\cite{Llewellyn} is used. The BBA2005~\cite{BBA05} vector
+    form factors are used, and the same dipole axial form factor used in
+    neutral-current elastic scattering is used here. Other neutrino-nucleon
+    interactions are simulated and contribute to the elastic scattering
+    backgrounds. They are described in detail by Andreopoulos et
+    al.~\cite{Andreopoulos:2015wxa}.
+
+    The hadrons produced in neutrino-nucleon interactions in a nucleus are
+    modeled separately from the nuclear model and the free-nucleon cross
+    section model. This is because hadron production in empirical neutrino
+    scattering measurements does not match nuclear and neutrino-nucleon cross
+    section models. The hadron discrepancy is corrected for in GENIE using the
+    AGKY model~\cite{AGKY} that was developed to account for the data seen in
+    the MINOS~\cite{MINOS} neutrino scattering experiment and tuned using
+    bubble chamber experimental data.
+
+    Finally, the transport of the final state hadrons through the argon atom is
+    modeled. The hadrons produced in the neutrino-nucleon interactions can
+    rescatter as the exit the nucleus which changes the observable final state
+    particle distributions. The intranuclear transport model is implemented by
+    the GENIE subpackage called INTRANUKE. INTRANUKE uses a cascade model in
+    which the hadron sees a nucleus of isolated nucleons. The interaction
+    probability is calculated based on the free nucleon cross section and the
+    nucleon density~\cite{Andreopoulos:2015wxa}
+    \begin{equation}
+      \lambda(E,r) = \frac{1}{\sigma_{hN,tot} \rho(r)} \,,
+    \end{equation}
+    where $\lambda$ is the hadron interaction probability, $E$ is the hadron
+    energy, $r$ is the distance from the center of the nucleus,
+    $\sigma_{hN,tot}$ is the total \textit{free} nucleon cross section, and
+    $\rho$ is the density of the argon nucleus. The free nucleon cross section
+    is different for protons, neutrons, and pions. The density of the argon
+    nucleus is again determined by equation~\ref{eq:woodssaxon}.
+
+  \subsubsection{Event generation}
+    The GENIE neutrino events are generated in LArSoft based on the neutrino
+    flux described in Sec.~\ref{sec:beam}. The spill structure with 1.6~$\mu$s
+    long spill containing $5\times 10^{12}$ protons on target is simulated.  In
+    addition to simulating neutrino events, cosmic ray events are also
+    simulated. The CORSIKA~\cite{corsika} cosmic ray generator is used to
+    generate these interactions. CORSIKA uses the FLUKA cosmic ray model and
+    models the flux of protons, He, N, Mg, and Fe on the atmosphere.  To
+    simulate real detector events as closely as possible, both neutrino and
+    cosmic ray interactions can be generated in the same simulation. They can
+    also be generated in separate events in order to isolate effects.
+
+    Only neutrino interactions in the liquid argon filled cryostat are
+    generated in the standard simulation. Special samples can be and are made
+    to study how secondary particles from neutrino interactions outside the
+    cryostat contribute to our signal background. One special sample that we
+    generate is a large \textit{dirt} sample where neutrino interactions that
+    happen in the dirt and detector hall outside of the cryostat are generated.
+    The neutrino interactions are allowed to happen anywhere in the fifty feet
+    of simulated dirt outside of the detector hall or anywhere in the detector
+    hall outside of the cryostat. These are known as beam-induced, TPC-external
+    (BITE) events.
+
+    All of the Monte Carlo samples that are generated are listed here.
+    \begin{enumerate}
+      \item Neutrino-only interactions in the cryostat. This sample is to study
+      exactly what neutrino signals would look like if there were no cosmic
+      background.
+      \item Neutrino plus cosmic interactions in the cryostat. This sample
+      very closely represents the actual detector conditions when there is a
+      neutrino interaction in MicroBooNE.
+      \item BITE plus cosmic interactions. This sample contains all known
+      backgrounds to neutrino events in the TPC.
+      \item In-time cosmic only. This sample simulates events where cosmic
+      interactions happen in time with the beam. This is the most problematic
+      background because both the TPC and PMT signals looks very similar to
+      neutrino events. It also occurs at a rate about ten times as large as the
+      triggered neutrino event rate in MicroBooNE.
+    \end{enumerate}
+
+  \subsubsection{Detector simulation}
+    The simulated final state particles from GENIE are passed to the
+    GEANT4~\cite{geant4} software package to be propagated through the
+    simulated geometry geometry. The entire MicroBooNE detector system, the
+    detector hall, and fifty feet of dirt surrounding the detector hall are all
+    included in the GEANT4 simulation. This includes the electric field and the
+    detector electronics. The particles are stepped through the geometry with
+    the possible physics processes simulated at each step. The particles are
+    allowed to interact electromagnetically and hadronically with other
+    particles and the detector system or decay through one of the physically
+    possible decay modes. Additionally, the energy loss through ionization and
+    scintillation is simulated for all particles traversing the detector
+    geometry. In the case of the ionization of the liquid argon, the resulting
+    electrons are propagated through the electric field to the wire readouts.
+    For the scintillation of the argon, a photon library was generated for each
+    position in the liquid cryostat. At each step particle takes through the
+    liquid argon, the resulting photons that would interact in the PMTs are
+    determined from a look-up table that was generated in a previous full
+    optical simulation. 
+
+    After the simulated particles interact with the TPC or PMT system, the
+    detector response is simulated. The detector-simulation stage includes the
+    electronic responses of the sensitive detectors and reproduces the
+    electronic signals from the TPC and PMT systems. First, the PMT signal is
+    digitized and the PMT software trigger described in
+    Sec.~\ref{sec:swtrigger} is fully simulated. Events that do not pass the
+    PMT trigger are dropped. The TPC electronics, including the electronic
+    noise on the wires and unresponsive wires, are also included at this stage.
+    At this point, the simulated data resembles the actual raw detector data as
+    closely as possible.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Event Reconstruction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Event reconstruction}\label{sec:reco}
+Both the simulated waveforms and the raw detector waveforms need to be
+reconstructed into neutrino interactions. A series of reconstruction algorithms
+for both PMT and TPC information exist in LArSoft. These algorithms start by
+identifying peaks in the waveforms and combine these peaks in stages to get to
+a 3-dimensional representation of the physics interaction.
+
+  \subsubsection{Flash reconstruction}\label{sec:flashreco}
+    The optical flash reconstruction algorithm is applied identically to
+    detector data and the simulated data that is output from the detector
+    simulation stage.  The first step is to find pulses on the electronic
+    signals read out from each of the 32 PMTs. This is done using a peak
+    finding algorithm on the digitized signal. The time, amplitude, width, and
+    area under the pulses are stored per pulse. Next, the flash reconstruction
+    algorithm looks for coincident pulses across PMTs. The individual pulses
+    are sorted by size, and all of the pulses that are within 30 nanoseconds of
+    the largest pulse are collected. If there are at least three pulses in that
+    time window and the sum of the pulse areas is at least 6~PE, it is considered a
+    flash and saved. The peak time, width, position, and size are reconstructed
+    and saved along with information about the pulses in the individual PMTs
+    that contributed to the flash. This process is repeated starting with the
+    next largest remaining pulse until there are none left. An individual pulse
+    can only contribute to one flash in an event.
+
+  \subsubsection{TPC event reconstruction}\label{sec:tpcreco}
+    Reconstructing TPC events involves more steps than the PMTs since there are
+    thousands of wires being read out for milliseconds resulting in
+    approximately 30~MB of raw data per event. The reconstruction algorithms
+    are again applied identically to detector data and the simulated data that
+    is output from the detector simulated stage. First, a noise-deconvultion
+    filter is passed over the digitized wire signals. Then, similar to the
+    optical reconstruction, pulses, or \textit{hits}, are found on individual
+    wires which are used as base building blocks for reconstructing 3D particle
+    tracks across wires and wire planes.
+
+    The 1D hit finding algorithm starts by walking along a wire signal until
+    the value is above a given threshold. The point where the signal goes above
+    the threshold is considered the start of the pulse, and the end of the
+    pulse is defined as the point where the signal goes back down below the
+    threshold.  Then, local minima and maxima are found between the start and
+    end of the pulse which are used to determined where there are peaks within
+    the pulse.  Adjacent pulses are merged if they are close enough in time.
+    Once the pulse and the number of peaks is established, the algorithm
+    attempts to fit Gaussian peaks to the pulse. The hypothesis signal is
+    composed of one Gaussian per peak from the previous step. The mean and
+    amplitude of each Gaussian is initially centered at the existing peaks and
+    is allowed to float. If the residuals of the fit are sufficiently small,
+    each Gaussian peak is saved as a 1D \textit{hit} with an amplitude, width,
+    and time given by the fit. The hit finding is repeating along the length of
+    the wire for each wire on all three planes.
+
+    The 3D track finding algorithm is separated into two distinct parts. The
+    first part attempts to reconstruct and tag as many cosmic-induced tracks.
+    The hits associated with these tracks are then removed from the set of hits
+    that are available to reconstruct neutrino-induced tracks in the second
+    part. 
+
+    The algorithm used to preferentially reconstruct cosmic tracks is called
+    \textit{PandoraCosmic}. It is implemented in the Pandora Software
+    Development Kit~\cite{Pandora} used by MicroBooNE. In PandoraCosmic, 1D
+    hits are first clustered in 2D per wire readout plane. All of the
+    reconstructed hits output by the hit finding algorithm on a given wire
+    plane are used as input. The hits are clustered into unambiguous,
+    continuous lines of hits. These initial clusters are meant to have a high
+    purity, meaning all of the hits in the cluster were induced by the same
+    true particle. The clusters in a 2D plane are then merged pairwise in an
+    attempt to improve the completeness of the cluster, meaning most of the
+    hits on that wire plane induced by a true particle are included in a single
+    merged cluster. The 2D clusters are then matched across the three wire
+    planes. The 3D track reconstruction algorithm attempts to find a cluster on
+    each plane that each corresponds to the same true particle. All possible
+    combinations of 2D cluster matching are considered by the algorithm. The
+    most suitable set of cluster combinations are projected into 3D and saved
+    as reconstructed track objects.
+
+    Next, the reconstructed tracks from PandoraCosmic are passed to a cosmic
+    tagging stage. There are two algorithms used to identify cosmic-induced
+    tracks. The first is a geometry tagger that looks for tracks that are not
+    fully contained in the TPC during the event, and the second is a
+    flash-matching algorithm that looks for tracks that are inconsistent with
+    any flashes in the beam spill window. Both of the cosmic tagging algorithms
+    try to remove as few neutrino-induced tracks as possible and only remove
+    tracks that are very likely cosmic-induced.
+    
+    The geometry tagger starts by locating any TPC wire hits that are
+    reconstructed before of after the 1.6 millisecond readout frame. Any tracks
+    that contain these hits are tagged as cosmic. Any tracks whose
+    reconstructed start or end points are located within a given distance from
+    the TPC boundary are also tagged. If both of the start and end points are
+    near a TPC boundary, the track is given a cosmic score of 1. If only one of
+    the start or end points is near a boundary, the track is given a cosmic
+    score of 0.5.
+    
+    The flash-matching algorithm creates a hypothesis flash for each
+    reconstructed track based on its position, size, and energy deposited. It
+    then compares the hypothesis flash to each of the reconstructed flashes in
+    the beam spill window. If a hypothesis flash is sufficiently incompatible
+    with all true flashes in the window, the track is tagged as cosmic. After
+    the cosmic tagging, all reconstructed hits associated with any of the
+    tracks tagged as cosmic are removed from the set of possible hits that are
+    used to reconstruct neutrino-induced tracks. This is refered to as the
+    cosmic hit removal stage.
+
+    Here describe the cluster and track finding algorithms that you end up
+    using. Need to wait for MCC8 to finish to decide. Should give a lot of
+    information about the final efficiency on MC data for the tracking
+    algorithm. Give efficiency for protons and muons as a function of length,
+    position, angle.
+
+    Calorimetric information is extracted when the reconstructed track objects
+    are created. The calorimetric information that we calculate and use is
+    related to the energy loss of the particle that created the track along its
+    trajectory. At each point along the track, the difference in the total
+    charge between the current point and the previous trajectory point is
+    calculated. This gives us the change in charge as a function of distance
+    along the track, which we label dQ/dx. The change in charge is determined
+    by adding the total charge of each of the reconstructed wire hits between
+    the two points on the track. The charge difference and the dQ/dx values are
+    found for each of the three wire planes. The dQ/dx values can be converted
+    to energy loss per unit distance, dE/dx, by multiplying the dQ/dx by a
+    measured conversion factor. This conversion factor depends on the strength
+    of the electric field and the gain of the readout electronics and is
+    determined empirically.
+
+    There are also two different algorithms that parameterize the dE/dx curves
+    into single parameters to easily evaluate how closely the dE/dx curve of a
+    reconstructed track resembles the expected dE/dx curve for a given particle
+    type. The first is PIDA which represents the magnitude of the dE/dx curve
+    near the end of the track, and the second is PID $\chi^2$ which represents
+    the difference between the dE/dx curve and the expected template. The PIDA
+    algorithm uses an idealized power law parameterization, $dE/dx = AR^{-b}$,
+    where $R$ is the residual range (distance to the end of the track) and $A$
+    and $b$ are fit parameters. In the algorithm, $b$ is set to $-0.42$ and $A$
+    is calculated at every step along the reconstructed track. All of the
+    calculated $A$-values for a given track are fit with a Gaussian hypothesis,
+    and the mean of the fit is the output PIDA parameter. The PID $\chi^2$
+    algorithm calculates the $\chi^2$ residuals between the dE/dx curve of the
+    reconstructed track and each of four template dE/dx curves. There is a
+    template curve for a proton, kaon, pion, and muon hypothesis. The template
+    curve with the lowest $\chi^2$ value is the most similar to the
+    reconstructed track. All four template $\chi^2$ values are saved for each
+    reconstructed track.
+
+
+%This is the end of detector section
