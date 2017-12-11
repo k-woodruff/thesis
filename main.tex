@@ -13,6 +13,8 @@
  %try to process the part of the document called chp1a.tex.  Commment
  %out the line below calling for \input{chp1a}.
 \usepackage{amsmath,amsthm}
+%For bra-ket notation
+\usepackage{physics}
 %Your system may not have the xypic drawing package.  If not, comment
  %out the next line.  If you comment out the next line, you should
  %also not try to process chp1a.tex.  
@@ -53,7 +55,7 @@
 \newcommand{\cC}{{\mathcal C}}
 % 
 %Miscellaneous symbols
-\newcommand{\op}{{\rm \oplus}}
+%\newcommand{\op}{{\rm \oplus}}
 \newcommand{\id}{\rm id}
 %
 %Miscellaneous Greek letters
@@ -139,9 +141,7 @@
 %
 \input{sections/intro}
 \newpage
-\input{sections/spin}
-\newpage
-\input{sections/neutrino}
+\input{sections/theory}
 \newpage
 \input{sections/detector}
 \newpage
