@@ -7,82 +7,191 @@
 % Particle interactions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Particle interactions}
-  The interaction Hamiltonian
+  The differential cross section for two-particle scattering is given by
+  \begin{equation}\label{eq:twobodyxsec}
+    d\sigma = \frac{(2\pi)^4 |\mathcal{M}|^2}{4 \sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
+      \cross d\Phi_2(p_1+p_2;p_3,p_4) \,,
+  \end{equation}
+  where $d\Phi_2(p_1+p_2;p_3,p_4)$ is an element of two-body phase space given by
+  \begin{equation}\label{eq:twobodyphase}
+      d\Phi_2(p_1+p_2;p_3,p_3) = \delta^4(p_1+p_2 - p_3-p_4)
+        \frac{d^3\mathbf{p}_3}{(2\pi)^3 2E_3}\frac{d^3\mathbf{p}_4}{(2\pi)^3 2E_4} \,,
+  \end{equation}
+  and $\mathcal{M}$ is the scattering amplitude.
+  Combining Eqns.~\ref{eq:twobodyxsec}~and~\ref{eq:twobodyphase} gives
+  \begin{equation}
+      d\sigma = \frac{|\mathcal{M}|^2}{64\pi^2}
+        \frac{\delta^4(p_1+p_2-p_3-p_4)}{E_3E_4\sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
+        \, d\mathbf{p}_3d\mathbf{p}_4 \,.
+  \end{equation}
+
   The transition amplitude is given by the matrix element of the interaction
   Hamiltonian between final and initial states: $M_{fi} = \mel{f}{H_{int}}{i}$
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Spin Structure of Nucleons
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Spin Structure of Nucleons} \label{sec:nuctheory}
-  Proton spin: \\
-  --- spin vector $s_{\mu}$ from forward matrix element of axial vector current \\
-  --- derive axial charges \\
-  From Bass 1.1 (need to fill in with Peskin): \\
-  Forward matrix element of the axial current vector (derive from peskin):
-  \[
-      2Ms_{\mu} = <p,s|\bar{\psi}\gamma_{\mu} \gamma_{5} \psi|p,s>
-  \]
-  where $s_{\mu}$ is the proton's spin vector, $\psi$ is the proton field
-  vector and $M$ is the proton mass. The quark axial charges measure
-  information about the quark ``spin content".
-  \[
-    2Ms_{\mu}\Delta q = <p,s| \bar{q}\gamma_{\mu}\gamma_{5}q|p,s> \,,
-  \]
-  where $q$ is the quark field operator and $\Delta q$ is the quark
-  flavor-dependent axial charge, $\Delta u$, $\Delta d$, or $\Delta s$. The
-  isovector, SU(3) octet, and flavor-singlet axial charges, $g_A^{(3)}$,
-  $g_A^{(8)}$, and $g_A^{(0)}$, respectively, can be written as linear
-  combinations of the quark axial charges (derive from Peskin)
-  \begin{align}
-      g_A^{(3)} &= \Delta u - \Delta d \\
-      g_A^{(8)} &= \Delta u + \Delta d - 2\Delta s \\
-      g_A^{(0)} &= \Delta u + \Delta d + \Delta s \,.
-  \end{align}
-  Can be interpreted semi-classically as amount of spin carried by quarks and
-  antiquarks of flavor $q$.
-
-  --- expectation of axial charges from non-relativistic quark model
+    \\
+  What are currents?
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Electroweak Interactions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Electroweak Interactions}
-    Go from electroweak lagrangean to weak current matrix elements to actual
-    cross sections. Show both neutral-current and charged-current version of
-    elastic scattering cross section.
+
+  The charged current (CC) and neutral current (NC) interaction Lagrangians are given by
+  \begin{align}
+      \mathcal{L}_{CC} &= - \frac{g}{2\sqrt{2}}\, j^{\mu}_{CC}\, W_{\mu} + (\textrm{Hermition conjugate}) \\
+      \mathcal{L}_{NC} &= - \frac{g}{2cos\theta_W}\, j^{\mu}_{NC}\, Z_{\mu}
+  \end{align}
+  The charged current, $j^{\mu}_{CC}$, which corresponds to the exchange of a
+  $W^{\pm}$ boson, and the neutral current, $j^{\mu}_{NC}$, which corresponds
+  to the exchange of the $Z^0$ boson are given by
+  \begin{align}\label{eq:ccurrent}
+      j^{\mu}_{CC} &= \sum_f \bar{\psi}_f \gamma^{\mu} (1-\gamma_5) \frac{1}{2}(\tau_1 + i\tau_2) \psi_f \\
+        \label{eq:ncurrent}
+      j^{\mu}_{NC} &= \sum_f \bar{\psi}_f \gamma^{\mu} (1-\gamma_5) \frac{1}{2}(\tau_3) \psi_f 
+       - 2\textrm{sin}^2(\theta_W) j^{\mu}_{em}
+  \end{align}
+  where $j^{\mu}_{em}$ is the electromagnetic current, $\psi_{f}$ are the weak
+  isospin doublets, and $\tau_i$ are the Pauli matrices
+  \begin{equation}
+      \tau_1 = 
+      \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+      \end{pmatrix} \,,
+      \hspace{5mm}
+      \tau_2 = 
+      \begin{pmatrix}
+        0 & -i \\
+        i & 0
+      \end{pmatrix} \,,
+      \hspace{5mm}
+      \tau_3 = 
+      \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+      \end{pmatrix} \,.
+  \end{equation}
+  The lepton weak isospin doublets are
+  \begin{equation}
+    \psi_{e} = 
+    \begin{pmatrix}
+        \hat{\nu}_{e} \\
+        \hat{e}^-
+    \end{pmatrix} \,,
+      \hspace{5mm}
+    \psi_{\mu} = 
+    \begin{pmatrix}
+        \hat{\nu}_{\mu} \\
+        \hat{\mu}^-
+    \end{pmatrix} \,,
+      \hspace{5mm}
+    \psi_{\tau} = 
+    \begin{pmatrix}
+        \hat{\nu}_{\tau} \\
+        \hat{\tau}^-
+    \end{pmatrix} \,,
+  \end{equation}
+  and the quark weak isospin doublets are
+  \begin{equation}
+    \psi_{1} = 
+    \begin{pmatrix}
+        \hat{u} \\
+        \hat{d'}
+    \end{pmatrix} \,,
+      \hspace{5mm}
+    \psi_{2} = 
+    \begin{pmatrix}
+        \hat{c} \\
+        \hat{s'}
+    \end{pmatrix} \,,
+      \hspace{5mm}
+    \psi_{3} = 
+    \begin{pmatrix}
+        \hat{t} \\
+        \hat{b'}
+    \end{pmatrix} \,,
+  \end{equation}
+  where $d'$, $s'$, and $b'$ represent the ``mixed" states
+  \begin{equation}
+      \begin{pmatrix}
+        \hat{d}' \\
+        \hat{s}' \\
+        \hat{b}'
+      \end{pmatrix}
+      =
+      \begin{pmatrix}
+          V_{ud} & V_{us} & V_{ub} \\
+          V_{cd} & V_{cs} & V_{cb} \\
+          V_{td} & V_{ts} & V_{tb}
+      \end{pmatrix}
+      \begin{pmatrix}
+        \hat{d} \\
+        \hat{s} \\
+        \hat{b}
+      \end{pmatrix}
+  \end{equation}
+  where $V$ is the Cabibbo-Kobayashi-Maskawa matrix. These doublets contain the
+  allowed weak transitions.
+
+  \subsubsection{The charged current}
+  The combination of Pauli matrices in the charged current
+  \begin{equation}
+      \frac{1}{2}\tau_+ = \frac{1}{2}(\tau_1 + \tau_2) \,,
+  \end{equation}
+  acts as an ``isospin raising matrix" and corresponds to the exchange of a
+  $W^+$ boson.
+  For the leptons, this gives
+  \begin{equation}
+      j^{\mu}_{CC}(\textrm{leptons}) = \sum_{l=e,\mu,\tau}
+      \begin{pmatrix}
+          \bar{\hat{\nu}}_l \\
+          \bar{\hat{l}}
+      \end{pmatrix}
+      \gamma^{\mu}(1-\gamma_5)\frac{1}{2}
+      \begin{pmatrix}
+        0 & 1 \\
+        0 & 0
+      \end{pmatrix}
+      \begin{pmatrix}
+        \hat{\nu}_l \\
+          \hat{l}
+      \end{pmatrix}
+      = \sum_{l=e,\mu,\tau} \bar{\hat{\nu}}_{l} \gamma^{\mu}\, \hat{l} \,,
+  \end{equation}
+  and, similarly, for the quarks we get
+  \begin{equation}
+      j^{\mu}_{CC}(\textrm{quarks}) =
+       \bar{\hat{u}}\gamma^{\mu}(1-\gamma_5)\frac{1}{2}\,\hat{d}'
+       +\bar{\hat{c}}\gamma^{\mu}(1-\gamma_5)\frac{1}{2}\,\hat{s}'
+       +\bar{\hat{t}}\gamma^{\mu}(1-\gamma_5)\frac{1}{2}\,\hat{b}' \,,
+  \end{equation}
+  with the total charged current being $j^{\mu}_{CC} =
+  j^{\mu}_{CC}(\textrm{leptons}) + j^{\mu}_{CC}(\textrm{quarks})$.
+
+  \subsubsection{The neutral current}
+  In neutral current scattering, $\frac{1}{2}\tau_3$ gives the weak isospin
+  which acts as a ``weak charge". The electromagnetic current is given by
+  \begin{equation}
+      j^{\mu}_{em} = \sum_f e_f \bar{\hat{f}} \gamma^{\mu} \hat{f}
+  \end{equation}
+  where $f$ is a fermions, and $e_f$ is the electric charge of $f$.
+  So, the total neutral current is
+  \begin{equation}
+    \begin{aligned}
+        j^{\mu}_{NC} &= \sum_{l=e,\mu,\tau} \left(\bar{\hat{\nu}}_{l}
+        \gamma^{\mu}(1-\gamma_5) \frac{1}{2}\, \hat{\nu}_{l} - \bar{\hat{l}}
+        \gamma^{\mu}(1-\gamma_5) \frac{1}{2}\, \hat{l} 
+        +\textrm{sin}^2\theta_W \bar{\hat{l}}\gamma^{\mu}\hat{l} \right) \\
+        &+ \sum_{q=u,c,t} \left(\bar{\hat{q}} \gamma^{\mu}(1-\gamma_5)\frac{1}{2}\hat{q} 
+        - \textrm{sin}^2\theta_W \frac{2}{3} \bar{\hat{q}}\gamma^{mu}\hat{q} \right) \\
+        &+ \sum_{q=d,s,b} \left(- \bar{\hat{q}} \gamma^{\mu}(1-\gamma_5)\frac{1}{2}\hat{q} 
+        + \textrm{sin}^2\theta_W \frac{1}{3} \bar{\hat{q}}\gamma^{mu}\hat{q} \right) \,.
+     \end{aligned}
+  \end{equation}
+ 
+  \subsubsection{V-A structure}
 
   %%% starting text %%%
   From Alberico, starting with 2.3: \\
-  The NC lagrangean is (interaction of leptons and quarks with $Z^0$:
-  \[
-      \mathcal{L}^{NC} = -\frac{g}{2\textrm{cos}\theta_W}j_{\alpha}^{NC}Z^{\alpha},
-  \]
-  where $j_{\alpha}^{NC}$ is \textit{the} neutral current. Since unification of
-  weak and electromagnetic is required, we get
-  \[
-    j_{\alpha}^{NC} = 2j_{\alpha}^3 - 2\textrm{sin}^2\theta_W j_{\alpha}^{em},
-  \]
-  where $j_{\alpha}^{em}$ is electromagnetic current and $j_{\alpha}^3$ is some
-  sort of isovector component?
-  \[
-      j_{\alpha}^{em} = \sum_{l = e,\mu,\tau} (-1)\bar{l}\gamma_{\alpha}l + \sum_{q=u,d,...}e_q\bar{q}\gamma_{\alpha}q
-  \]
-  and
-  \[
-    j_{\alpha}^i = \sum_a \bar{\psi}_{aL} \gamma_{\alpha}\frac{1}{2} \tau^i \psi_{aL} \,,
-  \]
-  and $\psi_{aL} = \frac{1}{2}(1-\gamma_5)\psi_a$ are the left-handed doublets
-  of the SU(2)xU(1) gauge group of the standard model, and I don't know what $\tau$ is.
-  So, we get
-  \begin{align*}
-      j_{\alpha}^{NC} &= \sum_{q=u,c,t}\bar{q}\gamma_{\alpha}(1-\gamma_5)\frac{1}{2}q
-                       + \sum_{q=d,s,b}\bar{q}\gamma_{\alpha}(1-\gamma_5)\left(-\frac{1}{2}\right)q \\
-                      &+ \sum_{l=e,\mu,\tau}\bar{\nu_l}\gamma_{\alpha}(1-\gamma_5)\frac{1}{2}\nu_l
-                       + \sum_{l=e,\mu,\tau}\bar{l}\gamma_{\alpha}(1-\gamma_5)\left(-\frac{1}{2}\right)l \\
-                      &- 2\mathrm{sin}^2\theta_W j_{\alpha}^{em} \,.
-  \end{align*}
   It's convenient to separate the contributions from the light ($u,d$) and
   heavy ($s,c,...$) quarks. We get
   \[
@@ -182,6 +291,39 @@
     Derive the axial form factor. Discuss different axial form factor models
     (dipole...). Show that you can determine $\Delta s$. Make explicit that
     this is the same $\Delta s$ from first subsubsection.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Spin Structure of Nucleons
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Spin Structure of Nucleons} \label{sec:nuctheory}
+  Proton spin: \\
+  --- spin vector $s_{\mu}$ from forward matrix element of axial vector current \\
+  --- derive axial charges \\
+  From Bass 1.1 (need to fill in with Peskin): \\
+  Forward matrix element of the axial current vector (derive from peskin):
+  \[
+      2Ms_{\mu} = <p,s|\bar{\psi}\gamma_{\mu} \gamma_{5} \psi|p,s>
+  \]
+  where $s_{\mu}$ is the proton's spin vector, $\psi$ is the proton field
+  vector and $M$ is the proton mass. The quark axial charges measure
+  information about the quark ``spin content".
+  \[
+    2Ms_{\mu}\Delta q = <p,s| \bar{q}\gamma_{\mu}\gamma_{5}q|p,s> \,,
+  \]
+  where $q$ is the quark field operator and $\Delta q$ is the quark
+  flavor-dependent axial charge, $\Delta u$, $\Delta d$, or $\Delta s$. The
+  isovector, SU(3) octet, and flavor-singlet axial charges, $g_A^{(3)}$,
+  $g_A^{(8)}$, and $g_A^{(0)}$, respectively, can be written as linear
+  combinations of the quark axial charges (derive from Peskin)
+  \begin{align}
+      g_A^{(3)} &= \Delta u - \Delta d \\
+      g_A^{(8)} &= \Delta u + \Delta d - 2\Delta s \\
+      g_A^{(0)} &= \Delta u + \Delta d + \Delta s \,.
+  \end{align}
+  Can be interpreted semi-classically as amount of spin carried by quarks and
+  antiquarks of flavor $q$.
+
+  --- expectation of axial charges from non-relativistic quark model
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neutrino-proton elastic cross section
