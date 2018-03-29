@@ -263,9 +263,9 @@
   \end{equation}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Nucleon Form Factors
+% Electroweak Scattering Matrix Elements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Nucleon form factors}
+\subsection{Electroweak Scattering Matrix Elements}
 
   \begin{figure}[h]
     \centering
@@ -286,7 +286,7 @@
 
   To calculate the charged-current neutrino-nucleon scattering matrix element,
   as shown in Fig.~\ref{fig:ccqefeynman}, we need to determine the lepton CC
-  matrix element, $\sideset{_{l}_}{{\nu_l}}{\mel{k'}{J^{\mu}_{CC}(0)}{k}}$, and the nucleon
+  matrix element, $\sideset{_{l}}{{\nu_l}}{\mel{k'}{J^{\mu}_{CC}(0)}{k}}$, and the nucleon
   CC matrix element, $\sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}(0)}{p}}$,
   and for neutral-current, as shown in Fig.~\ref{fig:ncefeynman}, we need the
   lepton NC matrix element, $\sideset{_{\nu_l}}{_{\nu_l}}{\mel{k'}{J^{\mu}_{NC}(0)}{k}}$, and
@@ -332,11 +332,12 @@
       \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}}{p}} 
           &= \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_{3}}{p}} 
             - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_{3}}{p}} 
-            - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} \,.
+            - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} \,,
     \end{aligned}
   \end{equation}
+  where $J^{\mu}$, $V^{\mu}$, and $A^{\mu}$ are current operators.
 
-  \subsubsection{Electric and magnetic form factors}
+  \subsubsection{Electromagnetic Scattering}
 
   It is easiest to first find an equation for $j^{\mu}_{em;q}$ in terms of the
   electric and magnetic form factors. The nucleon electromagnetic current
@@ -377,129 +378,252 @@
   \end{equation}
   where $\mu_p$ and $\mu_n$ are the proton and neutron magnetic moments.
  
-  \subsubsection{Vector current form factors}
+  \subsubsection{Vector current}
 
-  The quark part of the electromagnetic current, $j^{\mu}_{em;q}$, can be
-  written as
-  \begin{equation}
-    \begin{aligned}
-      j^{\mu}_{em;q} &= \bar{\hat{\psi}}_f \, Q_f \gamma^{\mu}\, \hat{\psi}_f \\
-                     &= \bar{\hat{\psi}}_f \, (\tau_3 + \frac{1}{6})\gamma^{\mu} \, \hat{\psi}_f \\
-                     &= v^{\mu}_3 + v^{\mu}_0 \,,
-    \end{aligned}
-  \end{equation}
-  where $v^{\mu}_0 = \frac{1}{6}\bar{\hat{\psi}}_f \, \gamma^{\mu}
-  \hat{\psi}_f$. Now we can write the nucleon electromagnetic current matrix
-  element in terms of the vector and isoscalar parts
-  \begin{equation}
-    \begin{aligned}
-      \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
-          &= \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_3 + V^{\mu}_0)}{p}} \\
-          &= \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_3}{p}} 
-           + \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_0}{p}} \,,
-    \end{aligned}
-  \end{equation}
-  Since $V^{\mu}_3$ behaves like a vector under the charge symmetry operator and
-  $V^{\mu}_0$ behaves as a scalar, the following equations are true
-  \begin{equation}
-    \begin{aligned}
+    The quark part of the electromagnetic current, $j^{\mu}_{em;q}$, can be
+    written as
+    \begin{equation}\label{eq:emcurrent30}
+      \begin{aligned}
+        j^{\mu}_{em;q} &= \bar{\hat{\psi}}_f \, Q_f \gamma^{\mu}\, \hat{\psi}_f \\
+                       &= \bar{\hat{\psi}}_f \, (\tau_3 + \frac{1}{6})\gamma^{\mu} \, \hat{\psi}_f \\
+                       &= v^{\mu}_3 + v^{\mu}_0 \,,
+      \end{aligned}
+    \end{equation}
+    where $v^{\mu}_0 = \frac{1}{6}\bar{\hat{\psi}}_f \, \gamma^{\mu}
+    \hat{\psi}_f$. Now we can write the nucleon electromagnetic current matrix
+    element in terms of the vector and isoscalar parts
+    \begin{equation}
+      \begin{aligned}
+        \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
+            &= \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_3 + V^{\mu}_0)}{p}} \\
+            &= \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_3}{p}} 
+             + \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_0}{p}} \,,
+      \end{aligned}
+    \end{equation}
+    Since $V^{\mu}_3$ behaves like a vector under the charge symmetry operator and
+    $V^{\mu}_0$ behaves as a scalar, the following equations are true
+    \begin{equation}
+      \begin{aligned}
+        \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
+          &= - \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_3}{p}} \,, \\
+        \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}} 
+          &= + \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_0}{p}} \,. \\
+      \end{aligned}
+    \end{equation}
+    Then
+    \begin{align}\label{eq:V3em}
       \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
-        &= - \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_3}{p}} \,, \\
+        &= \frac{1}{2} \left[\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
+         - \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{em}}{p}} \right] \,, \\
       \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}} 
-        &= + \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_0}{p}} \,. \\
-    \end{aligned}
-  \end{equation}
-  Then
-  \begin{align}\label{eq:V3em}
-    \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
-      &= \frac{1}{2} \left[\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
-       - \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{em}}{p}} \right] \,, \\
-    \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}} 
-      &= \frac{1}{2} \left[\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
-       + \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{em}}{p}} \right] \,.
-  \end{align}
-  Combining equations~\ref{eq:FFem}~and~\ref{eq:V3em} gives
-  \begin{equation}
-    \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
-      = \bar{u}(p') \left[\gamma^{\mu}F_1^V(Q^2) 
-        + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^V(Q^2)\right] u(p) \,,
-  \end{equation}
-  where the vector form factors, $F_1^V$ and $F_2^V$ are defined as
-  \begin{equation}
-    \begin{aligned}
-      F_1^V(Q^2) &= \frac{1}{2}\left( F_{1,\textrm{p}}(Q^2) - F_{1,\textrm{n}}(Q^2)\right) \,, \\
-      F_2^V(Q^2) &= \frac{1}{2}\left( F_{2,\textrm{p}}(Q^2) - F_{2,\textrm{n}}(Q^2)\right)
-    \end{aligned}
-  \end{equation}
-  The final vector currents are the ``raising" and ``lowering" vector currents,
-  $V^{\mu}_{\pm}$, in the charged current.
+        &= \frac{1}{2} \left[\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
+         + \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{em}}{p}} \right] \,.
+    \end{align}
+    Combining equations~\ref{eq:FFem}~and~\ref{eq:V3em} gives
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
+        = \bar{u}(p') \left[\gamma^{\mu}F_1^V(Q^2) 
+          + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^V(Q^2)\right] u(p) \,,
+    \end{equation}
+    where the vector form factors, $F_1^V$ and $F_2^V$ are defined as
+    \begin{equation}
+      \begin{aligned}
+        F_1^V(Q^2) &= \frac{1}{2}\left( F_{1,\textrm{p}}(Q^2) - F_{1,\textrm{n}}(Q^2)\right) \,, \\
+        F_2^V(Q^2) &= \frac{1}{2}\left( F_{2,\textrm{p}}(Q^2) - F_{2,\textrm{n}}(Q^2)\right) \,.
+      \end{aligned}
+    \end{equation}
 
-  
+    The isoscalar nucleon matrix element is then
+    \begin{equation}
+      {\mel{p'}{V^{\mu}_0}{p}}
+      = \bar{u}(p')\left[\gamma^{\mu}\frac{1}{2}\left(F_{1,p}(Q^2) + F_{1,n}(Q^2)\right) 
+        + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}\frac{1}{2}\left(F_{2,p}(Q^2) + F_{2,n}(Q^2)\right)\right]u(p)
+    \end{equation}
+ 
+    Under the conserved vector current (CVC) hypothesis the ``raising" and
+    ``lowering" vector currents, $V^{\mu}_{\pm}$, in the charged current
+    interactions are the same as the vector part of the electromagnetic current,
+    $V^{\mu}_{3}$.
 
+  \subsubsection{Axial current}
 
+    The axial current nucleon matrix elements can also be parameterized in
+    terms of form factors. Starting with the charged axial current, the most
+    general form contains an axial, a pseudoscalar, and a tensor term,
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}} 
+        = \bar{u}(p') \left[\gamma^{\mu}\gamma^{5} G_A(Q^2) 
+          + \frac{q^{\mu}\gamma^{5}}{2M}G_P^{CC}(Q^2) 
+          + \frac{\eta^{\mu}\gamma^{5}}{2M}G_T^{CC}(Q^2)\right] u(p) \,,
+    \end{equation}
+    where $G_A$, $G_P^{CC}$, and $G_T^{CC}$ are form factors and $\eta^{\mu}$
+    is the metric tensor. From isospin symmetry, we have
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}} 
+      = \sideset{_{\textrm{n}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_-}{p}} 
+      \equiv \sideset{_{\textrm{p}}}{_{\textrm{n}}^*}{\mel{p}{A^{\mu}_+}{p'}} \,,
+    \end{equation}
+    which implies that $G_T^{CC}(Q^2) = 0$. In quasi-elastic scattering the
+    pseudoscalar term containing $G_P^{CC}(Q^2)$ is proportional to the lepton
+    mass, and is often ignored. The charged current axial matrix element is then just
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}} 
+        = \bar{u}(p') \,\gamma^{\mu}\gamma^{5} G_A(Q^2)\, u(p) \,.
+    \end{equation}
 
-  \subsubsection{Axial form factors}
-    Derive the axial form factor. Discuss different axial form factor models
-    (dipole...). Show that you can determine $\Delta s$. Make clear that
-    this is the same $\Delta s$ from first subsubsection.
+    The most general form for the neutral axial current nucleon matrix element
+    is similarly
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_3}{p}} 
+        = \bar{u}(p') \left[\gamma^{\mu}\gamma^{5} G_A^{NC}(Q^2) 
+          + \frac{q^{\mu}\gamma^{5}}{2M}G_P^{NC}(Q^2) 
+          + \frac{\eta^{\mu}\gamma^{5}}{2M}G_T^{NC}(Q^2)\right] u(p) \,.
+    \end{equation}
+    Just as in the charged-current case, tensor part is zero, $G_T^{NC}(Q^2) =
+    0$, and we can again neglect $G_P^{NC}$ which is proportional to the lepton
+    mass. The neutral axial current matrix element is
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_3}{p}} 
+        = \bar{u}(p') \,\gamma^{\mu}\gamma^{5} G_A^{NC}(Q^2)\, u(p) \,.
+    \end{equation}
+    which can be related to the charged current axial form factor through
+    isospin symmetry.  The relationship is between the neutral and charged
+    axial current operators is
+    \begin{equation}
+      [I^k,A_j^{\mu}] = i\epsilon^{kjl}A^{\mu}_l \,,
+    \end{equation}
+    where $I^k$ is the total isospin operator, and $\epsilon^{kjl}$ is the
+    antisymmetric tensor. From this relationship, we get
+    \begin{equation}
+      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_3}{p}}
+       = \frac{1}{2}\sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}}\,,
+    \end{equation}
+    which implies
+    \begin{equation}
+      G_A^{NC}(Q^2) = \frac{1}{2}G_A(Q^2) \,,
+    \end{equation}
+    assuming only the contributions from up and down quarks.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Strangeness in the Nucleon
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Strangeness in the Nucleon} \label{sec:strangeness}
+\subsection{Strangeness in the nucleon} \label{sec:strangeness}
 
   If contributions to the nucleon from quarks heavier than the strange are
   neglected, the quark part of the charged and neutral currents can be
-  separated between the light quarks and the strange quark.
-  \begin{align}
-    j^{\mu}_{CC}(\textrm{quarks}) &= \bar{\hat{N}}(\gamma^{\mu} 
-                - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_{\pm}\hat{N} \,, \\
-    j^{\mu}_{NC}(\textrm{quarks}) &= \bar{\hat{N}}(\gamma^{\mu} - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_3\hat{N} 
-                - \bar{\hat{s}}(\gamma^{\mu} - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_3\hat{s} \,.
-  \end{align}
+  separated between the light quarks and the strange quark,
+  \begin{equation}\label{eq:chargedcurrent}
+    \begin{aligned}
+    j^{\mu}_{CC}(\textrm{quarks}) &= \bar{\hat{u}}(\gamma^{\mu} 
+                - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_{\pm}\hat{u}
+                - \bar{\hat{d}}(\gamma^{\mu} - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_{\pm}\hat{d} \\
+                 &\equiv \bar{\hat{N}}(\gamma^{\mu} 
+                - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_{\pm}\hat{N} \,,
+    \end{aligned}
+  \end{equation}
+  \begin{equation}\label{eq:neutralcurrent}
+    \begin{aligned}
+    j^{\mu}_{NC}(\textrm{quarks}) = \bar{\hat{N}}(\gamma^{\mu} 
+                - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_3\hat{N} 
+                &- \bar{\hat{s}}(\gamma^{\mu} - \gamma^{\mu}\gamma_5)\frac{1}{2}\tau_3\hat{s}  \\
+                  &- 2\sin^2\theta_W j^{\mu}_{em;q} \,.
+    \end{aligned}
+  \end{equation}
 
-  %%% starting text %%%
-  From Alberico, starting with 2.3: \\
-  It's convenient to separate the contributions from the light ($u,d$) and
-  heavy ($s,c,...$) quarks. We get
-  \[
-    \j_{\alpha}^{NC;q} = v_{\alpha}^3 - a_{\alpha}^3 - \frac{1}{2}(v_{\alpha}^s - a_{\alpha}^s) - 2\mathrm{sin}^2\theta_W j_{\alpha}^{em} \,,
-  \]
-  where we define
-  \begin{align*}
-      v_{\alpha}^3 &= \bar{u}\gamma_{\alpha}\frac{1}{2}u - \bar{d}\gamma_{\alpha}\frac{1}{2}d \equiv \bar{N} \gamma_{\alpha}\frac{1}{2}\tau_3 N \\
-      a_{\alpha}^3 &= \bar{u}\gamma_{\alpha}\gamma_5\frac{1}{2}u - \bar{d}\gamma_{\alpha}\gamma_5\frac{1}{2}d \equiv \bar{N} \gamma_{\alpha}\gamma_5\frac{1}{2}\tau_3 N \,.
-  \end{align*}
-  where $N = \left(\begin{matrix}{u}\\{d}\end{matrix} \right)$ is the isotopic
-  SU(2) group doublet and the currents $v_{\alpha}^3$ and $a_{\alpha}^3$
-  are the third components of the isovectors
-  \begin{align*}
-      v_{\alpha}^i &= \bar{N} \gamma_{\alpha}\frac{1}{2}\tau^i N \\
-      a_{\alpha}^i &= \bar{N} \gamma_{\alpha}\gamma_5\frac{1}{2}\tau^i N \,.
-  \end{align*}
-  On the other hand, $v_{\alpha}^s$ and $a_{\alpha}^s$ are isoscalars. They
-  represent the heavier quark contirbution to $j_{\alpha}^{NC;q}$. If we only
-  include the strange quark, we have
-  \begin{align*}
-      v_{\alpha}^s &= \bar{s}\gamma_{\alpha}s \\
-      a_{\alpha}^s &= \bar{s}\gamma_{\alpha}\gamma_5 s \,.
-  \end{align*}
-  The quark part of the electromagnetic current is
-  \[
-    j_{\alpha}^{em;q} = \sum_{q=u,d,...} e_q\bar{q} \gamma_{\alpha}q \,,
-  \]
-  which we can also separate between light and heavy contributions
-  \[
-    j_{\alpha}^{em;q} = v_{\alpha}^3 + v_{\alpha}^0 \,.
-  \]
-  where $v_{\alpha}^0$ is the isoscalar current which is given by
-  \[
-    v_{\alpha}^0 = \frac{1}{6}\bar{N}\gamma_{\alpha}N + \left(-\frac{1}{3}\right)\bar{s}\gamma_{\alpha}s \,,
-  \]
-  if we ignore charm and up.
+  \subsubsection{Strange currents}
+    If we redefine the neutral vector currents as
+    \begin{equation}\label{eq:updowncurrents}
+      \begin{aligned}
+        v^{\mu}_3 &\equiv \bar{\hat{N}} \gamma^{\mu}\frac{1}{2}\tau_3 \hat{N} \\
+        a^{\mu}_3 &\equiv \bar{\hat{N}} \gamma^{\mu}\gamma_5\frac{1}{2}\tau_3 \hat{N} \,,
+      \end{aligned}
+    \end{equation}
+    and define the strange part of the currents as
+    \begin{equation}\label{eq:strangecurrents}
+      \begin{aligned}
+        v^{\mu}_s &\equiv \bar{\hat{s}} \gamma^{\mu} \hat{s} \\
+        a^{\mu}_s &\equiv \bar{\hat{s}} \gamma^{\mu}\gamma_5 \hat{s} \,,
+      \end{aligned}
+    \end{equation}
+    we can rewrite combine
+    Eqs.~\ref{eq:chargedcurrent},~\ref{eq:neutralcurrent},~\ref{eq:updowncurrents},~and~\ref{eq:strangecurrents}
+    to get
+    \begin{align}
+      j^{\mu}_{CC}(\textrm{quarks}) &= (v^{\mu}_3 - a^{\mu}_3) \,, \\
+      j^{\mu}_{NC}(\textrm{quarks}) &= (v^{\mu}_3 - a^{\mu}_3) 
+        - \frac{1}{2}(v^{\mu}_s - a^{\mu}_s) - 2\sin^2\theta_W j^{\mu}_{em;q} \,.
+    \end{align}
+    
+    The quark part of the electromagnetic current can also be separated into
+    light and heavy quark components. Separating the vector and isoscalar terms
+    from Eq.~\ref{eq:emcurrent30}, into quark components gives
+    \begin{equation}
+      j^{\mu}_{em;q} = (v^{\mu}_3 + v^{\mu}_0) - \frac{1}{2}(v^{\mu}_s + v^{\mu}_{0s}) \,,
+    \end{equation}
+    where $v^{\mu}_3$ and $v^{\mu}_s$ are as defined in
+    Eqs.~\ref{eq:updowncurrents}~and~\ref{eq:strangecurrents}, and $v^{\mu}_0$
+    and $v^{\mu}_s0$ are defined as
+    \begin{equation}
+      \begin{aligned}
+        v^{\mu}_0 &\equiv \frac{1}{6}\bar{\hat{N}}\gamma^{\mu}\hat{N} \,, \\
+        v^{\mu}_{0s} &\equiv -\frac{1}{3}\bar{\hat{s}}\gamma^{\mu}\hat{s} \,.
+      \end{aligned}
+    \end{equation}
+    The quark part of the neutral current becomes
+    \begin{equation}
+      j^{\mu}_{NC}(\textrm{quarks}) = (1-2\sin^2\theta_W)(v^{\mu}_3 - \frac{1}{2}v^{\mu}_s)
+                                    - (a^{\mu}_3 - \frac{1}{2}a^{\mu}_s)
+                                    - 2\sin^2\theta_W(v^{\mu}_0 - \frac{1}{2}v^{\mu}_{0s}) \,.
+    \end{equation}
 
-  %%% ending text %%%
+  \subsubsection{Strange nucleon matrix elements}
 
+  The single-nucleon matrix elements for the charged current becomes
+  \begin{equation}
+     \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}}{p}} 
+       = \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_3}{p}}
+       - \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_3}{p}} \,.
+  \end{equation}
+  In terms of the vector and axial form factors, the matrix element is
+  \begin{equation}
+     \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}}{p}}
+       = \bar{u}(p')\left[\gamma^{\mu} F_1^V(Q^2)
+          + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M} F_2^V(Q^2)
+          - \gamma^{\mu}\gamma_5G_a(Q^2) \right] u(p) \,.
+  \end{equation}
+  The single-nucleon matrix elements for the neutral current becomes
+  \begin{equation}
+    \begin{aligned}
+      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}}{p}} 
+       = (1-2\sin^2\theta_w)&(\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}}
+        - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p}{\frac{1}{2}V^{\mu}_s}{p}}) \\
+       - &(\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_3}{p}}
+        - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p}{\frac{1}{2}A^{\mu}_s}{p}}) \\
+       - 2\sin^2\theta_W&(\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}}
+        - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p}{\frac{1}{2}V^{\mu}_{0s}}{p}}) \,.
+    \end{aligned}
+  \end{equation}
+  If we ignore the strange components of the Dirac and Pauli form factors
+  ($F_1$ and $F_2$), the matrix element is
+  \begin{equation}
+    \begin{aligned}
+     \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}}{p}}
+       = \bar{u}(p')&\left[(1-\sin^2\theta_W)\{\gamma^{\mu}F_1^{NC}(Q^2)
+          + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^{NC}(Q^2)\}  \\
+          - \gamma^{\mu}&\gamma_5 G_A^{NC}(Q^2)
+          - 2\sin^2\theta_W\{\gamma^{\mu}F_1^p(Q^2) 
+          \left. + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^p(Q^2)\} \right]u(p) \,,
+    \end{aligned}
+  \end{equation}
+  where
+  \begin{equation}
+    F_{1,2}^{NC}(Q^2) = \frac{1}{2}F_{1,2}^V(Q^2) \,,
+  \end{equation}
+  and
+  \begin{equation}
+    G_A^{NC} = \frac{1}{2}G_A(Q^2) - \frac{1}{2}G_A^s(Q^2) \,.
+  \end{equation}
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Spin Structure of Nucleons
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -532,6 +656,19 @@
   antiquarks of flavor $q$.
 
   --- expectation of axial charges from non-relativistic quark model
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Determination of the Form Factors
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Determination of the Form Factors} \label{formfactorforms}
+
+  Up to this point, we have only parameterized the electromagnetic and weak
+  currents in terms of the vector and axial form factors, but have said nothing
+  about their form. The actual form factors are determined empirically from
+  experiment.
+
+  \subsubsection{Z-Expansion}
+  \subsubsection{Fits to Data}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neutrino-proton elastic cross section
