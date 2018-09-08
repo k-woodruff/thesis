@@ -6,7 +6,7 @@ CHECK_RERUN =
 
 all: main.pdf
 
-main.pdf: *.tex sections/*.tex extras/*.tex
+main.pdf: *.tex sections/*.tex extras/*.tex main.bib
 	${LATEX} main
 	bibtex main
 	${LATEX} main

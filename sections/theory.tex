@@ -286,26 +286,26 @@
 
   To calculate the charged-current neutrino-nucleon scattering matrix element,
   as shown in Fig.~\ref{fig:ccqefeynman}, we need to determine the lepton CC
-  matrix element, $\sideset{_{l}}{{\nu_l}}{\mel{k'}{J^{\mu}_{CC}(0)}{k}}$, and the nucleon
-  CC matrix element, $\sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}(0)}{p}}$,
+  matrix element, $_{l}\mel{k'}{J^{\mu}_{CC}(0)}{k}_{\nu_l}$, and the nucleon
+  CC matrix element, $_{\textrm{p}}\mel{p'}{J^{\mu}_{CC}(0)}{p}_{\textrm{n}}$,
   and for neutral-current, as shown in Fig.~\ref{fig:ncefeynman}, we need the
-  lepton NC matrix element, $\sideset{_{\nu_l}}{_{\nu_l}}{\mel{k'}{J^{\mu}_{NC}(0)}{k}}$, and
+  lepton NC matrix element, $_{\nu_l}\mel{k'}{J^{\mu}_{NC}(0)}{k}_{\nu_l}$, and
   the nucleon NC matrix element,
-  $\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}(0)}{p}}$. Leptons are
+  $_{\textrm{p}}\mel{p'}{J^{\mu}_{NC}(0)}{p}_{\textrm{p}}$. Leptons are
   point-like particles, so their matrix elements are straight-forward
   \begin{equation}
     \begin{aligned}
-      \sideset{_l}{_{\nu_l}}{\mel{k'}{J^{\mu}_{CC}(0)}{k}}
+      _l\mel{k'}{J^{\mu}_{CC}(0)}{k}_{\nu_l}
         &= -i\frac{G_F}{\sqrt{2}}u(k')(\gamma^{\mu} - \gamma^{\mu}\gamma_5)u(k) \,, \\
-        \sideset{_{\nu_l}}{_{\nu_l}}{\mel{k'}{J^{\mu}_{NC}(0)}{k}}  
+        _{\nu_l}\mel{k'}{J^{\mu}_{NC}(0)}{k}_{\nu_l}
         &= -\frac{G_F}{\sqrt{2}}u(k')(\gamma^{\mu} - \gamma^{\mu}\gamma_5)u(k) \,.
     \end{aligned}
   \end{equation}
 
   \subsubsection{Nucleon matrix elements}
   Since nucleons have a finite structure, the nucleon matrix elements have a
-  more complicated form. The current is corrected by form factors which
-  represent the internal nucleon structure.
+  more complicated form. The current is corrected by form factors which encode
+  the longitudinal nucleon structure.
 
   If we define the vector and axial parts of the nucleon currents by
   \begin{equation}
@@ -326,13 +326,13 @@
   ia^{\mu}_2$. The nucleon matrix elements become
   \begin{equation}
     \begin{aligned}
-      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}}{p}} 
-          &= \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_{+}}{p}} 
-            - \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_{+}}{p}} \,, \\
-      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}}{p}} 
-          &= \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_{3}}{p}} 
-            - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_{3}}{p}} 
-            - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} \,,
+      _{\textrm{p}}\mel{p'}{J^{\mu}_{CC}}{p}_{\textrm{n}}
+          &= _{\textrm{p}}\mel{p'}{V^{\mu}_{+}}{p}_{\textrm{n}}
+            - _{\textrm{p}}\mel{p'}{A^{\mu}_{+}}{p}_{\textrm{n}} \,, \\
+      _{\textrm{p}}\mel{p'}{J^{\mu}_{NC}}{p}_{\textrm{p}}
+          &= _{\textrm{p}}\mel{p'}{V^{\mu}_{3}}{p}_{\textrm{p}} 
+            - _{\textrm{p}}\mel{p'}{A^{\mu}_{3}}{p}_{\textrm{p}} 
+            - _{\textrm{p}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{p}} \,,
     \end{aligned}
   \end{equation}
   where $J^{\mu}$, $V^{\mu}$, and $A^{\mu}$ are current operators.
@@ -348,16 +348,16 @@
     \Gamma^{\mu} = \gamma^{\mu}\cdot A + (p'^{\mu} + p^{\mu})\cdot B + (p'^{\mu} - p^{\mu})\cdot C \,,
   \end{equation}
   where $\Gamma^{\mu}$ is given by the equation
-  $\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} =
-  \bar{u}(p')\Gamma^{\mu}u(p)$, and $A$, $B$, and $C$ are arbitrary form factors.
-  $\Gamma^{\mu}$ if constrained further by the Ward identity,
+  $_{\textrm{p}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{p}} =
+  \bar{u}(p')\Gamma^{\mu}u(p)$, and $A$, $B$, and $C$ are arbitrary form
+  factors.  $\Gamma^{\mu}$ if constrained further by the Ward identity,
   $q_{\mu}\Gamma^{\mu} = 0$, which guarantees current conservation. The
   $\gamma^{\mu}$ and $(p'^{\mu} + p^{\mu})$ terms in $q_{\mu}\Gamma^{\mu}$ go
-  to zero, but the $(p'^{\mu} - p^{\mu})$ term does not, so $C=0$. Using the Gordon
-  identity~\cite{Gordon}, the general form for the nucleon EM current matrix
-  element is
+  to zero, but the $(p'^{\mu} - p^{\mu})$ term does not, so $C=0$. Using the
+  Gordon identity~\cite{Gordon}, the general form for the nucleon EM current
+  matrix element is
   \begin{equation}\label{eq:FFem}
-    \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} =
+    _{\textrm{p}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{p}} =
       \bar{u}(p')\left[ \gamma^{\mu}F_1(Q^2) + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2(Q^2)  \right]u(p) \,.
   \end{equation}
   The form factors $F_1$ and $F_2$ are the Dirac and Pauli form factors,
@@ -366,10 +366,11 @@
   \begin{equation}
     G_E(Q^2) = F_1(Q^2) - \frac{Q^2}{4M^2}F_2(Q^2)\,, \hspace{5mm} G_M(Q^2) = F_1(Q^2) + F_2(Q^2) \,,
   \end{equation}
-  where $Q^2 = -q^2$.  The electric form factor, $G_E$ represents the electric
-  charge structure of the nucleon and the magnetic form factor, $G_M$,
-  represents the magnetic structure. At the limit when $Q^2$ goes to zero, the
-  Sachs form factors become the net charge and magnetic moment of the nucleon.
+  where $Q^2 = -q^2$.  The electric form factor, $G_E$ encodes the longitudinal
+  electric charge structure of the nucleon and the magnetic form factor, $G_M$,
+  encodes the longitudinal magnetic structure. At the limit when $Q^2$ goes to
+  zero, the Sachs form factors become the net charge and magnetic moment of the
+  nucleon.
   \begin{equation}
     \begin{aligned}
       G_{E;p}(Q^2=0) = 1 \,,& \hspace{5mm} G_{M;p}(Q^2=0) = \mu_p \,, \\
@@ -394,34 +395,34 @@
     element in terms of the vector and isoscalar parts
     \begin{equation}
       \begin{aligned}
-        \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
-            &= \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_3 + V^{\mu}_0)}{p}} \\
-            &= \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_3}{p}} 
-             + \sideset{_{\textrm{p(n)}}}{_{\textrm{p(n)}}}{\mel{p'}{V^{\mu}_0}{p}} \,,
+        _{\textrm{p(n)}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{p(n)}} 
+            &= _{\textrm{p(n)}}\mel{p'}{V^{\mu}_3 + V^{\mu}_0)}{p}_{\textrm{p(n)}} \\
+            &= _{\textrm{p(n)}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{p(n)}} 
+             + _{\textrm{p(n)}}\mel{p'}{V^{\mu}_0}{p}_{\textrm{p(n)}} \,,
       \end{aligned}
     \end{equation}
     Since $V^{\mu}_3$ behaves like a vector under the charge symmetry operator and
     $V^{\mu}_0$ behaves as a scalar, the following equations are true
     \begin{equation}
       \begin{aligned}
-        \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
-          &= - \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_3}{p}} \,, \\
-        \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}} 
-          &= + \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_0}{p}} \,. \\
+        _{\textrm{p}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{p}} 
+          &= - _{\textrm{n}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{n}} \,, \\
+        _{\textrm{p}}\mel{p'}{V^{\mu}_0}{p}_{\textrm{p}} 
+          &= + _{\textrm{n}}\mel{p'}{V^{\mu}_0}{p}_{\textrm{n}} \,. \\
       \end{aligned}
     \end{equation}
     Then
     \begin{align}\label{eq:V3em}
-      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
-        &= \frac{1}{2} \left[\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
-         - \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{em}}{p}} \right] \,, \\
-      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}} 
-        &= \frac{1}{2} \left[\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{em}}{p}} 
-         + \sideset{_{\textrm{n}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{em}}{p}} \right] \,.
+      _{\textrm{p}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{p}} 
+        &= \frac{1}{2} \left[_{\textrm{p}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{p}} 
+         - _{\textrm{n}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{n}} \right] \,, \\
+      _{\textrm{p}}\mel{p'}{V^{\mu}_0}{p}_{\textrm{p}} 
+        &= \frac{1}{2} \left[_{\textrm{p}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{p}} 
+         + _{\textrm{n}}\mel{p'}{J^{\mu}_{em}}{p}_{\textrm{n}} \right] \,.
     \end{align}
     Combining equations~\ref{eq:FFem}~and~\ref{eq:V3em} gives
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}} 
+      _{\textrm{p}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{p}} 
         = \bar{u}(p') \left[\gamma^{\mu}F_1^V(Q^2) 
           + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^V(Q^2)\right] u(p) \,,
     \end{equation}
@@ -451,7 +452,7 @@
     terms of form factors. Starting with the charged axial current, the most
     general form contains an axial, a pseudoscalar, and a tensor term,
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}} 
+      _{\textrm{p}}\mel{p'}{A^{\mu}_+}{p}_{\textrm{n}} 
         = \bar{u}(p') \left[\gamma^{\mu}\gamma^{5} G_A(Q^2) 
           + \frac{q^{\mu}\gamma^{5}}{2M}G_P^{CC}(Q^2) 
           + \frac{\eta^{\mu}\gamma^{5}}{2M}G_T^{CC}(Q^2)\right] u(p) \,,
@@ -459,22 +460,25 @@
     where $G_A$, $G_P^{CC}$, and $G_T^{CC}$ are form factors and $\eta^{\mu}$
     is the metric tensor. From isospin symmetry, we have
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}} 
-      = \sideset{_{\textrm{n}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_-}{p}} 
-      \equiv \sideset{_{\textrm{p}}}{_{\textrm{n}}^*}{\mel{p}{A^{\mu}_+}{p'}} \,,
+      _{\textrm{p}}\mel{p'}{A^{\mu}_+}{p}_{\textrm{n}} 
+      = _{\textrm{n}}\mel{p'}{A^{\mu}_-}{p}_{\textrm{p}} 
+      \equiv _{\textrm{p}}\mel{p}{A^{\mu}_+}{p'}_{\textrm{n}}^* \,,
     \end{equation}
     which implies that $G_T^{CC}(Q^2) = 0$. In quasi-elastic scattering the
     pseudoscalar term containing $G_P^{CC}(Q^2)$ is proportional to the lepton
     mass, and is often ignored. The charged current axial matrix element is then just
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}} 
+      _{\textrm{p}}\mel{p'}{A^{\mu}_+}{p}_{\textrm{n}} 
         = \bar{u}(p') \,\gamma^{\mu}\gamma^{5} G_A(Q^2)\, u(p) \,.
     \end{equation}
+    The form factor $G_A$ encodes the longitudinal spin structure of the
+    nucleon due to the spin of the up and down quarks and is referred to as the
+    charged current axial form factor, or just the axial form factor.
 
     The most general form for the neutral axial current nucleon matrix element
     is similarly
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_3}{p}} 
+      _{\textrm{p}}\mel{p'}{A^{\mu}_3}{p}_{\textrm{n}} 
         = \bar{u}(p') \left[\gamma^{\mu}\gamma^{5} G_A^{NC}(Q^2) 
           + \frac{q^{\mu}\gamma^{5}}{2M}G_P^{NC}(Q^2) 
           + \frac{\eta^{\mu}\gamma^{5}}{2M}G_T^{NC}(Q^2)\right] u(p) \,.
@@ -483,7 +487,7 @@
     0$, and we can again neglect $G_P^{NC}$ which is proportional to the lepton
     mass. The neutral axial current matrix element is
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_3}{p}} 
+      _{\textrm{p}}\mel{p'}{A^{\mu}_3}{p}_{\textrm{n}} 
         = \bar{u}(p') \,\gamma^{\mu}\gamma^{5} G_A^{NC}(Q^2)\, u(p) \,.
     \end{equation}
     which can be related to the charged current axial form factor through
@@ -495,8 +499,8 @@
     where $I^k$ is the total isospin operator, and $\epsilon^{kjl}$ is the
     antisymmetric tensor. From this relationship, we get
     \begin{equation}
-      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_3}{p}}
-       = \frac{1}{2}\sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_+}{p}}\,,
+      _{\textrm{p}}\mel{p'}{A^{\mu}_3}{p}_{\textrm{p}}
+       = \frac{1}{2}_{\textrm{p}}\mel{p'}{A^{\mu}_+}{p}_{\textrm{n}}\,,
     \end{equation}
     which implies
     \begin{equation}
@@ -580,13 +584,13 @@
 
   The single-nucleon matrix elements for the charged current becomes
   \begin{equation}
-     \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}}{p}} 
-       = \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{V^{\mu}_3}{p}}
-       - \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{A^{\mu}_3}{p}} \,.
+     _{\textrm{p}}\mel{p'}{J^{\mu}_{CC}}{p}_{\textrm{n}} 
+       = _{\textrm{p}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{n}}
+       - _{\textrm{p}}\mel{p'}{A^{\mu}_3}{p}_{\textrm{n}} \,.
   \end{equation}
   In terms of the vector and axial form factors, the matrix element is
   \begin{equation}
-     \sideset{_{\textrm{p}}}{_{\textrm{n}}}{\mel{p'}{J^{\mu}_{CC}}{p}}
+     _{\textrm{p}}\mel{p'}{J^{\mu}_{CC}}{p}_{\textrm{n}}
        = \bar{u}(p')\left[\gamma^{\mu} F_1^V(Q^2)
           + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M} F_2^V(Q^2)
           - \gamma^{\mu}\gamma_5G_a(Q^2) \right] u(p) \,.
@@ -594,25 +598,25 @@
   The single-nucleon matrix elements for the neutral current becomes
   \begin{equation}
     \begin{aligned}
-      \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}}{p}} 
-       = (1-2\sin^2\theta_w)&(\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_3}{p}}
-        - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p}{\frac{1}{2}V^{\mu}_s}{p}}) \\
-       - &(\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{A^{\mu}_3}{p}}
-        - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p}{\frac{1}{2}A^{\mu}_s}{p}}) \\
-       - 2\sin^2\theta_W&(\sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{V^{\mu}_0}{p}}
-        - \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p}{\frac{1}{2}V^{\mu}_{0s}}{p}}) \,.
+      _{\textrm{p}}\mel{p'}{J^{\mu}_{NC}}{p}_{\textrm{p}} 
+       = (1-2\sin^2\theta_w)&(_{\textrm{p}}\mel{p'}{V^{\mu}_3}{p}_{\textrm{p}}
+        - _{\textrm{p}}\mel{p}{\frac{1}{2}V^{\mu}_s}{p}_{\textrm{p}}) \\
+       - &(_{\textrm{p}}\mel{p'}{A^{\mu}_3}{p}_{\textrm{p}}
+        - _{\textrm{p}}\mel{p}{\frac{1}{2}A^{\mu}_s}{p}_{\textrm{p}}) \\
+       - 2\sin^2\theta_W&(_{\textrm{p}}\mel{p'}{V^{\mu}_0}{p}_{\textrm{p}}
+        - _{\textrm{p}}\mel{p}{\frac{1}{2}V^{\mu}_{0s}}{p}_{\textrm{p}}) \,.
     \end{aligned}
   \end{equation}
   If we ignore the strange components of the Dirac and Pauli form factors
   ($F_1$ and $F_2$), the matrix element is
   \begin{equation}
     \begin{aligned}
-     \sideset{_{\textrm{p}}}{_{\textrm{p}}}{\mel{p'}{J^{\mu}_{NC}}{p}}
-       = \bar{u}(p')&\left[(1-\sin^2\theta_W)\{\gamma^{\mu}F_1^{NC}(Q^2)
+     _{\textrm{p}}\mel{p'}{J^{\mu}_{NC}}{p}_{\textrm{p}}
+       = \bar{u}(p')&\bigg[(1-\sin^2\theta_W)\{\gamma^{\mu}F_1^{NC}(Q^2)
           + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^{NC}(Q^2)\}  \\
           - \gamma^{\mu}&\gamma_5 G_A^{NC}(Q^2)
           - 2\sin^2\theta_W\{\gamma^{\mu}F_1^p(Q^2) 
-          \left. + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^p(Q^2)\} \right]u(p) \,,
+          + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2^p(Q^2)\} \bigg]u(p) \,,
     \end{aligned}
   \end{equation}
   where
@@ -623,6 +627,9 @@
   \begin{equation}
     G_A^{NC} = \frac{1}{2}G_A(Q^2) - \frac{1}{2}G_A^s(Q^2) \,.
   \end{equation}
+  The neutral current axial form factor, $G_A^{NC}$, represents the
+  longitudinal spin structure of the nucleon due to all three of the quark
+  flavors (up, down, and strange).
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Spin Structure of Nucleons
@@ -660,15 +667,114 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Determination of the Form Factors
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Determination of the Form Factors} \label{formfactorforms}
+\subsection{Determination of the Nucleon Form Factors} \label{sec:formfactorforms}
 
   Up to this point, we have only parameterized the electromagnetic and weak
   currents in terms of the vector and axial form factors, but have said nothing
   about their form. The actual form factors are determined empirically from
-  experiment.
+  experiment. To determine the form factors from experimental data some
+  parameterization must be chosen.
 
-  \subsubsection{Z-Expansion}
-  \subsubsection{Fits to Data}
+  There are many existing parameterizations of the electromagnetic form factors
+  which have been fit to electromagnetic scattering data. Since there is much
+  more data available from electromagnetic scattering than from weak
+  scattering, the parameterizations of the electromagnetic form factors can be
+  more precise with more parameters.
+  See~\cite{Perdrisat2008}~and~\cite{EMformfactors} for an extensive review of
+  the nucleon electromagnetic form factors.
+  
+  The most common parameterization of the axial form factor, the dipole form,
+  has only one free parameter known as the axial mass,
+  $M_A$~\cite{axialformfactor},
+  \begin{equation}
+    G_A^{(dipole)}(Q^2) = \frac{G_A(0)}{(1+Q^2/M_A^2)^2} \,.
+  \end{equation}
+  The dipole form of the axial form factor was motivated by early models of the
+  electromagnetic form factors which are no longer used. There hasn't been
+  strong physical motivation for new axial form factor parameterizations since
+  not as much data exists as for the electromagnetic form factors.
+
+  Constraining the shape of the axial form factor to one parameter can lead to
+  both overconfidence in the uncertainty of the measurement of the form factor
+  and disagreement of the parameters between different experimental
+  measurements at different ranges of negative four-momentum transfer squared.
+
+  \subsubsection{Model-Independent Form Factor Parameterization}
+
+  Both the electromagnetic and axial form factors can be determined using a
+  model-independent parameterization referred to as z
+  expansion~\cite{Boyd:1997qw}.
+
+  The z expansion parameterization is made by mapping the negative
+  four-momentum transfer squared onto a domain where the form factor, $F$ is
+  analytic
+  \begin{equation}
+    z(Q^2,t_{cut},t_0) = 
+    \frac{\sqrt{t_{cut}+Q^2} - \sqrt{t_{cut} - t_0}}{\sqrt{t_{cut}+Q^2} + \sqrt{t_{cut} - t_0}} \,,
+  \end{equation}
+  where $t_{cut}$ is the leading threshold for states that can be produced by
+  the vector or axial current. The form factor is analytic everywhere where
+  $Q^2 < t_{cut}$.  In the case of the electromagnetic (vector) form factors,
+  $t_{cut} = (2m_{\pi})^2$ (two-pion threshold). In the axial form factor case,
+  $t_{cut} = (3m_{\pi})^2$ (three-pion threshold)~\cite{Federbush:1958zz}. The
+  parameter $t_0$ is an arbitrary number that can be chosen to minimize the
+  absolute value of $z$~\cite{Meyer:2016oeg}.
+
+  Since $F(z(Q^2))$ is analytic by definition of $z$, and $z$ can be
+  constrained to be less than unity by choice of $t_0$ and the finite range of
+  $Q^2$ for a given experiment, the Taylor series of $F(z(Q^2))$ around zero
+  will converge to the true $F(Q^2)$
+  \begin{equation}
+    F(Q^2) = \sum_{k=0}^{\infty}a_{k}z(Q^2)^k \,,
+  \end{equation}
+  where $a_k$ are dimensionless parameters that encode the nucleon structure.
+
+  Physical quantities can still be extracted from the general form of the form
+  factors. For example, the electric charge radius is still defined by the
+  slope of the electric form factor at $Q^2 = 0$ and the axial mass can be
+  redefined by the slope of the axial form factor at $Q^2 = 0$.  Importantly,
+  the net contribution to the proton spin from the individual quark spins,
+  $\Delta q$, is the value of the value of axial form factor at $Q^2 = 0$, and
+  specifically, the net contribution to the spin of the proton from the spin of
+  the strange quarks in the nucleon is equal to the value of the strange axial
+  form factor at $Q^2 - 0$.
+
+  \subsubsection{Fits of Z Expansion Form Factors to Data}
+
+  An approximation to the general form of the form factors can be made by
+  fitting the coefficients, $a_k$, out to a value $k_{max}$
+  \begin{equation}
+    F(Q^2) \approx \sum_{k=0}^{k_{max}} a_{k}z(Q^2)^k \,.
+  \end{equation}
+  Obviously, the larger $k_{max}$ is, the better the approximation will be. The
+  limit of $k_{max}$ is generally determined by the experimental data.
+
+  Sum rules [92.013013], asymptotic freedom [Lepage Brodsky], choice of $t_0$ [93.113015].
+
+  Fits of the electric and magnetic form factor z expansion coefficients to
+  data have been performed
+  in~\cite{Hill:2010yb,Epstein:2014zua,Lee:2015jqa,Ye:2017gyb}.  We use the
+  recent fit to electron scattering data performed in~\cite{Ye:2017gyb}. In it,
+  the proton electric and magnetic form factors, $G_E^p(Q^2)$ and $G_M^p(Q^2)$,
+  are fit simultaneously up to $k_{max} = 12$ using a previous unpolarized
+  electron-proton scattering data and $G_E^p/G_m^p$ ratios extracted from
+  polarized electron-proton data. The neutron electric and magnetic form
+  factors, $G_E^n(Q^2)$ and $G_M^n(Q^2)$, are fit separately to up $k_{max} =
+  10$ using polarized and unpolarized electron-deuterium and electron-helium-3
+  scattering data.
+
+  Fits to the charged current axial form factor z expansion coefficients to
+  neutrino data have been performed
+  in~\cite{Bhattacharya:2011ah,Bhattacharya:2015mpa,Meyer:2016oeg} We use the
+  fit to deuterium bubble chamber neutrino data performed
+  in~\cite{Meyer:2016oeg}. The form factor, $G_A(Q^2)$, is fit up to $k_{max} =
+  8$ using accelerator neutrino-deuterium data from deuterium bubble chamber
+  experiments. They found results similar to a dipole form but with larger,
+  more accurate uncertainty estimates.
+
+
+  \subsubsection{Z Expansion fit to the Neutral Current Axial Form Factor}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neutrino-proton elastic cross section
@@ -677,6 +783,6 @@
   \subsubsection{Cross section model}
 
   \subsubsection{Previous measurements}
-    E734
+    E734 and MiniBooNE
 
 %This is the end of nu-N cross sections section

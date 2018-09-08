@@ -12,7 +12,7 @@
  %comment out all the theorem formatting commands, and you should not
  %try to process the part of the document called chp1a.tex.  Commment
  %out the line below calling for \input{chp1a}.
-\usepackage{amsmath,amsthm}
+\usepackage{amsmath,amsthm,mathtools}
 %For bra-ket notation
 \usepackage{physics}
 %For slash notation
@@ -149,6 +149,8 @@
 \newpage
 \input{sections/simulation}
 \newpage
+\input{sections/selection}
+\newpage
 \input{sections/analysis}
 \newpage
 %\input{sections/graphics}
@@ -162,7 +164,7 @@
  %to create and format the list of references yourself.
 \addcontentsline{toc}{section}{REFERENCES}
 \setlength{\baselineskip}{\singlespace}
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{main}
 %These next three command lines create a list of references for the paper from
  %a biblio.tex file you create yourself.
