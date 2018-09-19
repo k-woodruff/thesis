@@ -25,7 +25,7 @@ this section.
   400~MeV using radio frequency (RF) cavities. The hydrogen ions are then
   injected into the Booster accelerator. During injection, the ions pass
   through a foil that strips both electrons leaving only the positive proton.
-  The Booster~\cite{MinibooneBeam} is a 474-meter-circumference, 15~Hz
+  The Booster~\cite{AguilarArevalo:2008yp} is a 474-meter-circumference, 15~Hz
   synchrotron that accelerates the protons from 400~MeV to 8~GeV. The proton
   beam leaving the Booster has a bunched structure. Each turn contains 81
   proton bunches that are 2~ns wide and 19~ns apart. At this stage, a
@@ -34,27 +34,30 @@ this section.
   in a turn which we refer to as a spill. One spill is 1.6~$\mu$s long and
   contains $5\times 10^{12}$ protons.
 
-  %%% NOTE %%%
-  Add information about the hadron production cross sections; pions, kaons,
-  muons and their decay modes, neutrino rates and energies. Also mention about
-  stopping muons vs. muons decaying in motion.
-  %%%%%%%%%%%%
-
   The proton target is a beryllium cylinder 71.1~cm long and 0.51~cm thick that
   is aligned with the proton beam. The interactions of the protons in the
-  beryllium produce charged pions that are focused by a pulsed toroidal
-  electromagnet. The magnet can operate at a maximum frequency of 5~Hz which is
-  the limiting factor in the beam spill frequency. In neutrino mode, the magnet
-  focuses positive pions and defocuses negative pions. The positive pions then
-  pass through an air-filled decay pipe where they quickly decay into positive
-  muons (anti-muons) and neutrinos. In anti-neutrino mode, which is not used in
-  this analysis, negative pions are focused which decay into negative muons and
-  anti-neutrinos. The anti-muons and neutrinos next pass through a beam stop
-  made of steel and concrete to filter out remaining protons, pions, and kaons.
-  Finally, the anti-muons and neutrinos pass through almost 500~meters of dirt
-  where the anti-muons decay and a (mostly) pure neutrino beam remains. The
+  beryllium produce secondary hadrons including charged and neutral pion,
+  kaons, and nucleons. The decay of the charged pions, charged and neutral
+  kaons, and muons from pion and kaon decays all contribute to the neutrino
+  flux at the MicroBooNE detector. The charged pions and kaons are focused by a
+  pulsed toroidal electromagnet operating at a maximum frequency of 5~Hz which
+  is the limiting factor in the beam spill frequency. In neutrino mode, the
+  magnet focuses positive particles and defocuses negative particles.  The
+  positive pions and kaons then pass through an air-filled decay pipe where
+  they quickly decay into positive muons (anti-muons) and neutrinos. In
+  anti-neutrino mode, which is not used in this analysis, negative pions and
+  kaons are focused which decay into negative muons and anti-neutrinos. The
+  anti-muons and neutrinos next pass through a beam stop made of steel and
+  concrete to filter out remaining protons, pions, and kaons.  Finally, the
+  anti-muons and neutrinos pass through almost 500~meters of dirt where the
+  anti-muons stop and decay, and a (mostly) pure neutrino beam remains.  The
   predicted neutrino flux at MicroBooNE is shown in Fig.~\ref{fig:beamflux} per
-  $1\times 10^6$ protons on the target (POT).
+  $1\times 10^6$ protons on the target (POT). The neutrino flux prediction is
+  based on Geant4~\cite{Agostinelli:2002hh} (describe in Sec.~\ref{sec:detsim})
+  based Monte Carlo simulation of protons interacting with the beryllium target
+  and the magnetic focusing horn. The production rate of the secondary hadrons
+  are determined from external proton-beryllium experimental
+  data~\cite{Catanesi:2007ab}.
 
   \begin{figure}[h]
     \centering
@@ -85,14 +88,14 @@ this section.
   \begin{figure}[h]
     \includegraphics[angle=0,width=5in]{figures/detector/beam/DirtStart_ZY.png}
     \caption{Side view of all simulated neutrino interaction positions.}
-    \label{fig:dirtstartsize}
+    \label{fig:dirtstartside}
   \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The LArTPC
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MicroBooNE LArTPC}\label{sec:lartpc}
-  The MicroBooNE LArTPC~\cite{detector} acts as both a target for the neutrino
+  The MicroBooNE LArTPC~\cite{Acciarri:2016smi} acts as both a target for the neutrino
   beam and a detector for the charged particles produced in the neutrino-argon
   interactions. The MicroBooNE TPC is submerged in 170~tons of liquid argon, of
   which 87~tons is contained inside the TPC. All of this is contained within a
@@ -142,8 +145,9 @@ this section.
   third dimension, perpendicular to the anode planes, is reconstructed based on
   the time that the electrons arrived at the wires. A cartoon representation of
   this process is shown in Fig.~\ref{fig:tpccartoon}. The wires are read out
-  for 1.6~ms per frame to ensure that the ionization electrons have time to
-  traverse the entire width of the detector.
+  for 1.6~ms per event to ensure that the ionization electrons have time to
+  traverse the entire width of the detector. One 1.6~ms readout window is
+  referred to as a frame.
 
   \begin{figure}[h]
     \centering
@@ -177,32 +181,37 @@ this section.
   half this. The integrated number of all expected NC elastic neutrino-proton
   events from $1.3\times 10^{21}$ POT is approximately 30,000.
 
-  The MicroBooNE detector is positioned at the surface of the Earth. The rate
-  of cosmic ray interactions in the detector is therefore large. Based on
-  Fermilab's elevation (226~m above sea level) and MicroBooNE's geometry within
-  the detector hall, the expected cosmic muon flux in MicroBooNE is
-  $160$~m$^{-2}$s$^{-1}$ based on Monte Carlo simulation~\cite{cosmicnote}.
-  This gives a rate of about 9 muons per 1.6~ms readout frame. We only expect
-  one detectable neutrino interaction in the TPC for every 500 neutrino beam
-  spills (about one every 10~s), which is much smaller than the cosmic ray
-  rate.
+  The MicroBooNE detector is positioned just below the surface of the Earth,
+  with no substantial overburden for shielding cosmic rays. The rate of cosmic
+  ray interactions in the detector is therefore large. Based on Fermilab's
+  elevation (226~m above sea level) and MicroBooNE's geometry within the
+  detector hall, the expected cosmic muon flux in MicroBooNE is
+  $160$~m$^{-2}$s$^{-1}$ based on MicroBooNE simulation~\cite{uBCosmicNote}
+  using the CORSIKA Monte Carlo cosmic ray generator~\cite{Heck:1998vt}
+  (described in Sec.~\ref{sec:eventgen}). This gives a rate of about 9 muons
+  per 1.6~ms readout frame. We only expect one detectable neutrino interaction
+  in the TPC for every 500 neutrino beam spills (about one every 10~s), which
+  is much smaller than the cosmic ray rate.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % The Light Collection System
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{MicroBooNE light collection system and event trigger}\label{sec:swtrigger}
   Liquid argon also produces scintillation light. Tens of thousands of photons
-  are produced per MeV of deposited energy ~\cite{detectorpaper}. The
-  scintillation photons have a wavelength of 128 nm and do not re-interact with
-  the argon.  The light collection system in MicroBooNE consists of 32
-  photomultiplier tubes (PMTs) behind the TPC anode wire planes. Each PMT is
-  shielded by an acrylic plate coated in tetraphenyl-butadiene (TPB) that
-  shifts the ultraviolet photons to the visible spectrum before they interact
-  with the PMT.
+  are produced per MeV of deposited energy ~\cite{Acciarri:2016smi}. The
+  scintillation photons have a vacuum wavelength of 128~nm and do not
+  re-interact with the argon assuming there is no significant amount of
+  contaminants. In MicroBooNE, the electron drift lifetime is greater than 6
+  ms, which is twice as long as what is required to perform
+  analyses~\cite{uBPurityNote}. The light collection system in MicroBooNE
+  consists of 32 photomultiplier tubes (PMTs) behind the TPC anode wire planes.
+  Each PMT is shielded by an acrylic plate coated in tetraphenyl-butadiene
+  (TPB) that shifts the ultraviolet photons to the visible spectrum before they
+  interact with the PMT.
 
   The light collection system in MicroBooNE is particularly useful for timing
-  information. Since each TPC event is readout over several milliseconds, it is
-  difficult to determine which events have activity coinciding with the
+  information. Since each TPC event is read out over several milliseconds, it
+  is difficult to determine which events have activity coinciding with the
   neutrino beam spill and which consist of only cosmic background activity
   based on the TPC information alone. The PMTs have nanosecond timing
   resolution which allows us to only save events that have optical activity

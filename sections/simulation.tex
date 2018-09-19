@@ -1,4 +1,4 @@
-\section{Simulation and reconstruction}\label{sc:simreco}
+\section{Simulation and reconstruction}\label{sec:simreco}
 In order to understand how different physics models would affect what we would
 see in the detector, large and complex Monte Carlo simulations of the beam and
 the detector are created.  These simulations also allow us to develop and test
@@ -14,16 +14,15 @@ algorithms used by MicroBooNE are described in this section.
   The entire experimental process from the neutrino interactions in and around
   the detector to electronic signal readout to particle identification is
   simulated in software. To interface the different software packages needed to
-  simulate each step, a liquid argon software framework
-  (LArSoft)~\cite{larsoft} was developed at Fermilab. Within the LArSoft
-  framework, the simulation is divided into three steps: generation,
-  propagation, and detector simulation.  The output from the detector
-  simulation stage is designed to match the real data output from the detector
-  as closely as possible. Event reconstruction is also handled within LArSoft,
-  and the same algorithms can be applied to both real data and simulated data
-  in an identical way. This section describes all three stages of simulation
-  and all of the reconstruction stages, including TPC particle track and
-  optical flash reconstruction.
+  simulate each step, a liquid argon software framework (LArSoft) was developed
+  at Fermilab. Within the LArSoft framework, the simulation is divided into
+  three steps: generation, propagation, and detector simulation.  The output
+  from the detector simulation stage is designed to match the real data output
+  from the detector as closely as possible. Event reconstruction is also
+  handled within LArSoft, and the same algorithms can be applied to both real
+  data and simulated data in an identical way. This section describes all three
+  stages of simulation and all of the reconstruction stages, including TPC
+  particle track and optical flash reconstruction.
 
   \subsubsection{Cross section model}\label{sec:geniexsec}
     The initial neutrino interactions are simulated using the GENIE Neutrino
@@ -43,20 +42,21 @@ algorithms used by MicroBooNE are described in this section.
     due to the models in this section are explored in
     Sec.~\ref{sec:modeluncertainty}.
 
-    First, the relativistic Fermi gas (RFG) nuclear model~\cite{RFGmodel} is
-    used for all processes. It has been modified in GENIE to incorporate
+    First, the relativistic Fermi gas (RFG) nuclear model~\cite{Smith:1972xh}
+    is used for all processes. It has been modified in GENIE to incorporate
     short-range nucleon-nucleon correlations using the model by Bodek and
-    Ritchie~\cite{BodekrRitchie}. The mass density for the argon nucleus is
-    taken from review articles~\cite{nucdensity} and the two-parameter
-    Woods-Saxon density function is used~\cite{WoodsSaxon}
+    Ritchie~\cite{Bodek:1981wr}. The mass density for the argon nucleus is
+    taken from review articles~\cite{DeJager:1987qc} and the two-parameter
+    Woods-Saxon density function is used~\cite{Woods:1954zz}
     \begin{equation}\label{eq:woodssaxon}
       \rho(r) = N_0\frac{1}{1+e^{(r-c)/z}} \,,
     \end{equation}
     where $\rho$ is the density, $r$ is the distance from the center of the
-    nucleus, $c$ describes the size of the nucleus, and $z$ describes the width
-    of the surface. For argon, GENIE uses $c=3.53$ and $z=0.54$.  For elastic
-    nucleon scattering in the nucleus, Pauli blocking is
-    applied~\cite{PauliBlock}.
+    nucleus, $c$ describes the size of the nucleus (approximately the radius
+    where the density falls to half of the central value), and $z$ describes
+    the thickness of the surface. For argon, GENIE uses $c=3.53$~fm and
+    $z=0.54$~fm as default values.  For elastic nucleon scattering in the
+    nucleus, Pauli blocking is applied.
     
     Next, in the case of elastic (and quasi-elastic) neutrino-nucleon
     scattering, the free-nucleon cross section is calculated. The
@@ -70,8 +70,8 @@ algorithms used by MicroBooNE are described in this section.
     section model. This is because hadron production in empirical neutrino
     scattering measurements does not match nuclear and neutrino-nucleon cross
     section models. The hadron discrepancy is corrected for in GENIE using the
-    AGKY model~\cite{AGKY} that was developed to account for the data seen in
-    the MINOS~\cite{MINOS} neutrino scattering experiment and tuned using
+    AGKY model~\cite{Yang:2009zx} that was developed to account for the data seen in
+    the MINOS~\cite{Adamson:2007gu} neutrino scattering experiment and tuned using
     bubble chamber experimental data.
 
     Finally, the transport of the final state hadrons through the argon atom is
@@ -92,12 +92,12 @@ algorithms used by MicroBooNE are described in this section.
     is different for protons, neutrons, and pions. The density of the argon
     nucleus is again determined by equation~\ref{eq:woodssaxon}.
 
-  \subsubsection{Event generation}
+  \subsubsection{Event generation}\label{sec:eventgen}
     The GENIE neutrino events are generated in LArSoft based on the neutrino
     flux described in Sec.~\ref{sec:beam}. The 1.6~$\mu$s long spill containing
     $5\times 10^{12}$ protons on target is simulated.  In addition to neutrino
     events, cosmic ray events are also simulated with the
-    CORSIKA~\cite{corsika} cosmic ray generator. CORSIKA uses the FLUKA cosmic
+    CORSIKA~\cite{Heck:1998vt} cosmic ray generator. CORSIKA uses the FLUKA cosmic
     ray model and models the flux of protons, and helium, nitrogen, magnesium,
     and iron atoms on the atmosphere. To simulate real detector events both
     neutrino and cosmic ray interactions can be generated in the same
@@ -106,7 +106,7 @@ algorithms used by MicroBooNE are described in this section.
     to closely model the real detector data.
 
     In the standard simulation neutrino interactions are only generated within
-    the liquid argon filled cryostat Additional special samples are made to
+    the liquid argon filled cryostat. Additional special samples are made to
     study how secondary particles from neutrino interactions outside the
     cryostat contribute to our signal background. One special sample that we
     generate is a large \textit{dirt} sample in which neutrino interactions
@@ -123,40 +123,44 @@ algorithms used by MicroBooNE are described in this section.
       and event selection algorithms.
       \item Simulated neutrino interactions with real cosmic ray data backgrounds overlaid.
       This sample very closely represents the actual detector conditions when
-      there is a neutrino interaction in MicroBooNE and is refered to as the
+      there is a neutrino interaction in MicroBooNE and is referred to as the
       overlay sample.
       \item Simulated dirt interactions plus simulated cosmic interactions.
       This sample contains all known backgrounds to neutrino events in the TPC
-      and is refered to as the dirt sample.
+      and is referred to as the dirt sample.
     \end{enumerate}
 
-  \subsubsection{Detector simulation}
+  \subsubsection{Detector simulation}\label{sec:detsim}
 
-    The final state particles from GENIE are passed to the GEANT4~\cite{geant4}
-    software package to be propagated through the simulated geometry.  The
-    entire MicroBooNE detector system, the detector hall, and fifty feet of
-    dirt surrounding the detector hall are all included in the GEANT4
-    simulation. Figure~\ref{fig:uboonegdml} shows the entire simulated geometry
-    including the surroundnig dirt. This includes the electric field and the
-    detector electronics.  The particles are stepped through the geometry and
-    undergo a possible physics process at each step with a given probability.
-    The particles are allowed to interact electromagnetically and hadronically
-    with other particles and the detector system or decay through one of the
-    physically possible decay modes.  Additionally, the energy loss through
-    ionization and scintillation is simulated for all particles traversing the
-    detector geometry. In the case of the ionization of the liquid argon, the
-    resulting electrons are propagated through the electric field to the wire
-    readouts.  For the scintillation of the argon, a photon library was
-    generated for each position in the liquid cryostat. At each step particle
-    takes through the liquid argon, the resulting photons that would interact
-    in the PMTs are determined from a look-up table that was generated in a
-    previous full optical simulation. 
+    The final state particles from GENIE are passed to the
+    Geant4~\cite{Agostinelli:2002hh} software package to be propagated through
+    the simulated geometry.  The entire MicroBooNE detector system, the
+    detector hall, and fifty feet of dirt surrounding the detector hall are all
+    included in the Geant4 simulation. Figure~\ref{fig:uboonegdml} shows the
+    entire simulated geometry including the surrounding dirt. This includes the
+    electric field and the detector electronics.  The particles are stepped
+    through the geometry and undergo a possible physics process at each step
+    with a given probability.  The particles are allowed to interact
+    electromagnetically and hadronically with other particles and the detector
+    system or decay through one of the physically possible decay modes.
+    Additionally, the energy loss through ionization and scintillation is
+    simulated for all particles traversing the detector geometry. In the case
+    of the ionization of the liquid argon, the resulting electrons are
+    propagated through the electric field to the wire readouts.  For the
+    scintillation of the argon, a photon library was generated for each
+    position in the liquid cryostat. At each step a particle takes through the
+    liquid argon, the resulting photons that would interact in the PMTs are
+    determined from a look-up table that was generated in a previous full
+    optical simulation. The full optical simulation of the scintillation
+    photons includes the Rayleigh scattering of the photons in the liquid argon
+    as well as the reflection and absorption of the photons at the surfaces in
+    the detector.
 
     \begin{figure}[h]
       \centering
       \includegraphics[angle=0,width=5in]{figures/detector/simreco/uboone_gdml.png}
       \caption{Rendering of the simulated MicroBooNE geometry.}
-      \label{fig:uboonegpml}
+      \label{fig:uboonegdml}
     \end{figure}
 
     After the simulated particles interact with the TPC or PMT system, the
@@ -217,7 +221,7 @@ interaction.
     threshold.  Then, local minima and maxima are found between the start and
     end of the pulse which are used to determined where there are peaks within
     the pulse.  Adjacent pulses are merged if they are close enough in time.
-    Once the pulse and the number of peaks is established, the algorithm
+    Once the pulse and the number of peaks are established, the algorithm
     attempts to fit Gaussian peaks to the pulse. The hypothesis signal is
     composed of one Gaussian per peak from the previous step. The mean and
     amplitude of each Gaussian is initially centered at the existing peaks and
@@ -234,21 +238,21 @@ interaction.
 
     The algorithm used to preferentially reconstruct cosmic tracks is called
     \textit{PandoraCosmic}. It is implemented in the Pandora Software
-    Development Kit~\cite{Pandora} used by MicroBooNE. In PandoraCosmic, 1D
-    hits are first clustered in 2D per wire readout plane. All of the
-    reconstructed hits output by the hit finding algorithm on a given wire
-    plane are used as input. The hits are clustered into unambiguous,
-    continuous lines of hits. These initial clusters are meant to have a high
-    purity, meaning all of the hits in the cluster were induced by the same
-    true particle. The clusters in a 2D plane are then merged pairwise in an
-    attempt to improve the completeness of the cluster, meaning most of the
-    hits on that wire plane induced by a true particle are included in a single
-    merged cluster. The 2D clusters are then matched across the three wire
-    planes. The 3D track reconstruction algorithm attempts to find a cluster on
-    each plane that each corresponds to the same true particle. All possible
-    combinations of 2D cluster matching are considered by the algorithm. The
-    most suitable set of cluster combinations are projected into 3D and saved
-    as reconstructed track objects.
+    Development Kit~\cite{Acciarri:2017hat} used by MicroBooNE. In
+    PandoraCosmic, 1D hits are first clustered in 2D per wire readout plane.
+    All of the reconstructed hits output by the hit finding algorithm on a
+    given wire plane are used as input. The hits are clustered into
+    unambiguous, continuous lines of hits. These initial clusters are meant to
+    have a high purity, meaning all of the hits in the cluster were induced by
+    the same true particle. The clusters in a 2D plane are then merged pairwise
+    in an attempt to improve the completeness of the cluster, meaning most of
+    the hits on that wire plane induced by a true particle are included in a
+    single merged cluster. The 2D clusters are then matched across the three
+    wire planes. The 3D track reconstruction algorithm checks each plane for
+    clusters which are likely to have come from the same true particle.  All
+    possible combinations of 2D cluster matching are considered by the
+    algorithm. The most suitable set of cluster combinations are projected into
+    3D and saved as reconstructed track objects.
 
     Next, the reconstructed tracks from PandoraCosmic are passed to a cosmic
     tagging stage. There are two algorithms used to identify cosmic-induced
@@ -260,7 +264,7 @@ interaction.
     tracks that are very likely cosmic-induced.
     
     The geometry tagger starts by locating any TPC wire hits that are
-    reconstructed before of after the 1.6 millisecond readout frame. Any tracks
+    reconstructed before or after the 1.6 millisecond readout frame. Any tracks
     that contain these hits are tagged as cosmic. Any tracks whose
     reconstructed start or end points are located within a given distance from
     the TPC boundary are also tagged. If both of the start and end points are
@@ -275,25 +279,25 @@ interaction.
     with all true flashes in the window, the track is tagged as cosmic. After
     the cosmic tagging, all reconstructed hits associated with any of the
     tracks tagged as cosmic are removed from the set of possible hits that are
-    used to reconstruct neutrino-induced tracks. This is refered to as the
+    used to reconstruct neutrino-induced tracks. This is referred to as the
     cosmic hit removal stage.
 
     The remaining set of hits is used to reconstruct neutrino-induced tracks.
     First, two dimensional clusters of hits are formed on each of the three
-    wire planes using the TrajCluster~\cite{trajcluster} algorithm in
-    LArSoft. TrajCluster creates line-like collections of hits and adds new
-    hits to the cluster based on the 2D trajectory of the current set of hits.
-    The algorithm stops when there are no additional hits along the trajectory
-    of the cluster and is followed by an additional stage the combines cluster
-    which start and end near eachother. Next, 3D tracks are formed using the
-    projection matching algorithm (PMA)~\cite{PMAIcarus} which was developed
-    for the ICARUS experiment and implemented in LArSoft. PMA works by
-    proposing nodes and lines connecting the nodes in 3D, projecting the 3D
-    lines onto the 2D planes, and determining the most likely positions of the
-    nodes in 3D based on the fit of the 2D projections to the existing 2D
-    reconstructed clusters from the previous stage. The algorithm start with a
-    two-node hypothesis and adds nodes to the 3D line until a maximum number of
-    nodes, which is based on the number of hits on the wires, has been reached.
+    wire planes using the TrajCluster algorithm in LArSoft. TrajCluster creates
+    line-like collections of hits and adds new hits to the cluster based on the
+    2D trajectory of the current set of hits.  The algorithm stops when there
+    are no additional hits along the trajectory of the cluster and is followed
+    by an additional stage that combines cluster which start and end near each
+    other. Next, 3D tracks are formed using the projection matching algorithm
+    (PMA)~\cite{Antonello:2012hu} which was developed for the ICARUS experiment
+    and implemented in LArSoft. PMA works by proposing nodes and lines
+    connecting the nodes in 3D, projecting the 3D lines onto the 2D planes, and
+    determining the most likely positions of the nodes in 3D based on the fit
+    of the 2D projections to the existing 2D reconstructed clusters from the
+    previous stage. The algorithm start with a two-node hypothesis and adds
+    nodes to the 3D line until a maximum number of nodes, which is based on the
+    number of hits on the wires, has been reached.
 
     Calorimetric information is extracted when the reconstructed track objects
     are created. The calorimetric information that we calculate and use is
@@ -301,14 +305,14 @@ interaction.
     trajectory. At each point along the track, the difference in the total
     charge between the current point and the previous trajectory point is
     calculated. This gives us the change in charge as a function of distance
-    along the track, which we label dQ/dx. The change in charge is determined
+    along the track, which we label $dQ/dx$. The change in charge is determined
     by adding the total charge of each of the reconstructed wire hits between
-    the two points on the track. The charge difference and the dQ/dx values are
-    found for each of the three wire planes. The dQ/dx values can be converted
-    to energy loss per unit distance, dE/dx, by multiplying the dQ/dx by a
-    measured conversion factor. This conversion factor depends on the strength
-    of the electric field and the gain of the readout electronics and is
-    determined empirically.
+    the two points on the track. The charge difference and the $dQ/dx$ values
+    are found for each of the three wire planes. The $dQ/dx$ values can be
+    converted to energy loss per unit distance, $dE/dx$, by multiplying the
+    $dQ/dx$ by a measured conversion factor. This conversion factor depends on
+    the strength of the electric field and the gain of the readout electronics
+    and is determined empirically~\cite{uBCalibrationNote}.
 
 
 %This is the end of detector section
