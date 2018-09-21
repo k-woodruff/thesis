@@ -2,7 +2,7 @@
 %The next line produces an indented paragraph to start the document
  %unit.  The LaTeX defaults start most units without indentations.
 \hspace{\parindent}
-Outline the analysis section.
+Proton ID and event selection.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Particle Identification and Event Selection
@@ -25,39 +25,42 @@ Outline the analysis section.
     some are created for this classifier. Each of the features used to identify
     protons either helps to separate neutrino-induced tracks from
     cosmic-induced tracks or to separate neutrino-induced proton tracks from
-    other neutrino-induced particle types.
+    other neutrino-induced particle types. For colorimetric information we only
+    use information from the collection plane.
 
     First is a list and description of the features designed to separate
     neutrino-induced protons from other neutrino-induced particle types.
     \begin{itemize}
-      \item \textbf{Number of hits:} This is the total number of hits on all
-      three wire planes associated with track. When used in combination with
-      track length and average energy deposited, this feature can be used to
-      determine the hit and energy density of the track.
+      \item \textbf{Number of hits:} This is the total number of hits on the
+      collection plane that are associated with track. When used in combination
+      with track length and average energy deposited, this feature can be used
+      to determine the hit and energy density of the track.
       \item \textbf{Straightness:} This is the ratio of distance between
       reconstructed end points (displacement) to reconstructed path length. It
       represents the amount of scattering a track undergoes. The value is
-      always betwen zero and one with one being perfectly straight.
+      always between zero and one with one being perfectly straight.
       \item \textbf{Cosmic score:} This is the geometry tagging cosmic score
       from Sec.~\ref{sec:tpcreco}. Tracks with a cosmic score of 1 have already
       been removed in the cosmic hit removal stage. So, this value is either 0
       (fully contained within the TPC) or 0.5 (entering or exiting the TPC).
-      \item \textbf{Particle ID from energy deposited per unit length (dE/dx):}
-      The PIDA and $\chi^2$ PID algorithms values described in
-      Sec.~\ref{sec:tpcreco} are used.
       \item \textbf{Length:} This is the reconstructed 3D track length found by
       stepping along the trajectory points.
-      \item \textbf{Start and end dQ/dx:} These are the total charge deposited
-      at start and end points of track divided by the distance between hits to
-      account for the angle with respect to the wires. The total charge of the
-      first (or last) six track hits on each plane is summed.
-      \item \textbf{End to start dQ/dx ratio and difference:} These are the
-      ratio and difference of the end dQ/dx divided by (or subtracted by) the
-      start dQ/dx described in the previous item.
-      \item \textbf{Total dQ/dx:} This is the sum of the dQ/dx of all hits on
-      all planes associated with track.
-      \item \textbf{Average dQ/dx:} This is the total dQ/dx divided by the
-      number of hits associated with track.
+      \item \textbf{Start dE/dx:} This is the total energy deposited on the
+      collection plane in the first six non-zero hits along the track divided
+      by the distance between hits to account for the angle with respect to the
+      wire plane.
+      \item \textbf{End to start dE/dx ratio:} This is the ratio of the total
+      $dE/dx$ from the last six non-zero hits along the track on the collection
+      plane to the total $dE/dx$ from the first six non-zero hits along the
+      track on the collection plane.
+      \item \textbf{Truncated total dE/dx:} This is the sum of the $dE/dx$ of a
+      truncated set of hits on the collection plane associated with track. The
+      truncated set includes all hits along the track with a $dE/dx$ value
+      within one standard deviation of the median $dE/dx$ value of all hits
+      along the track on the collection plane.
+      \item \textbf{Truncated average dE/dx:} This is the truncated total
+      $dE/dx$ divided by the number of hits in the truncated hit set associated
+      with track.
     \end{itemize}
 
     Next is the list and description of the features designed to separate
@@ -77,11 +80,14 @@ Outline the analysis section.
     neutral-current elastic events with only a single proton, the direction of
     the track is a concern. A proton will deposit much more energy at the end
     of its track than at the beginning which can be used to determine the true
-    direction. Since this correction is not currently implemented in pandoraNu,
-    we take all reconstructed tracks that have a higher start charge than end
-    charge and flip them. This means changing the saved start positions, end
-    positions, $\theta$, $\phi$, start dQ/dx, end dQ/dx, and the end to start
-    dQ/dx ratio and difference.
+    direction. Since this correction is not currently implemented within the
+    reconstruction, we take all reconstructed tracks that have a higher
+    deposited energy at the beginning of the track than at the end of the track
+    and flip them. The deposited energy at the beginning (ending) of the track
+    is defined as the total $dE/dx$ of the first (last) six non-zero hits along
+    the track on the collection plane.  This includes changing the saved start
+    positions, end positions, $\theta$, $\phi$, start $dE/dx$, end $dE/dx$, and
+    the end to start $dE/dx$ ratio.
     
   \subsubsection{Boosted decision trees}\label{sec:decisiontrees}
     A decision tree can be thought of as a series of if/else statements that
@@ -95,7 +101,7 @@ Outline the analysis section.
     and minimum leaf size (how small does a leaf have to be before you stop). 
     \begin{figure}[ht]
       \centering
-      \includegraphics[angle=0,width=4in]{figures/bz.pdf}
+      \includegraphics[angle=0,width=4in]{figures/analysis/protonid/trees_diagram.pdf}
       \caption{Graphical example of a decision tree.}
       \label{fig:dtree}
     \end{figure}
@@ -113,26 +119,130 @@ Outline the analysis section.
     is in a given class.
     
     The gradient-boosted decision tree software package we use is
-    XGBoost~\cite{xgboost}. There are two types of classifiers we can use to
-    separate protons from other tracks: binary and multiclass. Both classifiers
-    are trained on all types of reconstructed tracks. A binary classifier
-    classifies each track as either a proton or not a proton, and a multiclass
-    classifier classifies a track as one of many types including a proton. We
-    choose to use multiclass because the information about non-proton tracks is
-    useful for event identification. The five classes that we train the
-    decision trees to classify are protons (both BNB and cosmic), BNB muons,
-    BNB pions, BNB electrons/photons, and all non-proton cosmics.
+    XGBoost~\cite{Chen:2016btl}. There are two types of classifiers we can use
+    to separate protons from other tracks: binary and multiclass. Both
+    classifiers are trained on all types of reconstructed tracks. A binary
+    classifier classifies each track as either a proton or not a proton, and a
+    multiclass classifier classifies a track as one of many types including a
+    proton. We choose to use multiclass because the information about
+    non-proton tracks is useful for selecting neutral current events. The five
+    classes that we train the decision trees to classify are protons (both
+    neutrino-induced and cosmic), neutrino-induced muons, neutrino-induced
+    pions, neutrino-induced electrons/photons, and all non-proton cosmics.
     
-    The decision trees were trained to select protons in general. The target
-    class contains all protons from BNB interactions, as well as cosmic
-    protons. However, the choice of track features and most of the improvements
-    that were made were done with the goal of a high efficiency for isolated
-    protons and cosmic rejection.
-
   \subsubsection{Training}
-    Describe the training sets. What samples were used, how many of everything,
-    and all hyperparamter settings. Describe hyperparameter optimization. 
-  \subsubsection{Performance}
+
+    \begin{table}[ht]
+      \caption{Breakdown by simulated particle type reconstructed tracks in the
+        training set.
+      \label{tab:mctrain}}
+      \begin{tabularx}{\textwidth}{ l r r r r r }
+        \hline
+        & Protons & Muons & Pions & EM Showers & Non-proton Cosmics \\
+        \hline
+        No. of tracks  & 90,922 & 57,583 & 12,848 & 473,323 & 2,586,527 \\
+        Fraction of set & 0.028 & 0.018 & 0.004 & 0.147 & 0.803 \\
+        Class weight  & 0.141 & 0.223 & 1.000 & 0.027 & 0.005 \\
+        \hline
+      \end{tabularx}
+    \end{table}
+
+    The gradient-boosted decision tree model was trained on 95,600 events with
+    both simulated GENIE neutrino interactions and simulated CORSIKA cosmic
+    interactions. Each track in every event was treated as a separate training
+    sample. Table~\ref{tab:mctrain} shows the number of each type of track that
+    was used for training. There are were a total of 3,221,203 simulated
+    training tracks.
+
+    Because the training set has unbalanced classes (there are different
+    numbers of each particle type) each training sample is initially weighted
+    so that the sum of weights is equal to the size of the smallest class, in
+    this case pions.
+    \begin{equation*}
+      N_s = \sum_{i=1}^{N_{n}}w^n_i \,,
+    \end{equation*}
+    where $N_s$ is the number of samples in the smallest class, $N_{n}$ is the
+    number samples in the $n^{th}$ class, and $w^n_i$ is the weight given to
+    the $ith$ sample in that class. The same weight is used for each sample in
+    a class, so the value of each positive weight is $w^n=\frac{N_s}{N_{n}}$.
+    Balancing the training set prevents the classifier from only learning the
+    most frequent classes. In our case, the classifier could achieve a high
+    accuracy by classifying everything as a cosmic in the unbalanced set
+    because over 80\% of the tracks are cosmic-induced. One of our main goals
+    is to have a proton ID efficiency, and since protons only make up 3\% of
+    the training set, giving them a higher weight makes it more important to
+    the classifier that they are correctly classified.
+
+    The parameters used for training were chosen to both maximize
+    classification accuracy and minimize overfitting to the training set.
+    Overfitting occurs when the performance on the training set is more
+    accurate than the performance on an external test set. The final training
+    parameter settings are:
+    \begin{itemize}
+      \item \textbf{Objective: multiclass: softprob} \\
+      The learning objective. We want to classify five different track types
+      and get a probability of each class.  
+      \item \textbf{Learning rate: 0.045}  \\
+      The factor each incorrectly classified sample gets re-weighted by for the
+      next tree.  A smaller learning rate requires more trees but prevents
+      overfitting.
+      \item \textbf{Number of trees: 500} \\
+      The total number of trees in classifier.
+      \item \textbf{Maximum depth: 10} \\ 
+      The maximum number of layers of nodes each tree can have.
+      \item \textbf{Maximum sampled features: 0.8} \\
+      The fraction of total features that each tree can use to train. These are
+      randomly sampled.
+      \item \textbf{Maximum sampled observations: 0.85} \\
+      The fraction of total samples that each tree can use to train. These are
+      randomly sampled.
+    \end{itemize}
+
+  \subsubsection{Performance on a Test Set}
+    The performance of the gradient-boosted decision tree model was tested on a
+    set of 3,200,000 reconstructed tracks from 96,200 events with simulated
+    GENIE neutrino interactions and simulated CORSIKA cosmic interactions. This
+    set of tracks was generated in the exact same way as the training set.
+
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=5in]{figures/analysis/protonid/protonid_mc_output_norm.pdf}
+      \caption{Area-normalized histograms of decision tree proton
+      identification scores for simulated protons and other simulated proton
+      tracks.}
+      \label{fig:pidmcout}
+    \end{figure}
+    Figure~\ref{fig:pidmcout} shows normalized histograms of the output proton
+    score for every track in the test set. The proton score ranges from zero to
+    one with zero being the least proton-like and one being the most. The blue
+    histogram shows all simulated neutrino-induced and cosmic induced proton
+    tracks normalized so that the area under the histogram is one. The orange
+    histogram shows every other simulated track type, also normalized so that
+    the area under it is equal to one. Figure~\ref{fig:pidmcoutNCE} shows the
+    area-normalized histogram of proton scores for simulated proton tracks that
+    were produced in neutral current elastic proton events.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=5in]{figures/analysis/protonid/protonid_mc_output_norm_ncelastic.pdf}
+      \caption{Area-normalized histogram of decision tree proton identification
+      scores for simulated proton tracks from NC elastic proton interactions.}
+      \label{fig:pidmcoutNCE}
+    \end{figure}
+
+    Figure~ref{fig:heatmap} shows the overall classification performance of the
+    gradient-boosted decision tree model on the test set for each class. The x
+    axis shows the true particle type and the y axis shows the particle
+    classes. The numbers in the boxes are the fraction of the class that is
+    made up of the given true particle type.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=5.5in]{figures/analysis/protonid/heatmap_mcc87_pmtrack_final.pdf}
+      \caption{Heatmap showing the fraction of each class that is made up of a
+      given particle type.}
+      \label{fig:heatmap}
+    \end{figure}
+
+
     Show efficiency, accuracy, itemize backgrounds.
     Discuss reasons for different backgrounds.
 

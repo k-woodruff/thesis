@@ -19,7 +19,7 @@
   \end{equation}
   and $\mathcal{M}$ is the scattering amplitude.
   Combining Eqns.~\ref{eq:twobodyxsec}~and~\ref{eq:twobodyphase} gives
-  \begin{equation}
+  \begin{equation}\label{eq:genxsec}
       d\sigma = \frac{|\mathcal{M}|^2}{64\pi^2}
         \frac{\delta^4(p_1+p_2-p_3-p_4)}{E_3E_4\sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
         \, d\mathbf{p}_3d\mathbf{p}_4 \,.
@@ -291,7 +291,7 @@
   the nucleon NC matrix element,
   $_{\textrm{p}}\mel{p'}{J^{\mu}_{NC}(0)}{p}_{\textrm{p}}$. Leptons are
   point-like particles, so their matrix elements are straight-forward
-  \begin{equation}
+  \begin{equation}\label{eq:leptonmatel}
     \begin{aligned}
       _l\mel{k'}{J^{\mu}_{CC}(0)}{k}_{\nu_l}
         &= -i\frac{G_F}{\sqrt{2}}\bar{u}(k')(\gamma^{\mu} - \gamma^{\mu}\gamma_5)u(k) \,, \\
@@ -607,7 +607,7 @@
   \end{equation}
   If we ignore the strange components of the Dirac and Pauli form factors
   ($F_1$ and $F_2$), the matrix element is
-  \begin{equation}
+  \begin{equation}\label{eq:nucmatel}
     \begin{aligned}
      _{\textrm{p}}\mel{p'}{J^{\mu}_{NC}(0)}{p}_{\textrm{p}}
        = \bar{u}(p')&\bigg[(1-\sin^2\theta_W)\{\gamma^{\mu}F_1^{NC}(Q^2)
@@ -661,6 +661,38 @@
   antiquarks of flavor $q$.
 
   --- expectation of axial charges from non-relativistic quark model
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neutrino-proton elastic cross section
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Neutrino-proton neutral current elastic cross section}\label{sec:probe}
+
+  We know have everything to calculate the neutrino-proton neutral current
+  elastic cross section. Figure~\ref{fig:feynmannup} shows the Feynman diagram
+  of the interaction. The neutrino is represented by the letter $\nu$ with
+  incoming four-momentum $k$ and outgoing four-momentum $k'$. The proton is
+  represented by the letter p with incoming four-momentum $p$ and outgoing
+  four-momentum $p'$. The four-momentum transferred by the $Z^0$ boson is $q$
+  with $q = k-k' = p' - p$.
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[angle=0,width=4in]{figures/theory/nup_feynman.pdf}
+    \caption{Feynman diagram of neutrino-proton neutral current elastic
+    scattering.}
+    \label{fig:feynmannup}
+  \end{figure}
+
+  Combining
+  Eqs.~\ref{eq:genxsec},~\ref{eq:genmatel},~\ref{eq:leptonmatel},~and~\ref{eq:nucmatel}
+  and averaging over the spin states gives
+  \begin{equation}
+    (\frac{d\sigma}{dQ^2})^{NC}
+  \end{equation}
+  
+
+  \subsubsection{Cross section model}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Determination of the Form Factors
@@ -835,14 +867,13 @@
   Sec.~\ref{sec:analysis}.
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Neutrino-proton elastic cross section
+% Previous measurements
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Neutrino-proton neutral current elastic cross section}\label{sec:probe}
-  \subsubsection{Cross section model}
+\subsection{Previous Measurements of Strange Spin in the Nucleon}\label{sec:measurements}
+  \subsubsection{Neutrino-nucleon NC elastic measurements}
 
-  \subsubsection{Previous measurements}
+  \subsubsection{Charged lepton measurements}
     E734 and MiniBooNE
 
 %This is the end of nu-N cross sections section
