@@ -2,56 +2,66 @@
 %The next line produces an indented paragraph to start the document
  %unit.  The LaTeX defaults start most units without indentations.
 \hspace{\parindent}
+This section describes the mathematical foundation for the analysis. It gives a
+derivation of the neutral current elastic neutrino-proton cross section, how
+the cross section depends on the vector and axial form factors, and the
+relationship of the neutral current form factors to the ones measured in
+charged current scattering. The section ends with a discussion of the shape of
+the form factors that are used in the analysis.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Particle interactions
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Two-particle interactions}
-  The differential cross section for two-particle scattering is given by
+  The differential cross section for two-fermion scattering, shown in
+  Fig.~\ref{fig:feynmantwofermion}, is given by Fermi's Golden
+  Rule~\cite{Aitchison:2004cs}
   \begin{equation}\label{eq:twobodyxsec}
-    d\sigma = \frac{(2\pi)^4 |\mathcal{M}|^2}{4 \sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
-      \cross d\Phi_2(p_1+p_2;p_3,p_4) \,,
+    \sigma = \int \frac{(2\pi)^4 |\mathcal{M}|^2}{4 \sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
+      \cross d\Phi_2(p_1+p_2;p_1',p_2') \,,
   \end{equation}
-  where $d\Phi_2(p_1+p_2;p_3,p_4)$ is an element of two-body phase space given by
+  where $d\Phi_2(p_1+p_2;p_1',p_2')$ is an element of two-body phase space
+  given by
   \begin{equation}\label{eq:twobodyphase}
-      d\Phi_2(p_1+p_2;p_3,p_3) = \delta^4(p_1+p_2 - p_3-p_4)
-        \frac{d^3\mathbf{p}_3}{(2\pi)^3 2E_3}\frac{d^3\mathbf{p}_4}{(2\pi)^3 2E_4} \,,
+      d\Phi_2(p_1+p_2;p_1',p_2') = \delta^4(p_1+p_2 - p_1'-p_2')
+        \frac{d^3\mathbf{p}_1'}{(2\pi)^3 2E_1'}\frac{d^3\mathbf{p}_2'}{(2\pi)^3 2E_2'} \,,
   \end{equation}
-  and $\mathcal{M}$ is the scattering amplitude.
+  $p_1$ and $p_2$ are the incoming four-momenta of the fermions $f_1$ and
+  $f_2$, respectively, $p_1'$ and $p_2'$ are the outgoing fermion momenta,
+  $m_1$ and $m_2$ are the fermion masses, $E_1'$ and $E_2'$ are the outgoing
+  fermion energies, and $\mathcal{M}$ is the scattering amplitude.
   Combining Eqns.~\ref{eq:twobodyxsec}~and~\ref{eq:twobodyphase} gives
   \begin{equation}\label{eq:genxsec}
-      d\sigma = \frac{|\mathcal{M}|^2}{64\pi^2}
-        \frac{\delta^4(p_1+p_2-p_3-p_4)}{E_3E_4\sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
-        \, d\mathbf{p}_3d\mathbf{p}_4 \,.
+       \sigma = \int \frac{|\mathcal{M}|^2}{64\pi^2}
+        \frac{\delta^4(p_1+p_2-p_1'-p_2')}{E_1'E_2'\sqrt{(p_1\cdot p_2)^2 - m_1^2m_2^2}}
+        \, d\mathbf{p}_1'd\mathbf{p}_2' \,.
   \end{equation}
+  \begin{figure}[ht]
+    \centering
+    \includegraphics[angle=0,width=4in]{figures/theory/f1f2_feynman.pdf}
+    \caption{Feynman diagram of two-fermion scattering.}
+    \label{fig:feynmantwofermion}
+  \end{figure}
 
   The scattering amplitude is given by the matrix element of the scattering
   matrix, $S$, between the final and initial states ($\mathcal{M} =
-  \mel{f}{S}{i}$).  The general form of $S$ is
+  \mel{f}{S}{i}$).  The general form of $S$ is~\cite{Aitchison:2004cs}
   \begin{equation}
     S = \sum_{n=0}^{\inf} \frac{(-i)^n}{n!}\int\dots\int d^4x_1 \, d^4x_2 \dots d^4x_n\,
       T\{\hat{\mathcal{H}}'_I(x_1)\hat{\mathcal{H}}'_I(x_2)\dots\hat{\mathcal{H}}'_I(x_n)\} \,,
   \end{equation}
-  where $\hat{\mathcal{H}}'_I(x_i)$ is the interaction Hamiltonian density. The
-  matrix element can more easily be determined using Feynman calculus.
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[angle=0,width=4in]{figures/theory/bz.pdf}
-    \caption{Feynman diagram of two-fermion scattering.}
-    \label{fig:feynmantwofermion}
-  \end{figure}
-  Figure~\ref{fig:feynmantwofermion} shows the Feynman diagram for two-fermion
-  scattering. For a massive, vector-boson propagator the matrix element for
-  this interaction is given by
+  where $\hat{\mathcal{H}}'_I(x_i)$ is the interaction Hamiltonian density.
+  
+  The matrix element can more easily be determined using Feynman calculus.  For
+  a massive, vector-boson propagator the matrix element for this interaction is
+  given by~\cite{Aitchison:2004cs}
   \begin{equation}\label{eq:genmatel}
-    \mathcal{M} = \mel{f}{S}{i} = \mel{k'}{J^{\mu}(0)}{k} \frac{i}{q^2 - M_V^2}(-g_{\mu\nu} 
-            + q_{\mu}q_{\nu}/M_V^2) \mel{p'}{J^{\mu}(0)}{p} \,,
+    \mathcal{M} = \mel{f}{S}{i} = \mel{p_1'}{J^{\mu}(0)}{p_1} \frac{i}{q^2 - M_V^2}(-g_{\mu\nu} 
+            + q_{\mu}q_{\nu}/M_V^2) \mel{p_2'}{J^{\mu}(0)}{p_2} \,,
   \end{equation}
-  where $k$ and $k'$ initial and final four-momenta of the first fermion
-  ($f_1$), $p$ and $p'$ are the initial and final four-momenta of the second
-  fermion ($f_2$), $q$ is the four-momenta carried by the vector-boson
-  propagator, and $M_V$ is the mass of the propagator, and $J^{\mu}$ is the
-  probability current operator.
+  where $q$ is the four-momenta carried by the vector-boson propagator, $M_V$
+  is the mass of the propagator, $J^{\mu}(0)$ is the probability current
+  operator, and $g_{\mu\nu}$ is the metric tensor.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -61,7 +71,7 @@
 
   The charged current, $j^{\mu}_{CC}$, which corresponds to the exchange of a
   $W^{\pm}$ boson, and the neutral current, $j^{\mu}_{NC}$, which corresponds
-  to the exchange of the $Z^0$ boson are given by
+  to the exchange of the $Z^0$ boson are given by~\cite{Paschos:2007pi}
   \begin{align}\label{eq:ccurrent}
       j^{\mu}_{CC} &= \sum_f \bar{\psi}_f \gamma^{\mu} (1-\gamma_5) \frac{1}{2}(\tau_1 + i\tau_2) \psi_f \\
         \label{eq:ncurrent}
@@ -89,7 +99,7 @@
         0 & -1
       \end{pmatrix} \,.
   \end{equation}
-  The lepton weak isospin doublets are
+  The lepton weak isospin doublets are~\cite{Paschos:2007pi}
   \begin{equation}
     \psi_{e} = 
     \begin{pmatrix}
@@ -146,19 +156,20 @@
         \hat{d} \\
         \hat{s} \\
         \hat{b}
-      \end{pmatrix}
+      \end{pmatrix} \,.
   \end{equation}
-  where $V$ is the Cabibbo-Kobayashi-Maskawa matrix. These doublets contain the
-  allowed weak transitions.
+  The matrix, $V$, is the Cabibbo-Kobayashi-Maskawa matrix. These doublets
+  contain the allowed weak transitions where $V_{ab}$ is the probability of a
+  transition from a quark with flavor $a$ to a quark with flavor $b$.
 
-  \subsubsection{The charged current}
-  The combination of Pauli matrices in the charged current
+  \subsubsection{The charged and neutral currents}
+  The linear combination of Pauli matrices in the charged current
   \begin{equation}
       \frac{1}{2}\tau_+ = \frac{1}{2}(\tau_1 + \tau_2) \,,
   \end{equation}
   acts as an ``isospin raising matrix" and corresponds to the exchange of a
   $W^+$ boson.
-  For the leptons, this gives
+  For the leptons, this gives~\cite{Paschos:2007pi}
   \begin{equation}
     \begin{aligned}
       j^{\mu}_{CC}(\textrm{leptons}) &= \sum_{l=e,\mu,\tau}
@@ -188,7 +199,6 @@
   with the total charged current being $j^{\mu}_{CC} =
   j^{\mu}_{CC}(\textrm{leptons}) + j^{\mu}_{CC}(\textrm{quarks})$.
 
-  \subsubsection{The neutral current}
   In neutral current scattering, $\frac{1}{2}\tau_3$ gives the weak isospin
   which acts as a ``weak charge". The electromagnetic current is given by
   \begin{equation}
@@ -213,7 +223,7 @@
 
   We can separate the currents into their vector and pseudovector, or axial
   vector, components. The terms that contain just $\gamma^{\mu}$ behave like
-  vectors under a parity transformation
+  vectors under a parity transformation~\cite{Alberico:2001sd}
   \begin{equation}
     \hat{\textrm{\textbf{P}}}\hat{\psi}(\textbf{x},t)\hat{\textrm{\textbf{P}}}^{-1} \, 
       \gamma^{\mu} \, \hat{\textrm{\textbf{P}}}\hat{\psi(\textbf{x},t)}\hat{\textrm{\textbf{P}}}^{-1} 
@@ -233,7 +243,7 @@
       \gamma^{\mu}\gamma_5 \, \hat{\textrm{\textbf{P}}}\hat{\psi(-\textbf{x},t)}\hat{\textrm{\textbf{P}}}^{-1}
       \,.
   \end{equation}
-  The charged current is simple
+  The charged current is
   \begin{equation}
     \begin{aligned}
     j^{\mu}_{CC} = \frac{g}{\sqrt{2}}\Bigg[&\sum_{l=e,\mu,\tau} \bar{\hat{\nu}}_l (\gamma^{\mu} 
@@ -268,17 +278,17 @@
   \begin{figure}[h]
     \centering
     \begin{subfigure}{2.5in}
-      \includegraphics[angle=0,width=2.5in]{figures/theory/bz.pdf}
-      \caption{Feynman diagram of neutral-current elastic lepton-nucleon
-      scattering.}
-      \label{fig:ncefeynman}
-    \end{subfigure}
-    \hspace{2pt}
-    \begin{subfigure}{2.5in}
-      \includegraphics[angle=0,width=2.5in]{figures/theory/bz.pdf}
+      \includegraphics[angle=0,width=2.5in]{figures/theory/nun_feynman.pdf}
       \caption{Feynman diagram of charged-current elastic lepton-nucleon
       scattering.}
       \label{fig:ccqefeynman}
+    \end{subfigure}
+    \hspace{2pt}
+    \begin{subfigure}{2.5in}
+      \includegraphics[angle=0,width=2.5in]{figures/theory/nup_feynman.pdf}
+      \caption{Feynman diagram of neutral-current elastic lepton-nucleon
+      scattering.}
+      \label{fig:ncefeynman}
     \end{subfigure}
   \end{figure}
 
@@ -341,26 +351,28 @@
   electric and magnetic form factors. The nucleon electromagnetic current
   should have the same vector form as the electromagnetic current for
   point-like particles. The available physical variables to construct the
-  nucleon EM current are $p$, $p'$, $\gamma^{\mu}$. The most general form is
+  nucleon EM current are $p$, $p'$, $\gamma^{\mu}$. The most general form
+  is~\cite{Alberico:2001sd}
   \begin{equation}
     \Gamma^{\mu} = \gamma^{\mu}\cdot A + (p'^{\mu} + p^{\mu})\cdot B + (p'^{\mu} - p^{\mu})\cdot C \,,
   \end{equation}
   where $\Gamma^{\mu}$ is given by the equation
   $_{\textrm{p}}\mel{p'}{J^{\mu}_{em}(0)}{p}_{\textrm{p}} =
   \bar{u}(p')\Gamma^{\mu}u(p)$, and $A$, $B$, and $C$ are arbitrary form
-  factors.  $\Gamma^{\mu}$ if constrained further by the Ward identity,
-  $q_{\mu}\Gamma^{\mu} = 0$, which guarantees current conservation. The
-  $\gamma^{\mu}$ and $(p'^{\mu} + p^{\mu})$ terms in $q_{\mu}\Gamma^{\mu}$ go
-  to zero, but the $(p'^{\mu} - p^{\mu})$ term does not, so $C=0$. Using the
-  Gordon identity~\cite{Gordon}, the general form for the nucleon EM current
-  matrix element is
+  factors.  $\Gamma^{\mu}$ is constrained further by the Ward
+  identity~\cite{Ward:1950xp}, $q_{\mu}\Gamma^{\mu} = 0$, which guarantees
+  current conservation. The $\gamma^{\mu}$ and $(p'^{\mu} + p^{\mu})$ terms in
+  $q_{\mu}\Gamma^{\mu}$ go to zero, but the $(p'^{\mu} - p^{\mu})$ term does
+  not, so $C=0$. Using the Gordon identity~\cite{Gordon:1928}, the general form
+  for the nucleon EM current matrix element is
   \begin{equation}\label{eq:FFem}
     _{\textrm{p}}\mel{p'}{J^{\mu}_{em}(0)}{p}_{\textrm{p}} =
       \bar{u}(p')\left[ \gamma^{\mu}F_1(Q^2) + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}F_2(Q^2)  \right]u(p) \,.
   \end{equation}
   The form factors $F_1$ and $F_2$ are the Dirac and Pauli form factors,
-  respectively, and they are functions of $Q^2 = -q^2$. They can be transformed
-  into the Sachs form factors, $G_E$ and $G_M$ by the relationships
+  respectively, and they are functions of $Q^2 = -q^2$, the negative
+  four-momentum transfer. They can be transformed into the Sachs form factors,
+  $G_E$ and $G_M$ by the relationships
   \begin{equation}
     G_E(Q^2) = F_1(Q^2) - \frac{Q^2}{4M^2}F_2(Q^2)\,, \hspace{5mm} G_M(Q^2) = F_1(Q^2) + F_2(Q^2) \,,
   \end{equation}
@@ -380,7 +392,7 @@
   \subsubsection{Vector current}
 
     The quark part of the electromagnetic current, $j^{\mu}_{em;q}$, can be
-    written as
+    written as~\cite{Alberico:2001sd}
     \begin{equation}\label{eq:emcurrent30}
       \begin{aligned}
         j^{\mu}_{em;q} &= \bar{\hat{\psi}}_f \, Q_f \gamma^{\mu}\, \hat{\psi}_f \\
@@ -439,24 +451,25 @@
         + \frac{i\sigma^{\mu\nu}q_{\mu}}{2M}\frac{1}{2}\left(F_{2,p}(Q^2) + F_{2,n}(Q^2)\right)\right]u(p)
     \end{equation}
  
-    Under the conserved vector current (CVC) hypothesis the ``raising" and
-    ``lowering" vector currents, $v^{\mu}_{\pm}$, in the charged current
-    interactions are the same as the vector part of the electromagnetic current,
-    $v^{\mu}_{3}$.
+    Under the conserved vector current (CVC)
+  hypothesis~\cite{Gerstein:1956,Feynman:1958ty} the ``raising" and ``lowering"
+  vector currents, $v^{\mu}_{\pm}$, in the charged current interactions are the
+  same as the vector part of the electromagnetic current, $v^{\mu}_{3}$.
 
   \subsubsection{Axial current}
 
     The axial current nucleon matrix elements can also be parameterized in
     terms of form factors. Starting with the charged axial current, the most
-    general form contains an axial, a pseudoscalar, and a tensor term,
+    general form contains an axial, a pseudoscalar, and a tensor
+    term,~\cite{Alberico:2001sd}
     \begin{equation}
       _{\textrm{p}}\mel{p'}{A^{\mu}_+(0)}{p}_{\textrm{n}} 
         = \bar{u}(p') \left[\gamma^{\mu}\gamma^{5} G_A(Q^2) 
           + \frac{q^{\mu}\gamma^{5}}{2M}G_P^{CC}(Q^2) 
-          + \frac{\eta^{\mu}\gamma^{5}}{2M}G_T^{CC}(Q^2)\right] u(p) \,,
+          + \frac{i\sigma^{\mu\nu}q_{\mu}\gamma^{5}}{2M}G_T^{CC}(Q^2)\right] u(p) \,,
     \end{equation}
-    where $G_A$, $G_P^{CC}$, and $G_T^{CC}$ are form factors and $\eta^{\mu}$
-    is the metric tensor. From isospin symmetry, we have
+    where $G_A$, $G_P^{CC}$, and $G_T^{CC}$ are the axial form factors.  From
+    isospin symmetry, we have
     \begin{equation}
       _{\textrm{p}}\mel{p'}{A^{\mu}_+(0)}{p}_{\textrm{n}} 
       = _{\textrm{n}}\mel{p'}{A^{\mu}_-(0)}{p}_{\textrm{p}} 
@@ -464,7 +477,8 @@
     \end{equation}
     which implies that $G_T^{CC}(Q^2) = 0$. In quasi-elastic scattering the
     pseudoscalar term containing $G_P^{CC}(Q^2)$ is proportional to the lepton
-    mass, and is often ignored. The charged current axial matrix element is then just
+    mass and can be ignore in neutral current scattering. The charged current
+    axial matrix element is then just
     \begin{equation}
       _{\textrm{p}}\mel{p'}{A^{\mu}_+(0)}{p}_{\textrm{n}} 
         = \bar{u}(p') \,\gamma^{\mu}\gamma^{5} G_A(Q^2)\, u(p) \,.
@@ -479,9 +493,9 @@
       _{\textrm{p}}\mel{p'}{A^{\mu}_3(0)}{p}_{\textrm{n}} 
         = \bar{u}(p') \left[\gamma^{\mu}\gamma^{5} G_A^{NC}(Q^2) 
           + \frac{q^{\mu}\gamma^{5}}{2M}G_P^{NC}(Q^2) 
-          + \frac{\eta^{\mu}\gamma^{5}}{2M}G_T^{NC}(Q^2)\right] u(p) \,.
+          + \frac{i\sigma^{\mu\nu}q_{\mu}\gamma^{5}}{2M}G_T^{NC}(Q^2)\right] u(p) \,.
     \end{equation}
-    Just as in the charged-current case, tensor part is zero, $G_T^{NC}(Q^2) =
+    Just as in the charged-current case, the tensor part is zero, $G_T^{NC}(Q^2) =
     0$, and we can again neglect $G_P^{NC}$ which is proportional to the lepton
     mass. The neutral axial current matrix element is
     \begin{equation}
@@ -513,7 +527,8 @@
 
   If contributions to the nucleon from quarks heavier than the strange are
   neglected, the quark part of the charged and neutral currents can be
-  separated between the light quarks and the strange quark,
+  separated between the light quarks and the strange
+  quark,~\cite{Alberico:2001sd}
   \begin{equation}\label{eq:chargedcurrent}
     \begin{aligned}
     j^{\mu}_{CC}(\textrm{quarks}) &= \bar{\hat{u}}(\gamma^{\mu} 
@@ -629,39 +644,6 @@
   longitudinal spin structure of the nucleon due to all three of the quark
   flavors (up, down, and strange).
   
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Spin Structure of Nucleons
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{The Spin Structure of Nucleons} \label{sec:nuctheory}
-  Proton spin: \\
-  --- spin vector $s_{\mu}$ from forward matrix element of axial vector current \\
-  --- derive axial charges \\
-  From Bass 1.1 (need to fill in with Peskin): \\
-  Forward matrix element of the axial current vector (derive from peskin):
-  \[
-      2Ms_{\mu} = <p,s|\bar{\psi}\gamma_{\mu} \gamma_{5} \psi|p,s>
-  \]
-  where $s_{\mu}$ is the proton's spin vector, $\psi$ is the proton field
-  vector and $M$ is the proton mass. The quark axial charges measure
-  information about the quark ``spin content".
-  \[
-    2Ms_{\mu}\Delta q = <p,s| \bar{q}\gamma_{\mu}\gamma_{5}q|p,s> \,,
-  \]
-  where $q$ is the quark field operator and $\Delta q$ is the quark
-  flavor-dependent axial charge, $\Delta u$, $\Delta d$, or $\Delta s$. The
-  isovector, SU(3) octet, and flavor-singlet axial charges, $g_A^{(3)}$,
-  $g_A^{(8)}$, and $g_A^{(0)}$, respectively, can be written as linear
-  combinations of the quark axial charges (derive from Peskin)
-  \begin{align}
-      g_A^{(3)} &= \Delta u - \Delta d \\
-      g_A^{(8)} &= \Delta u + \Delta d - 2\Delta s \\
-      g_A^{(0)} &= \Delta u + \Delta d + \Delta s \,.
-  \end{align}
-  Can be interpreted semi-classically as amount of spin carried by quarks and
-  antiquarks of flavor $q$.
-
-  --- expectation of axial charges from non-relativistic quark model
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neutrino-proton elastic cross section
@@ -684,14 +666,22 @@
   \end{figure}
 
   Combining
-  Eqs.~\ref{eq:genxsec},~\ref{eq:genmatel},~\ref{eq:leptonmatel},~and~\ref{eq:nucmatel}
-  and averaging over the spin states gives
+  Eqs.~\ref{eq:genxsec},~\ref{eq:genmatel},~\ref{eq:leptonmatel},~and~\ref{eq:nucmatel},
+  averaging over the spin states, and setting the outgoing neutrino mass to
+  zero gives (in the LLewellyn-Smith formalism)~\cite{LLewellynSmith:1971uhs}
   \begin{equation}
-    (\frac{d\sigma}{dQ^2})^{NC}
+    (\frac{d\sigma}{dQ^2})^{NC} = \frac{G_F^2 M_p^2}{8\pi E_{\nu}^2} 
+      \bigg[A - \frac{(4M_p E_{\nu} - Q^2)}{M_P^2} B + \frac{(4M_p E_{\nu} - Q^2)^2}{M_P^4} C \bigg]
   \end{equation}
-  
-
-  \subsubsection{Cross section model}
+  with
+  \begin{align*}
+    A &= 4\tau\big[(1+\tau)(G_A^{NC})^2 - (1-\tau)(F_2^{NC})^2 + \tau(1 - \tau)(F_2^{NC})^2 + 4\tau F_1^{NC} F_2^{NC}\big] \,, \\
+    B &= 4\tau \big[G_A^{NC}(F_1^{NC} + F_2^{NC}) \big] \,, \\
+    C &= \frac{1}{4}\big[ (G_A^{NC})^2 + (F_1^{NC})^2 + (F_2^{NC})^2 \big] \,,
+  \end{align*}
+  where $E_{\nu}$ is the incoming neutrino energy, $M_P$ is the proton mass,
+  $\tau = \frac{Q^2}{4M_P}$, and each of the form factors are functions of
+  $Q^2$.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -866,14 +856,5 @@
   The specific fitting procedure and parameters are described in
   Sec.~\ref{sec:analysis}.
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Previous measurements
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Previous Measurements of Strange Spin in the Nucleon}\label{sec:measurements}
-  \subsubsection{Neutrino-nucleon NC elastic measurements}
-
-  \subsubsection{Charged lepton measurements}
-    E734 and MiniBooNE
 
 %This is the end of nu-N cross sections section

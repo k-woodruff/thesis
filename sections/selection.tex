@@ -19,7 +19,7 @@ Proton ID and event selection.
   background.  Each tree is essentially a series of cuts based on physical
   variables which have been fine-tuned to increase the efficiency and purity of
   the final selected sample.
-  \subsubsection{Reconstructed track features}
+  \subsubsection{Reconstructed track features}\label{sec:features}
     The reconstructed features that are used as input to the classifier are
     listed below. Most of the features come directly from the track object, but
     some are created for this classifier. Each of the features used to identify
@@ -28,7 +28,7 @@ Proton ID and event selection.
     other neutrino-induced particle types. For colorimetric information we only
     use information from the collection plane.
 
-    First is a list and description of the features designed to separate
+    Below is a list and description of the features designed to separate
     neutrino-induced protons from other neutrino-induced particle types.
     \begin{itemize}
       \item \textbf{Number of hits:} This is the total number of hits on the
@@ -131,7 +131,6 @@ Proton ID and event selection.
     pions, neutrino-induced electrons/photons, and all non-proton cosmics.
     
   \subsubsection{Training}
-
     \begin{table}[ht]
       \caption{Breakdown by simulated particle type reconstructed tracks in the
         training set.
@@ -212,6 +211,13 @@ Proton ID and event selection.
       tracks.}
       \label{fig:pidmcout}
     \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=5in]{figures/analysis/protonid/protonid_mc_output_norm_ncelastic.pdf}
+      \caption{Area-normalized histogram of decision tree proton identification
+      scores for simulated proton tracks from NC elastic proton interactions.}
+      \label{fig:pidmcoutNCE}
+    \end{figure}
     Figure~\ref{fig:pidmcout} shows normalized histograms of the output proton
     score for every track in the test set. The proton score ranges from zero to
     one with zero being the least proton-like and one being the most. The blue
@@ -221,19 +227,7 @@ Proton ID and event selection.
     the area under it is equal to one. Figure~\ref{fig:pidmcoutNCE} shows the
     area-normalized histogram of proton scores for simulated proton tracks that
     were produced in neutral current elastic proton events.
-    \begin{figure}[ht]
-      \centering
-      \includegraphics[angle=0,width=5in]{figures/analysis/protonid/protonid_mc_output_norm_ncelastic.pdf}
-      \caption{Area-normalized histogram of decision tree proton identification
-      scores for simulated proton tracks from NC elastic proton interactions.}
-      \label{fig:pidmcoutNCE}
-    \end{figure}
 
-    Figure~ref{fig:heatmap} shows the overall classification performance of the
-    gradient-boosted decision tree model on the test set for each class. The x
-    axis shows the true particle type and the y axis shows the particle
-    classes. The numbers in the boxes are the fraction of the class that is
-    made up of the given true particle type.
     \begin{figure}[ht]
       \centering
       \includegraphics[angle=0,width=5.5in]{figures/analysis/protonid/heatmap_mcc87_pmtrack_final.pdf}
@@ -241,19 +235,371 @@ Proton ID and event selection.
       given particle type.}
       \label{fig:heatmap}
     \end{figure}
+    Figure~\ref{fig:heatmap} shows the overall classification performance of
+    the gradient-boosted decision tree model on the test set for each class.
+    The x axis shows the true particle type and the y axis shows the particle
+    classes. The numbers in the boxes are the fraction of the class that is
+    made up of the given true particle type. The fraction of true protons in
+    the set of tracks classified as protons is 0.71, the fraction of true muons
+    in that set is 0.04, the fraction of true pions is 0.09, the fraction of
+    electromagnetic shower particles is 0.04, and the fraction of non-proton
+    cosmics in the proton-classified set is 0.05. A track is labelled as a
+    given class type in this plot if the particle's decision tree score for
+    that class is higher than its score for any of the other four classes.  The
+    numbers in this plot were calculated using equal numbers of each true
+    particle type. In reality, there are far more non-proton cosmic tracks than
+    there are true protons, and the fraction of true protons in the set
+    classified as protons will be smaller.
 
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_allmcke.pdf}
+        \caption{The full simulated kinetic energy range.}
+        \label{fig:pideffkeall}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_mcke.pdf}
+        \caption{The kinetic energy range used in this analysis.}
+        \label{fig:pideffkerng}
+      \end{subfigure}
+      \caption{The efficiency of simulated neutrino-induced proton tracks
+        correctly classified as protons as a function of true proton kinetic energy.}
+      \label{fig:pideffke}
+    \end{figure}
+    Figure~\ref{fig:pideffke} shows the efficiency of the decision tree proton
+    identification on simulated neutrino-induced protons as a function of true
+    proton kinetic energy. The left plot (\ref{fig:pideffkeall}) shows the full
+    simulated range of true proton kinetic energy, and the right
+    (\ref{fig:pideffkerng}) shows the range of interest to this analysis. In
+    the interesting range of kinetic energies, the proton identification
+    efficiency stays relatively flat between 0.8 and 0.8 efficiency, with an
+    average efficiency of 0.71. A track is considered positively identified as
+    a proton in these plots if its decision tree proton score is higher than
+    0.5, meaning it is more likely than not to be a proton.
 
-    Show efficiency, accuracy, itemize backgrounds.
-    Discuss reasons for different backgrounds.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_mctheta_kerange.pdf}
+        \caption{Efficiency as a function of the cosine of the true proton
+          angle from the beam direction.}
+        \label{fig:pideffangletheta}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_mcphi_kerange.pdf}
+        \caption{Efficiency as a function of the true proton angle around the beam direction.}
+        \label{fig:pideffanglephi}
+      \end{subfigure}
+      \caption{The efficiency of simulated neutrino-induced proton tracks
+        correctly classified as protons as a function of true proton angle.}
+      \label{fig:pideffangle}
+    \end{figure}
+    Figure~\ref{fig:pideffangle} shows the efficiency of the decision tree proton
+    identification on simulated neutrino-induced protons as a function of true
+    proton angle. The efficiencies in these plots are calculated using only the
+    simulated protons within the kinetic energy range of interest ($0.05$ GeV
+    $\le T_p \le 0.5$ GeV) used in Figure~\ref{fig:pideffkerng}. The left plot
+    (\ref{fig:pideffangletheta}) shows the efficiency as a function of
+    $\cos(\theta_p)$, where $\theta_p$ is the angle of the proton from the
+    neutrino beam direction. At $\cos(theta_p) = 1$ the proton is parallel to
+    the beam, at $\cos(\theta_p) = -1$ the proton is anti-parallel to the beam,
+    and at $\cos(\theta_p) = 0$ the proton is perpendicular to the beam. When
+    the proton is perpendicular to the beam, it is aligned with the anode
+    collection plane, and will not traverse more than one collection plane
+    wire. A large contribution to the decrease in efficiency at $\cos(\theta_p)
+    = 0$ is the fact that the decision tree classifier only uses calorimetry
+    information from the collection plane. The right
+    plot(\ref{fig:pideffanglephi}) shows the efficiency as a function of
+    $\phi_p$ which is the angle around the neutrino beam direction. The flat
+    efficiency is due to the fact that the neutrino-induced proton angle should
+    be isotropic in $\phi_p$, and the angle around the beam direction has no
+    effect on the angle with respect to the angle of the anode wires. Again, a
+    track is considered positively identified as a proton in these plots if its
+    decision tree proton score is higher than 0.5.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=5.0in]{figures/analysis/protonid/PID_efficiency_mcthetavmcke.pdf}
+      \caption{Two-dimensional efficiency for true proton $\cos(\theta_p)$
+      versus true proton kinetic energy.}
+      \label{fig:pideffthetake}
+    \end{figure}
+    Figure~\ref{fig:pideffthetake} shows the two-dimensional efficiency for
+    true proton $\cos(\theta_p)$ versus true proton kinetic energy. The kinetic
+    energy range of interest to this analysis goes up to $0.5$ GeV (the bottom
+    half of the plot).
+
+  \subsubsection{Performance on a Neutrino Data Subset}
+    The gradient-boosted decision tree classifier was tested on a subset of
+    MicroBooNE neutrino data corresponding to 5e19 POT ($< 5\%$ of the full
+    MicroBooNE approved POT). The data subset comes entirely from MicroBooNE's
+    first year of running (Run I).
+    
+    Figures~\ref{fig:pidnhits}-\ref{fig:pidphi} show comparisons between the
+    subset of MicroBooNE neutrino data and the MicroBooNE simulation for each
+    of the input variables being used in the decision tree classifier. A
+    description of each of these reconstructed track features is given in
+    Sec.~\ref{sec:features}. The left plots show the histogram of the given
+    variable for all tracks being input to the classifier, and the right plots
+    show the histograms of the given variable for the tracks that were
+    classified as protons. A track is considered classified as a proton if the
+    decision tree proton score is greater than 0.5 for that track.
+    
+    In all of the figures, the black points in the top plots show the subset of
+    neutrino data.  The horizontal bars represent the bin width, and the
+    vertical bars represent the statistical uncertainty. The light gray filled
+    histogram includes tracks from the off-beam data. These tracks represent
+    the background of events where a cosmic interaction in the detector
+    coincident with the beam time window triggered the event, and there was no
+    actual neutrino interaction. The dark gray filled histograms include cosmic
+    tracks that are in the background of events with actual neutrino
+    interactions that triggered the event. For simulated neutrino interactions
+    inside the detector, real data cosmic tracks are overlaid on the simulated
+    event, and for simulated neutrino interaction outside the detector, the
+    background cosmic tracks are from simulation. The color filled histograms
+    include tracks from simulated neutrino interactions. The peach colored
+    histograms include simulated neutrino-induced proton tracks, the dark green
+    includes simulated neutrino-induced pion tracks, the light green includes
+    simulated neutrino-induced muon tracks, and the purple includes simulated
+    neutrino-induced electromagnetic shower tracks. The fraction of proton
+    tracks in the right plots (the tracks classified as protons) is much larger
+    than in the left plots (all tracks), which is the goal of the classifier.
+    The bottom plots in all of the figures show the ratio of the neutrino data
+    points to the sum of all of the stacked, filled histograms. A ratio of one
+    means perfect data to simulation agreement.
+
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the number of hits on the collection
+      plane.}
+      \label{fig:pidnhits}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track straightness.}
+      \label{fig:piddistlenratio}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track length.}
+      \label{fig:pidlength}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track start $dE/dx$.}
+      \label{fig:piddedx}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the end to start $dE/dx$ ratio.}
+      \label{fig:piddedxratio}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track truncated total $dE/dx$.}
+      \label{fig:pidtrtotaldedx}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the truncated average $dE/dx$.}
+      \label{fig:pidtraveragededx}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track starting $y$ position.}
+      \label{fig:pidstarty}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track ending $y$ position.}
+      \label{fig:pidendy}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track starting $z$ position.}
+      \label{fig:pidstartz}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track ending $z$ position.}
+      \label{fig:pidendz}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track $\cos(\theta)$ angle.}
+      \label{fig:pidcostheta}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_all_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_all_truncated-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_pass_truncated.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_pass_truncated-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Breakdown of the different particle track types in neutrino data
+      and simulation as a function of the track $\phi$ angle.}
+      \label{fig:pidphi}
+    \end{figure}
+
+    \FloatBarrier
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Neutral Current Elastic Proton Event Selection
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Event Selection}\label{sec:selection}
-  Need to select both NCE and CCQE events.
-  Use particle ID plus reconstructed flashes.
-  Exactly how we select NCE events 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

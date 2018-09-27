@@ -7,78 +7,43 @@
 % Standard Model
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{The Standard Model}\label{sec:standardmodel}
-  The standard model of particle physics describes all known fundamental
-  particles and three of the four known forces forces in the universe. It also
-  describes how each of the fundamental particles interacts with each of these
-  three forces.
 
-  The particles in the standard model behave differently based in part on their
-  spin. Spin-$\frac{1}{2}$ particles are called fermions (the first three
-  columns in Fig.~\ref{fig:standardmodel}), and they make up all known matter.
-  Spin-$1$ particles are called gauge bosons (the fourth column in
-  Fig.~\ref{fig:standardmodel}), and they carry the forces.  The only other
-  particle is the Higgs boson with a spin of $0$. The fermions interact by
-  exchanging gauge bosons with each other. They can also exchange bosons with
-  bosons. What type of boson any particle can exchange depends on the what
-  charges that particle carries. Quarks (the first two rows of fermions in
-  Fig.~\ref{fig:standardmodel}) are the only fermions that carry the color
-  charge, so they can interact via the strong force by exchanging gluons.
-  Interestingly, gluons also carry the color charge, so they can also interact
-  by exchanging gluons. Gluons are the only gauge bosons that carry their own
-  charge. All of the quarks, half of the leptons, and the W boson carry
-  electromagnetic charge and can interact electromagnetically via photon
-  exchange. Lastly, all of the fermions and the Higgs boson carry the weak
-  charge and can interact weakly via exchanging W$^{\pm}$ and Z bosons. An
-  exchange of a W$^{\pm}$ boson is a charged-current weak interaction and an
-  exchange of a Z$^0$ boson is a neutral-current weak interaction. In all
-  interactions, charged must be conserved, so the fermions exchanging the
-  W$^{\pm}$ boson will each change charge by $\pm 1$.
-
-  \begin{figure}[ht]
-    \centering
-    \includegraphics[angle=0,width=4in]{figures/intro/Standard_Model_of_Elementary_Particles.png}
-    \caption{The standard model of elementary particles~\cite{wikipedia}.}
-    \label{fig:standardmodel}
-  \end{figure}
-
-  There are three generations of fermions (shown as columns in
-  Fig.~\ref{fig:standardmodel}). The first generation is the lightest and
-  therefore the most stable. The up and down quarks and the electron in the
-  first generation make up all atoms and ordinary matter. The higher
-  generations contain heavier relatives of each of the particles in the first
-  generation that will decay into their first generation complement. Particle
-  decays are a type of interaction and are subject to the same laws. The only
-  interaction that allows quark flavor change is the charged-current weak
-  interaction. Quark flavor comes in up and down for the first generation,
-  charm and strange for the second generation, and top and bottom for the third
-  generation.
-
-  All other known particles are either the conjugate anti-particles of the
-  fundamental standard model particles or composite particles made up of them.
-  Nucleons (protons and neutrons) are composed of up and down quarks held
-  together by the strong force. A simple model of nucleon has the proton
-  composed of two up quarks and one down quark. These three quarks in the
-  proton only carry a small fraction of the proton mass. The rest is carried by
-  the gluons that bind them. The gluons have enough energy to produce
-  short-lived quark-antiquark pairs.
-
-  General introduction to nucleons being made of quarks. Explain valance quarks
-  and virtual sea quarks with gluons.  Talk about quark model and strong force.
+Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Neutrino Oscillations and Mass
+% Spin Structure of Nucleons
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Neutrino oscillations and mass}\label{sec:bsm}
-    Maybe a short introduction on discovery of neutrinos?
-    Introduction to what neutrinos are. Talk generally about forces and the
-    weak force.  Handedness and chirality. CKM Matrix.
-  Not in the standard model. Quick summary and this is why MicroBooNE exists.
+\subsection{The Spin Structure of Nucleons} \label{sec:nuctheory}
+  Proton spin: \\
+  --- spin vector $s_{\mu}$ from forward matrix element of axial vector current \\
+  --- derive axial charges \\
+  From Bass 1.1 (need to fill in with Peskin): \\
+  Forward matrix element of the axial current vector (derive from peskin):
+  \[
+      2Ms_{\mu} = <p,s|\bar{\psi}\gamma_{\mu} \gamma_{5} \psi|p,s>
+  \]
+  where $s_{\mu}$ is the proton's spin vector, $\psi$ is the proton field
+  vector and $M$ is the proton mass. The quark axial charges measure
+  information about the quark ``spin content".
+  \[
+    2Ms_{\mu}\Delta q = <p,s| \bar{q}\gamma_{\mu}\gamma_{5}q|p,s> \,,
+  \]
+  where $q$ is the quark field operator and $\Delta q$ is the quark
+  flavor-dependent axial charge, $\Delta u$, $\Delta d$, or $\Delta s$. The
+  isovector, SU(3) octet, and flavor-singlet axial charges, $g_A^{(3)}$,
+  $g_A^{(8)}$, and $g_A^{(0)}$, respectively, can be written as linear
+  combinations of the quark axial charges (derive from Peskin)
+  \begin{align}
+      g_A^{(3)} &= \Delta u - \Delta d \\
+      g_A^{(8)} &= \Delta u + \Delta d - 2\Delta s \\
+      g_A^{(0)} &= \Delta u + \Delta d + \Delta s \,.
+  \end{align}
+  Can be interpreted semi-classically as amount of spin carried by quarks and
+  antiquarks of flavor $q$.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Nucleon spin
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Nucleon spin structure}\label{sec:nucleonbsm}
+  --- expectation of axial charges from non-relativistic quark model
+
   Talk about EMC and proton spin puzzle. The spins of the quarks don't add up
   to the total proton spin! Explain what $\Delta s$ is and previous
   measurements. Talk about structure functions, inclusive DIS, SIDIS...
@@ -87,6 +52,27 @@
   --- spin structure functions (g1 and g2) \\
   --- spin sum rules: Bjorken and Ellis-Jaffe \\
 
-  --- scaling and Regge theory?
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Neutrinos as a Nucleon Probe
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Neutrinos as a Nucleon Probe}\label{sec:neutrinos}
+
+  Neutrinos only interact via the weak force, don't have electromagnetic
+  interactions, axial form factor enhanced
+
+  \subsection{Previous NC Elastic Neutrino-Nucleon Measurements}
+  \label{sec:measurements}
+
+    \subsubsection{The Brookhaven E734 Experiment}\label{sec:e734}
+    E734 experimental setup
+    analysis and results
+    subsequent follow-ups
+
+    \subsubsection{The MiniBooNE Experiment}\label{sec:miniboonence}
+    MiniBooNE experimental setup
+    analysis and results (all three)
+    subsequent follow-ups (including last week)
+
 
 %This is the end of introduction
