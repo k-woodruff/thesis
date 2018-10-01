@@ -198,10 +198,11 @@ Proton ID and event selection.
     \end{itemize}
 
   \subsubsection{Performance on a Test Set}
-    The performance of the gradient-boosted decision tree model was tested on a
-    set of 3,200,000 reconstructed tracks from 96,200 events with simulated
-    GENIE neutrino interactions and simulated CORSIKA cosmic interactions. This
-    set of tracks was generated in the exact same way as the training set.
+    The performance of the gradient-boosted decision tree classifier was tested
+    on a set of 3,200,000 reconstructed tracks from 96,200 events with
+    simulated GENIE neutrino interactions and simulated CORSIKA cosmic
+    interactions. This set of tracks was generated in the exact same way as the
+    training set.
 
     \begin{figure}[ht]
       \centering
@@ -331,12 +332,105 @@ Proton ID and event selection.
     energy range of interest to this analysis goes up to $0.5$ GeV (the bottom
     half of the plot).
 
-  \subsubsection{Performance on a Neutrino Data Subset}
+  \subsubsection{Performance on a Neutrino Data Subset}\label{sec:datamcpid}
     The gradient-boosted decision tree classifier was tested on a subset of
-    MicroBooNE neutrino data corresponding to 5e19 POT ($< 5\%$ of the full
-    MicroBooNE approved POT). The data subset comes entirely from MicroBooNE's
-    first year of running (Run I).
+    MicroBooNE neutrino data corresponding to 5e19 POT ($< 5\%$ of the fill
+    MicroBooNE approved POT). The data set is taken entirely from MicroBooNE's
+    first year of running (Run I). The results of the classifier on the
+    neutrino data subset was compared to the results on a combination of
+    neutrino and cosmic simulation and off-beam data. Each of the samples is
+    scaled to 5e19 POT. The samples used in these comparisons and the scaling
+    factors are listed below. 
+    \begin{enumerate}
+      \item Run I 5e19 POT neutrino data subset
+      \begin{itemize}
+        \item Number of events: 171,603
+        \item POT (\texttt{tor860\_wcut}): $4.41e19$
+        \item Number of triggers (\texttt{E1DCNT\_wcut}): 9,779,224
+        \item Normalization factor: 1
+      \end{itemize}
+      \item Run I off-beam data subset
+      \begin{itemize}
+        \item Number of events: 189,226
+        \item Number of triggers (\texttt{EXT}): 14,579,406
+        \item Normalization factor: 0.7063
+      \end{itemize}
+      \item Neutrino Monte Carlo with cosmic data overlay set
+      \begin{itemize}
+        \item Number of events: 200,160
+        \item POT: $2.08e20$
+        \item Flux correction factor: 1.029
+        \item Normalization factor: 0.2429
+      \end{itemize}
+    \item Neutrino dirt Monte Carlo with simulated cosmic data set
+      \begin{itemize}
+        \item Number of events: 105214
+        \item POT: $4.66e20$
+        \item POT normalization factor: 0.0947
+        \item Data driven normalization factor: 0.5 (described in Sec.~\ref{sec:dirt})
+        \item Normalization factor: 0.0474
+      \end{itemize}
+    \end{enumerate}
+    The number of triggers listed is the total number of beam spill triggers
+    issued by the accelerator division and does not include the optical
+    software trigger implemented in MicroBooNE.  This is how we scale the
+    off-beam data to the neutrino beam data. The number of events is the number
+    of events left after the optical pre-selection described in
+    section~\ref{sec:optpresel}. The off-beam data is a direct measurement of
+    the background to the neutrino beam data that is due to a cosmic
+    interaction occurring in-time with the beam. The neutrino Monte Carlo
+    simulates neutrino beam interactions that occur within the liquid argon
+    cryostat, and the neutrino dirt Monte Carlo simulates the background
+    neutrino beam interactions that occur outside of the cryostat.
     
+    Figure~\ref{fig:pidscores} shows the comparison of the decision tree proton
+    score between the subset of MicroBooNE neutrino data and the MicroBooNE
+    simulation. The top left plot is in linear scale and the top right plot is
+    in log scale. The bottom plots are the same, and they show the ratio
+    between the on-beam neutrino data and the combination of neutrino
+    simulation and off-beam data.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay-ratio.pdf}
+        \caption{All reconstructed tracks.}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay_log.pdf}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay-ratio.pdf}
+        \caption{All reconstructed tracks that are classified as protons.}
+      \end{subfigure}
+      \caption{Comparison of the decision tree proton scores between a subset
+      of MicroBooNE neutrino data and a combination of MicroBooNE neutrino
+      simulation and off-beam data.}
+      \label{fig:pidscores}
+    \end{figure}
+
+    In all of the figures in this section, the black points in the top plots
+    show the subset of neutrino data.  The horizontal bars represent the bin
+    width, and the vertical bars represent the statistical uncertainty. The
+    light gray filled histogram includes tracks from the off-beam data. These
+    tracks represent the background of events where a cosmic interaction in the
+    detector coincident with the beam time window triggered the event, and
+    there was no actual neutrino interaction. The dark gray filled histograms
+    include cosmic tracks that are in the background of events with actual
+    neutrino interactions that triggered the event. For simulated neutrino
+    interactions inside the detector, real data cosmic tracks are overlaid on
+    the simulated event, and for simulated neutrino interaction outside the
+    detector, the background cosmic tracks are from simulation. The color
+    filled histograms include tracks from simulated neutrino interactions. The
+    peach colored histograms include simulated neutrino-induced proton tracks,
+    the dark green includes simulated neutrino-induced pion tracks, the light
+    green includes simulated neutrino-induced muon tracks, and the purple
+    includes simulated neutrino-induced electromagnetic shower tracks. The
+    fraction of proton tracks in the right plots (the tracks classified as
+    protons) is much larger than in the left plots (all tracks), which is the
+    goal of the classifier.  The bottom plots in all of the figures show the
+    ratio of the neutrino data points to the sum of all of the stacked, filled
+    histograms. A ratio of one means perfect data to simulation agreement.
+
     Figures~\ref{fig:pidnhits}-\ref{fig:pidphi} show comparisons between the
     subset of MicroBooNE neutrino data and the MicroBooNE simulation for each
     of the input variables being used in the decision tree classifier. A
@@ -347,29 +441,6 @@ Proton ID and event selection.
     classified as protons. A track is considered classified as a proton if the
     decision tree proton score is greater than 0.5 for that track.
     
-    In all of the figures, the black points in the top plots show the subset of
-    neutrino data.  The horizontal bars represent the bin width, and the
-    vertical bars represent the statistical uncertainty. The light gray filled
-    histogram includes tracks from the off-beam data. These tracks represent
-    the background of events where a cosmic interaction in the detector
-    coincident with the beam time window triggered the event, and there was no
-    actual neutrino interaction. The dark gray filled histograms include cosmic
-    tracks that are in the background of events with actual neutrino
-    interactions that triggered the event. For simulated neutrino interactions
-    inside the detector, real data cosmic tracks are overlaid on the simulated
-    event, and for simulated neutrino interaction outside the detector, the
-    background cosmic tracks are from simulation. The color filled histograms
-    include tracks from simulated neutrino interactions. The peach colored
-    histograms include simulated neutrino-induced proton tracks, the dark green
-    includes simulated neutrino-induced pion tracks, the light green includes
-    simulated neutrino-induced muon tracks, and the purple includes simulated
-    neutrino-induced electromagnetic shower tracks. The fraction of proton
-    tracks in the right plots (the tracks classified as protons) is much larger
-    than in the left plots (all tracks), which is the goal of the classifier.
-    The bottom plots in all of the figures show the ratio of the neutrino data
-    points to the sum of all of the stacked, filled histograms. A ratio of one
-    means perfect data to simulation agreement.
-
     \begin{figure}[h]
       \centering
       \begin{subfigure}[t]{2.5in}
@@ -601,6 +672,164 @@ Proton ID and event selection.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Event Selection}\label{sec:selection}
 
+  \subsubsection{Optical Pre-selection}\label{sec:optpresel}
+    A common optical pre-filter is run over MicroBooNE data before any of the
+    events are reconstructed. The common optical filter requires both that
+    there is a sufficient optical flash within the 2~$\mu s$ beam time window
+    and that there is no such flash in a 2~$\mu s$ time window immediately
+    preceding the beam. This 2~$\mu s$ window before the beam is called the
+    veto window.
+
+    First, each of the 2~$\mu s$ windows is sliced into 339 bins that are
+    94~$\mu s$ wide. Then the total number of PE of any optical pulses that
+    occur within a given bin are added to that time bin. If any of the time
+    bins within the larger 2~$\mu s$ window add to more than 20 PE, it is
+    considered a sufficient flash to the optical filter. If any one of these
+    flashes occur within the beam window and none of the flashes occur within
+    the veto window the event is accepted. Otherwise, it is rejected.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/optfilter_efficiency.pdf}
+      \caption{Efficiency of optical pre-selection on simulated NC elastic
+        proton events.}
+      \label{fig:opfiltereff}
+    \end{figure}
+
+    Figure~\ref{fig:opfiltereff} shows the efficiency of the optical
+    pre-selection on simulated NC elastic proton events as a function of true
+    negative four-momentum squared. The overall efficiency in range between
+    $Q^2 = 0.1$~GeV$^2$ and $Q^2 = 1.0$~GeV$^2$ is 81\%.
+
+  \subsubsection{NC Elastic Pre-selection}
+    Before making a final neutral current elastic event selection, some simple
+    cuts are made to reject a large number of background events that are very
+    unlikely to be NC elastic interactions. The result of each of these
+    pre-cuts on the scaled data and simulation samples described in
+    Sec.~\ref{sec:datamcpid} are shown in Tab.~\ref{tab:preseldatamc}. 
+    \begin{table}
+      \caption{Number of remaining events in 5e19 POT data set after each of
+        the NC elastic pre-selection cuts.
+      \label{tab:preseldatamc}}
+      \begin{tabularx}{\textwidth}{l r r | r r}
+        \hline
+        Cut & Simulation & Off-Beam Data & Sim.+Off-Beam & Neutrino Data \\
+        \hline
+        Beam Flash & 33743 & 71208 & 104951 & 108064 \\
+        Containment & 33742 & 71207 & 104949 & 108058 \\
+        Length & 33523 & 70426 & 103949 & 107123 \\
+        Proton Score & 16805 & 23491 & 40296 & 41867 \\
+        \hline
+      \end{tabularx}
+    \end{table}
+    The first column shows the total number of simulated neutrino events that
+    pass each cut scaled to 5e19 POT, and the second column shows the total
+    number of off-beam data events that pass each cut scaled to 5e19 POT. The
+    third column is the sum of the first two columns which is the expected
+    number of on-beam events in 5e19 POT. The last column shows the total
+    number of on-beam events in the 5e19 POT data after each cut. If the
+    simulation were a perfect representation of reality, the last two columns
+    would be the same. At each cut in the pre-selection the measured number of
+    event in the on-beam neutrino data is within 5\% of the expected number of
+    events from simulation and off-beam data.
+
+    The first pre-selection requirement is that there is at least one
+    reconstructed optical flash inside the 1.6~$\mu s$ neutrino beam time
+    window. This cut is to reduce the amount of cosmic background. The next two
+    pre-selection requirements are that there is at least one reconstructed
+    track fuller contained within a fiducial TPC volume that is at least 2.5~cm
+    long. The fiducial volume is defined as being at least 10~cm away from
+    either $y$ boundary of the TPC active volume and at least 5~cm away from
+    any of the $x$ and $z$ boundaries of the TPC active volume. The containment
+    and length requirement don't reduce the number of events by a lot, but they
+    reduce the number of tracks within each event that are considered when
+    trying to select NC elastic proton tracks. The last pre-selection
+    requirement is that there is at least one track in the event that has a
+    proton score from the gradient-boosted decision tree classifier greater
+    than 0.5. To summarize all of the cuts, the set of events after the
+    pre-selection had an interaction in-time with the neutrino beam and at
+    least one track that is likely to be a proton contained in the TPC fiducial
+    volume.  The efficiency and purity of simulated NC elastic proton events
+    after each of the cuts is shown in Tab.~\ref{tab:preseleff}.
+    \begin{table}
+      \caption{Efficiency and purity of simulated NC elastic proton events
+        after each of the NC elastic pre-selection cuts.
+      \label{tab:preseleff}}
+      \begin{tabularx}{\textwidth}{l r r r}
+        \hline
+        Cut & Efficiency & Relative Efficiency & Purity \\
+        \hline
+        Optical Pre-Filter & 0.81 & 0.81 & 0.004 \\
+        Beam Flash & 0.78 & 0.97 & 0.005 \\
+        Reconstruction & 0.62 & 0.79 & 0.005 \\
+        Containment & 0.57 & 0.92 & 0.005 \\
+        Length & 0.49 & 0.87 & 0.005 \\
+        Proton Score & 0.41 & 0.83 & 0.009 \\
+        \hline
+      \end{tabularx}
+    \end{table}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/presel_length.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/presel_length_ratio.pdf}
+      \caption{Reconstructed track length of the longest proton candidate track
+      in the events after all pre-selection cuts.}
+      \label{fig:presellength}
+    \end{figure}
+
+    Figure~\ref{fig:presellength} shows the reconstructed track lengths of the
+    longest remaining proton candidate track in the events remaining after the
+    preselection. The black points in the top plot include the events in the
+    5e19 POT neutrino data set with statistical uncertainty only. The gray
+    filled histogram include the off-beam data events scaled to 5e19 POT, and
+    the color filled histograms include the simulated neutrino events scaled to
+    5e19 POT. The simulated NC elastic proton events in the TPC are in peach,
+    the simulated charged current events in the TPC are in blue, the simulated
+    neutral current background TPC events are in purple, the simulated events
+    in which the neutrino interaction occurred in the liquid argon but outside
+    of the TPC are in green, and the simulated events in which the neutrino
+    interaction occurred outside of the liquid argon cryostat are in yellow.
+    Each of the remaining background type is described in more detail in
+    section~\ref{sec:effbg}.
+
+  \subsubsection{Selection Variables}
+    To select NC elastic proton interactions we look for events with a track
+    that is very likely to be a proton, the track is near the reconstructed
+    beam flash, there are no other tracks near the proton candidate track,
+    there are no tracks likely to be from charged current interactions near the
+    reconstructed beam flash, and the proton candidate track is often in the
+    direction of the neutrino beam. The following seven variables are used to select these events,
+    \begin{enumerate}
+      \item the decision tree proton ID score,
+      \item the distance from the center of the reconstructed track to the
+      center of the reconstructed beam flash in the $z$ direction,
+      \item the shortest distance between either reconstructed endpoint of the
+      candidate track and the next closest endpoint of a different
+      reconstructed track,
+      \item the distance from the center of the reconstructed track to the
+      center of the reconstructed beam flash in the $y$ direction,
+      \item whether of not the reconstructed track is in the neutrino beam
+      direction,
+      \item the distance between any reconstructed tracks with a decision tree
+      muon ID score greater than 0.5 and the reconstructed beam flash in the
+      $z$ direction,
+      \item the distance between any reconstructed tracks with a decision tree
+      pion ID score greater than 0.5 and the reconstructed beam flash in the
+      $z$ direction.
+    \end{enumerate}
+    The center of the reconstructed track is defined as the halfway point
+    between the reconstructed track endpoints in the dimension of interest. The
+    center of the reconstructed flash is the PE-weighted reconstructed center
+    of the flash. The beam flash is defined as a flash whose peak amplitude
+    occurs within the neutrino beam time window. A track is defined as in the
+    beam direction if its reconstructed endpoint is downstream (higher in $z$)
+    than its reconstructed start point. If there are no tracks in the event
+    identified as a muon (in item 6.) or a pion (in item 7.), the value is set
+    to 999~cm, which is close to the maximum distance a track can be from a
+    flash in the TPC. A comparison of each of these variables between data and
+    simulation after the pre-selection is shown in
+    Figs.~\ref{fig:lrpid}-\ref{fig:lrpiflash}.
+
+  \subsubsection{Logistic Regression}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Efficiency and Background Estimation
@@ -610,16 +839,16 @@ Proton ID and event selection.
     Efficiency due to TPC, PMT software trigger, reconstruction, proton ID,
     event selection, etc. This includes efficiency due to proton reinteracting
     in the nucleus and other nuclear effects.
-  \subsubsection{Beam Induced Dirt Background}
+  \subsubsection{Beam Induced Dirt Background}\label{sec:dirt}
     Discuss dirt neutrons, how they happen and estimated rates and energy
-    distributions.  Show how well we can seperate or understand them. Show any
+    distributions.  Show how well we can separate or understand them. Show any
     sort of data-driven correction we did to dirt neutron background and how it
     affects our uncertainty. Talk about how well we can tag cryostat neutrons
     with the PMTs.
   \subsubsection{Beam Induced TPC Background}
     Talk about neutral-current elastic neutrons that are produced in the TPC
     and how their distributions differ from NCEp ones. Also include BNB
-    backgounds (CCQE where muon wasn't reconstructed, NCpi0, etc.) Discuss how
+    backgrounds (CCQE where muon wasn't reconstructed, NCpi0, etc.) Discuss how
     the optical signal would be different for each of these.
   \subsubsection{Cosmic Background}
     Discuss the difference between cosmic tracks and beam proton tracks. How do
@@ -627,21 +856,24 @@ Proton ID and event selection.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ratio of Cross Sections
+% Systematic Uncertainty Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Ratio of NCEp to CCQEn Cross Sections}\label{sec:ratios}
+\subsection{Estimation of Systematic Uncertainty}\label{sec:systematics}
   Show how the ratio gets rid of a lot of measurement uncertainty like beam
   flux and efficiencies. Give exact equation that we will be using for
   analysis. Show how $\Delta s$ is still large at low $Q^2$.
-  \subsubsection{Sources of Measurement Uncertainty}
-    TPC efficiency: If ionization electrons actually reach the
-    TPC and leave a signal.
-    PMT trigger efficiency: Refer back to PMT trigger studies. Give uncertainty
-    due to on signal.
-    Reconstruction efficiency: Refer back. Give uncertainty on signal.
-  \subsubsection{Quantifying Uncertainty on Ratio}\label{errorcalc}
-    Calculate exact uncertainty and show it here.
-  \subsubsection{Model uncertainty}\label{sec:modeluncertainty}
-    Nuclear effects and FSI. Discuss. Discuss which values are varied and by
-    how much? Refer to reweighting section. 
+  \subsubsection{Neutrino Beam Flux Uncertainty}\label{sec:fluxuncertainty}
+    Reference public note, show plots
+  \subsubsection{Measurement Uncertainty}\label{sec:detvar}
+    Effects of detector variation MC
+  \subsubsection{Nuclear Model Uncertainty}\label{sec:modeluncertainty}
+    MEC based on CC change between Tunes 1 and 3 \\
+    Separate CC MEC change from nuc. model based on NC MEC change \\
+    Pauli blocking based on previous CCQE Genie MC reweighting \\
+    Nuclear model from Tunes 1 and 3 differences \\
+    FSI from nucleon MFP reweighting and Tunes 1 and 3 differences?
+  \subsubsection{Form Factor Uncertainty}\label{sec:ffuncertainty}
+    Describe z-exp uncertainty from z-exp papers \\
+    Describe how it is implemented here
+
 
