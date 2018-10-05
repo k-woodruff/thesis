@@ -133,7 +133,7 @@ Proton ID and event selection.
   \subsubsection{Training}
     \begin{table}[ht]
       \caption{Breakdown by simulated particle type reconstructed tracks in the
-        training set.
+        gradient-boosted decision tree training set.
       \label{tab:mctrain}}
       \begin{tabularx}{\textwidth}{ l r r r r r }
         \hline
@@ -197,7 +197,7 @@ Proton ID and event selection.
       randomly sampled.
     \end{itemize}
 
-  \subsubsection{Performance on a Test Set}
+  \subsubsection{Performance on a Test Set}\label{sec:protonidtest}
     The performance of the gradient-boosted decision tree classifier was tested
     on a set of 3,200,000 reconstructed tracks from 96,200 events with
     simulated GENIE neutrino interactions and simulated CORSIKA cosmic
@@ -671,6 +671,15 @@ Proton ID and event selection.
 % Neutral Current Elastic Proton Event Selection
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Event Selection}\label{sec:selection}
+  The neutral current elastic proton event selection consists of some simple
+  pre-selection cuts to remove events that are very unlike the signal and a
+  final event selection using a logistic regression model based on event
+  details. The proton identification in the previous section was designed to
+  identify any proton induced track from any type of event. To select protons
+  from NC elastic neutrino-proton interactions, we use optical timing and
+  position information, information about activity surrounding the proton
+  candidate, and information about unrelated tracks in the event that may be
+  neutrino induced.
 
   \subsubsection{Optical Pre-selection}\label{sec:optpresel}
     A common optical pre-filter is run over MicroBooNE data before any of the
@@ -681,7 +690,7 @@ Proton ID and event selection.
     veto window.
 
     First, each of the 2~$\mu s$ windows is sliced into 339 bins that are
-    94~$\mu s$ wide. Then the total number of PE of any optical pulses that
+    94~ns wide. Then the total number of PE of any optical pulses that
     occur within a given bin are added to that time bin. If any of the time
     bins within the larger 2~$\mu s$ window add to more than 20 PE, it is
     considered a sufficient flash to the optical filter. If any one of these
@@ -761,12 +770,22 @@ Proton ID and event selection.
         Optical Pre-Filter & 0.81 & 0.81 & 0.004 \\
         Beam Flash & 0.78 & 0.97 & 0.005 \\
         Reconstruction & 0.62 & 0.79 & 0.005 \\
-        Containment & 0.57 & 0.92 & 0.005 \\
-        Length & 0.49 & 0.87 & 0.005 \\
-        Proton Score & 0.41 & 0.83 & 0.009 \\
+        Containment & 0.53 & 0.86 & 0.005 \\
+        Length & 0.46 & 0.87 & 0.005 \\
+        Proton Score & 0.39 & 0.84 & 0.009 \\
         \hline
       \end{tabularx}
     \end{table}
+    Figure~\ref{fig:preseleff} shows the efficiency of the pre-selection on
+    simulated neutrino events as a function of true negative four-momentum
+    squared.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/presel_efficiency.pdf}
+      \caption{Efficiency of simulated NC elastic proton events as a function
+        of true $Q^2$ after the pre-selection cuts.}
+      \label{fig:preseleff}
+    \end{figure}
     \begin{figure}[ht]
       \centering
       \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/presel_length.pdf} \\
@@ -791,20 +810,21 @@ Proton ID and event selection.
     Each of the remaining background type is described in more detail in
     section~\ref{sec:effbg}.
 
-  \subsubsection{Selection Variables}
+  \subsubsection{Selection Variables}\label{sec:selectionvars}
     To select NC elastic proton interactions we look for events with a track
     that is very likely to be a proton, the track is near the reconstructed
     beam flash, there are no other tracks near the proton candidate track,
     there are no tracks likely to be from charged current interactions near the
     reconstructed beam flash, and the proton candidate track is often in the
-    direction of the neutrino beam. The following seven variables are used to select these events,
+    direction of the neutrino beam. The following seven variables are used to
+    select these events,
     \begin{enumerate}
       \item the decision tree proton ID score,
-      \item the distance from the center of the reconstructed track to the
-      center of the reconstructed beam flash in the $z$ direction,
       \item the shortest distance between either reconstructed endpoint of the
       candidate track and the next closest endpoint of a different
       reconstructed track,
+      \item the distance from the center of the reconstructed track to the
+      center of the reconstructed beam flash in the $z$ direction,
       \item the distance from the center of the reconstructed track to the
       center of the reconstructed beam flash in the $y$ direction,
       \item whether of not the reconstructed track is in the neutrino beam
@@ -827,19 +847,345 @@ Proton ID and event selection.
     to 999~cm, which is close to the maximum distance a track can be from a
     flash in the TPC. A comparison of each of these variables between data and
     simulation after the pre-selection is shown in
-    Figs.~\ref{fig:lrpid}-\ref{fig:lrpiflash}.
+    Figs.~\ref{fig:lrpid}-\ref{fig:lrpidist}.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_pscore.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_pscore-ratio.pdf}
+      \caption{Decision tree proton score after the pre-selection cuts.}
+      \label{fig:lrpid}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_vtxdist.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_vtxdist-ratio.pdf}
+      \caption{Distance to the next closest track after the pre-selection cuts.}
+      \label{fig:lrvtxdist}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_fzdist.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_fzdist-ratio.pdf}
+      \caption{Distance to the beam flash in $z$ after the
+        pre-selection cuts.}
+      \label{fig:lrfzdist}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_fydist.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_fydist-ratio.pdf}
+      \caption{Distance to the beam flash in $y$ after the
+        pre-selection cuts.}
+      \label{fig:lrfydist}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_forward.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_forward-ratio.pdf}
+      \caption{Whether or not the track is forward going after the pre-selection
+        cuts.}
+      \label{fig:lrforward}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_mudist.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_mudist-ratio.pdf}
+      \caption{Distance between muon track and flash after the pre-selection
+        cuts.}
+      \label{fig:lrmudist}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_pidist.pdf} \\
+      \includegraphics[angle=0,width=4in]{figures/analysis/selection/LR_input_all_pidist-ratio.pdf}
+      \caption{Distance between pion track and flash after the pre-selection
+        cuts.}
+      \label{fig:lrpidist}
+    \end{figure}
+
+    \FloatBarrier
 
   \subsubsection{Logistic Regression}
+    To determine which events are NC elastic like based on these seven
+    variables, we use them as input to a logistic regression
+    model~\cite{Hosmer2005}. The difference between a logistic regression model
+    and a linear regression model is that the outcome is binary (or logistic).
+    Otherwise, the methods used to fit logistic and linear regression models
+    follow the same principles. In our logistic regression a multi-dimensional
+    sigmoid function is fit to the signal and background data. The output is a
+    score that can be used to determine how signal-like a data point is.
+    \begin{equation*}
+      S(g({\bf x})) = \frac{e^{g({\bf x})}}{1 + e^{g({\bf x})}} \,,
+    \end{equation*}
+    where $g({\bf x})$ is a linear combination of the selection variables, ${\bf x}$,
+    \begin{equation*}
+      g({\bf x}) = w_0 + w_1 x_1 + w_2 x_2 + ... + w_7 x_7 \,.
+    \end{equation*}
+    Here $x_1$ is item 1 from the list in Sec.~\ref{sec:selectionvars} (the
+    proton ID score), $x_2$ is item 2 (the distance to the next closest track),
+    etc. The set of weights, $w_0,...,w_7$ are determined from a fit to the
+    data. We determined these weights using the StatsModels
+    module~\cite{pystats} in Python to fit the model to a subset of the
+    simulated neutrino events described in Sec.~\ref{sec:protonidtest} along
+    with a set of simulated cosmic events that produce an optical flash in-time
+    with the neutrino beam. The simulated set of in-time cosmics should match
+    the off-beam data in a perfect simulation. For the fit, 998 simulated NC
+    elastic proton events, 2000 simulated background neutrino events, and 1806
+    simulated background in-time cosmic events were used. The final set of
+    weights used are
+    \begin{equation}
+      \begin{aligned}
+        w_0 = -5.943956,& \\
+        w_1 =  5.388985,& \\
+        w_2 =  0.021189,& \\
+        w_3 = -0.016710,& \\
+        w_4 = -0.017510,& \\
+        w_5 =  0.592240,& \\
+        w_6 =  0.001084,& \\
+        w_7 =  0.000989.&
+      \end{aligned}
+    \end{equation}
+    The $\chi^2/DoF$ of the fit was $8161/4804 = 1.70$. The degrees of freedom
+    in the fit are the 4804 simulated events used.
+    
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/LR_output_overlay_stacked.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/LR_output_overlay-ratio.pdf}
+      \caption{Logistic regression NC elastic events selection score.}
+      \label{fig:lroutput}
+    \end{figure}
+    Figure~\ref{fig:lroutput} shows the output logistic regression score on the
+    simulated neutrino events plus the off-beam data compared to the output on
+    the 5e19 POT neutrino beam data. Again, the black points in the top plot
+    include the 5e19 POT subset of neutrino data with statistical uncertainty
+    only, the gray filled histogram includes off-beam data scaled to 5e19 POT,
+    and the color filled histograms include the simulated neutrino interactions
+    overlaid with cosmic data backgrounds scaled to 5e19 POT. The peach color
+    is NC elastic proton events in the TPC, blue is charged current background
+    events in the TPC, purple is neutral current background events in the TPC,
+    green is background from neutrino interactions in the liquid argon outside
+    of the TPC, and yellow is background from neutrino interactions outside of
+    the liquid argon cryostat. The higher the logistic regression score, the
+    more likely the event is NC elastic proton. The bottom plot shows the ratio
+    of the 5e19 POT neutrino beam data to the sum of the simulated neutrino
+    events and off-beam data.
+    
+    Figure~\ref{fig:lreffpur} shows the efficiency and purity of the NC elastic
+    signal for cutting on given logistic regression scores.
+    Figure~\ref{fig:lreffnpur} shows both the efficiency curve and the purity
+    curve of the NC elastic event selection on the simulated neutrino events
+    and off-beam data as a function of the logistic regression score cut. This
+    cut is imposed after the pre-selection cuts, which is why the efficiency
+    only goes as high as 0.41. Figure~\ref{fig:lreffvpur} shows the purity on
+    the $y$-axis as a function of efficiency on the $x$-axis for different
+    logistic regression score cuts. Some score cut values are labelled along
+    the curve.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/selection/LR_effandpur.pdf}\hspace{2pc}%
+        \caption{Efficiency and purity curves overlaid.}
+        \label{fig:lreffnpur}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.5in}
+        \includegraphics[angle=0,width=2.5in]{figures/analysis/selection/LR_effvpur.pdf}\hspace{2pc}%
+        \caption{Purity as a function of efficiency.}
+        \label{fig:lreffvpur}
+      \end{subfigure}
+      \caption{Efficiency and purity of the NC elastic proton event selection
+      given several different cut values on the logistic regression score.
+      \label{fig:lreffpur}}
+    \end{figure}
+   
+    In this analysis we choose a logistic regression score cut of 0.9 to
+    minimize the backgrounds as much as reasonably possible. The gives us an
+    overall NC elastic proton events selection efficiency of 0.11 and a purity
+    of 0.30 based on simulated neutrino events and off-beam data. The
+    efficiency of this selection on simulated NC elastic proton events is shown
+    in Fig.~\ref{fig:nceeff} as a function of true $Q^2$. The overall shape of
+    the NC elastic proton selection efficiency remains relatively flat across
+    the $Q^2$ range of interest.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncsel_efficiency.pdf}
+      \caption{Efficiency of the NC elastic proton event selection on simulated
+      NC elastic proton events.}
+      \label{fig:nceeff}
+    \end{figure}
+
+  \subsubsection{Comparison of Event Selection on Neutrino Beam Data to
+  Expectation from Simulation and Off-Beam Data}
+    Figures~\ref{fig:ncetheta}-{fig:ncestartz} show comparisons between the
+    final selected events in the neutrino beam data and the neutrino simulation
+    and off-beam data. The full Run I and simulated data sets are used in these
+    comparisons. Each of the data sets is scaled to the size of the Run I data
+    (1.7e20 POT). The data sets and the scaling factors are listed below.
+    \begin{enumerate}
+      \item Run I 1.7e19 POT neutrino data set
+      \begin{itemize}
+        \item Number of events: 
+        \item POT (\texttt{tor860\_wcut}): 
+        \item Number of triggers (\texttt{E1DCNT\_wcut}):
+        \item Normalization factor: 1
+      \end{itemize}
+      \item Run I off-beam data subset
+      \begin{itemize}
+        \item Number of events: 941,584
+        \item Number of triggers (\texttt{EXT}): 73,761,274
+        \item Normalization factor: 
+      \end{itemize}
+      \item Neutrino Monte Carlo with cosmic data overlay set
+      \begin{itemize}
+        \item Number of events: 750,629
+        \item POT: 
+        \item Flux correction factor: 1.029
+        \item Normalization factor: 
+      \end{itemize}
+    \item Neutrino dirt Monte Carlo with simulated cosmic data set
+      \begin{itemize}
+        \item Number of events: 105214
+        \item POT: $4.66e20$
+        \item POT normalization factor: 0.0947
+        \item Data driven normalization factor: 0.5 (described in Sec.~\ref{sec:dirt})
+        \item Normalization factor: 0.0474
+      \end{itemize}
+    \end{enumerate}
+
+    Figure~\ref{fig:nceq2} shows the comparison between neutrino beam data and
+    the expectation from simulation and off-beam data as a function of
+    reconstructed negative four-momentum transfer squared, which is calculated
+    from the proton kinetic energy, $T_p$, as derived in
+    Sec.~\ref{sec:neutrinos},
+    \begin{equation*}
+      Q_p^2 = 2 T_p M_p,
+    \end{equation*}
+    where $M_p$ is the proton mass.  This is the comparison that will be used
+    to extract the strange axial form factor parameters (described in
+    Sec.~\ref{sec:analysis}). In this and all of the following figures in this
+    section, the black points in the top plot include the neutrino beam data
+    with statistical uncertainty only, the gray filled histogram includes
+    off-beam data, and the color filled histograms include simulated neutrino
+    events with overlaid cosmic data backgrounds. The peach are NC elastic
+    proton events, the blue are CC background events in the TPC, the purple are
+    NC background events in the TPC, the green are background events from
+    neutrino interactions in the liquid argon outside of the TPC, and the
+    yellow are backgrounds from neutrino interactions outside of the liquid
+    argon cryostat. Each of these backgrounds are described in more detail in
+    Sec.~\ref{sec:effbg}. The bottom plot shows the ratio of the selected
+    neutrino beam data events to the combination of selected simulated neutrino
+    events and selected off-beam data events. If the simulation and data were
+    exactly the same, the ratio would be equal to one.
+    
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_q2.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_q2-ratio.pdf} \\
+      \caption{Selected NC elastic proton events as a function of reconstructed $Q_p^2$.}
+      \label{fig:nceq2}
+    \end{figure}
+
+    Figures~\ref{fig:ncetheta}~and~\ref{fig:ncephi} show the comparison between
+    neutrino beam data and the expectation from neutrino simulation and
+    off-beam data as a function of the reconstructed proton angle.
+    Figure~\ref{fig:ncetheta} shows this as a function of the cosine of the
+    proton angle from the beam direction, $\cos(\theta_p)$, and
+    Fig.~\ref{fig:ncephi} shows it as a function of the proton angle around the
+    beam direction, $\phi_p$. The $\cos(\theta_p)$ distribution appears to have
+    a peak near 0.4 and another peak near 1.0. These peaks in the off-beam data
+    are a combination of angle dependence of the cosmic ray flux and the
+    reconstruction efficiency of the MicroBooNE TPC. The simulated
+    neutrino-induced tracks tend to be more in the direction of the neutrino
+    beam. The $\phi_p$ distribution has clear peaks in the off-beam data at
+    $\phi_p = \pm \pi/2$. The $-\pi/2$ peak corresponds to tracks that are
+    reconstructed as vertically down-going in the TPC and the $+\pi/2$ peak
+    corresponds to tracks that are reconstructed as vertically up-going. Both
+    peaks are due to down-going cosmic tracks, but some of these tracks are
+    mis-reconstructed as going up through the detector. The simulated
+    neutrino-induced tracks are relatively isotropic in $\phi$.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_theta.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_theta-ratio.pdf} \\
+      \caption{Selected NC elastic proton events as a function of reconstructed $\cos(\theta_p)$.}
+      \label{fig:ncetheta}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_phi.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_phi-ratio.pdf} \\
+      \caption{Selected NC elastic proton events as a function of reconstructed $\phi_p$.}
+      \label{fig:ncephi}
+    \end{figure}
+
+    Figures~\ref{fig:ncestartx},~\ref{fig:ncestarty}~and~\ref{fig:ncestartz}
+    show the comparison between neutrino beam data and the expectation from
+    neutrino simulation and off-beam data as a function of the start points of
+    the reconstructed tracks in $x$, $y$, and $z$, respectively. In the
+    reference frame used by MicroBooNE, the $x$ dimension is the dimension
+    across the width of the detector with the anode near $x = 0$~cm and the
+    cathode near $x = 250$~cm, the $y$ dimension is the vertical dimension
+    across the height of the detector with the bottom of the TPC near $y =
+    -100$~cm and the top near y = $+100$~cm, and the $z$ dimension is the
+    dimension in the beam direction across the length of the detector with the
+    upstream (front) end of the detector near $z = 0$~cm and the downstream
+    (back) end of the detector near $z = 1000$~cm.
+    
+    In Fig.~\ref{fig:ncestartx}, the higher number of selected events at low
+    $x$ is due to the greater charge and light collection efficiency for
+    particles that are near the anode since both the TPC readout wires and the
+    PMTs are on the anode side of the detector at $x = 0$.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_startx.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_startx-ratio.pdf} \\
+      \caption{Selected NC elastic proton events as a function of reconstructed $x$ position.}
+      \label{fig:ncestartx}
+    \end{figure}
+
+    In Fig~\ref{fig:ncestarty}, the increase in the number of selected off-beam
+    tracks from the bottom ($y = -100$~cm) to the top ($y = +100$~cm) of the
+    TPC is due to the fact that cosmic tracks enter through the top of the
+    detector, and not all tracks make it all of the way through. The greater
+    number of selected simulated neutrino events near the center of the
+    detector ($y = 0$) might be due to the fact that tracks at an angle are
+    more likely to fail the fiducial TPC containment cut when they are closer
+    to the edges of the detector. This may be more visible in the $y$ dimension
+    than the $x$ because there are no other competing effects.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_starty.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_starty-ratio.pdf} \\
+      \caption{Selected NC elastic proton events as a function of reconstructed $y$ position.}
+      \label{fig:ncestarty}
+    \end{figure}
+
+    In Fig.~\ref{fig:ncestartz}, the selected off-beam and the selected
+    neutrino events are fairly uniform in the $z$ dimension. The small decrease
+    in selected events near the very back of the TPC ($z \approx 1000$~cm) is
+    due to the fact that tracks are much less likely to be contained in the TPC
+    if they are produced so close to the back edge.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_startz.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/selection/ncselection_bacgkrounds_startz-ratio.pdf} \\
+      \caption{Selected NC elastic proton events as a function of reconstructed $z$ position.}
+      \label{fig:ncestartz}
+    \end{figure}
+
+    \FloatBarrier
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Efficiency and Background Estimation
+% Background Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Efficiency and Background Estimation}\label{sec:effbg}
-  \subsubsection{Event selection efficiency}
-    Efficiency due to TPC, PMT software trigger, reconstruction, proton ID,
-    event selection, etc. This includes efficiency due to proton reinteracting
-    in the nucleus and other nuclear effects.
+\subsection{Estimation of Remaining Backgrounds}\label{sec:effbg}
   \subsubsection{Beam Induced Dirt Background}\label{sec:dirt}
+    The dirt background, desrcibed in Sec.~\ref{sec:beam}
+
+    Reference MiniBooNE analysis with dirt scaling. \\
+    Remaining events: 9.0 +/- 0.7 +/- 4.5 \\
+
     Discuss dirt neutrons, how they happen and estimated rates and energy
     distributions.  Show how well we can separate or understand them. Show any
     sort of data-driven correction we did to dirt neutron background and how it
