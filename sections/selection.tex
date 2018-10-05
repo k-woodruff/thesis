@@ -2,7 +2,15 @@
 %The next line produces an indented paragraph to start the document
  %unit.  The LaTeX defaults start most units without indentations.
 \hspace{\parindent}
-Proton ID and event selection.
+This section describes the process for selecting events in data and simulation
+that we use to determine the strange axial form factor. First, proton tracks
+are identified using a gradient-boosted decision tree model based on
+reconstructed tracks features. Next, events are selected as neutral current
+elastic proton events using a logistic regression model based on reconstructed
+properties of the whole event include optical information. Comparisons of the
+selected NC elastic proton events in the neutrino beam data are compared to the
+expectation from neutrino simulation and off-beam data are shown, and each of
+the remaining backgrounds is described in detail.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Particle Identification and Event Selection
@@ -254,14 +262,14 @@ Proton ID and event selection.
 
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_allmcke.pdf}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/PID_efficiency_allmcke.pdf}
         \caption{The full simulated kinetic energy range.}
         \label{fig:pideffkeall}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_mcke.pdf}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/PID_efficiency_mcke.pdf}
         \caption{The kinetic energy range used in this analysis.}
         \label{fig:pideffkerng}
       \end{subfigure}
@@ -282,15 +290,15 @@ Proton ID and event selection.
 
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_mctheta_kerange.pdf}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/PID_efficiency_mctheta_kerange.pdf}
         \caption{Efficiency as a function of the cosine of the true proton
           angle from the beam direction.}
         \label{fig:pideffangletheta}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/PID_efficiency_mcphi_kerange.pdf}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/PID_efficiency_mcphi_kerange.pdf}
         \caption{Efficiency as a function of the true proton angle around the beam direction.}
         \label{fig:pideffanglephi}
       \end{subfigure}
@@ -391,15 +399,15 @@ Proton ID and event selection.
     simulation and off-beam data.
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay.pdf}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay-ratio.pdf}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/datamcpid/pscore_overlay.pdf}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/datamcpid/pscore_overlay-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay_log.pdf}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pscore_overlay-ratio.pdf}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/datamcpid/pscore_overlay_log.pdf}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/protonid/datamcpid/pscore_overlay-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
       \end{subfigure}
       \caption{Comparison of the decision tree proton scores between a subset
@@ -443,13 +451,13 @@ Proton ID and event selection.
     
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_nhits_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -461,13 +469,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_distlenratio_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -478,13 +486,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_length_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -495,13 +503,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startdedx_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -512,13 +520,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_dedxratio_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -529,13 +537,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_trtotaldedx_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -546,13 +554,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_traveragededx_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -563,13 +571,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_starty_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -580,13 +588,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endy_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -597,13 +605,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_startz_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -614,13 +622,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_endz_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -631,13 +639,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_costheta_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -648,13 +656,13 @@ Proton ID and event selection.
     \end{figure}
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_all_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_all_truncated-ratio.pdf}
         \caption{All reconstructed tracks.}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
+      \begin{subfigure}[t]{2.8in}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_pass_truncated.pdf}
         \includegraphics[angle=0,width=2.5in]{figures/analysis/protonid/datamcpid/pid_phi_pass_truncated-ratio.pdf}
         \caption{All reconstructed tracks that are classified as protons.}
@@ -983,14 +991,14 @@ Proton ID and event selection.
     the curve.
     \begin{figure}[h]
       \centering
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/selection/LR_effandpur.pdf}\hspace{2pc}%
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/selection/LR_effandpur.pdf}\hspace{2pc}%
         \caption{Efficiency and purity curves overlaid.}
         \label{fig:lreffnpur}
       \end{subfigure}
       \hspace{2pt}
-      \begin{subfigure}[t]{2.5in}
-        \includegraphics[angle=0,width=2.5in]{figures/analysis/selection/LR_effvpur.pdf}\hspace{2pc}%
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/selection/LR_effvpur.pdf}\hspace{2pc}%
         \caption{Purity as a function of efficiency.}
         \label{fig:lreffvpur}
       \end{subfigure}
@@ -1179,26 +1187,176 @@ Proton ID and event selection.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Background Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Estimation of Remaining Backgrounds}\label{sec:effbg}
+\subsection{Remaining Backgrounds}\label{sec:effbg}
   \subsubsection{Beam Induced Dirt Background}\label{sec:dirt}
-    The dirt background, desrcibed in Sec.~\ref{sec:beam}
+    The dirt background, described in Sec.~\ref{sec:beam}, consists of any
+    selected events that are due to a neutrino interaction outside of the
+    liquid argon cryostat. The majority of this background is caused by
+    neutrons entering the detector and scattering protons. Sometimes the
+    neutron is directly from the neutrino interaction in the dirt, and other
+    times secondary particles from the neutrino interaction enter the cryostat
+    and cause a flash, but an unrelated proton from a cosmic neutron happens to
+    be spatially nearby. Figure~\ref{fig:selecteddirt} shows the total dirt
+    background that passes the NC elastic proton event selection as a function
+    of reconstructed $Q^2$. The filled yellow histogram includes all remaining
+    dirt events, and the pale yellow box shows the statistical uncertainty on
+    the number of events. An overall data-driven normalization has been applied
+    and is described below. The hatched histograms overlaying the yellow filled
+    histogram shows a different shows what type of particle was selected as the
+    NC elastic proton candidate. The blue hatched histograms include the events
+    in which a proton was selected with hatching diagonal for cosmic protons
+    and vertical hatching for neutrino beam induced protons. The red hatched
+    histograms include the events in which a track from an electromagnetic
+    shower was selected with diagonal hatching for cosmic showers and vertical
+    hatching for neutrino beam induced showers. The purple hatched histograms
+    include all other types of tracks.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_dirt_bacgkround_q2.pdf}
+      \caption{Remaining background dirt events after NC elastic proton event
+        selection as a function of $Q^2$.}
+      \label{fig:selecteddirt}
+    \end{figure}
 
-    Reference MiniBooNE analysis with dirt scaling. \\
-    Remaining events: 9.0 +/- 0.7 +/- 4.5 \\
+    The dirt background is difficult to simulated for several reasons. First,
+    the neutrino interactions occur outside of the detector in the surrounding
+    infrastructure which is much more difficult to model perfectly than
+    uniformly dense liquid argon. The composition and density distribution of
+    the dirt outside of the detector hall is not known perfectly and changes
+    with throughout the year due to rain, freezing, and other weather. The
+    neutrino interactions can also occur in the walls of the detector building,
+    the electronics racks, the cryogenic plumbing, or anything else that exists
+    near the detector.
+    
+    Additionally, the dirt sample is difficult to simulate because it depends
+    on modeling cosmic neutron flux, which is not well known at the energies
+    that we are interested in~\cite{Bhadra:2009fw}. The different cosmic ray
+    flux models that were tested in MicroBooNE studies~\cite{uBCosmicNote} vary
+    by almost an order of magnitude in their predictions of the proton flux at
+    proton kinetic energies below 100~MeV, shown in Fig.~\ref{fig:cosmicpflux}.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/backgrounds/cosmicproton_flux_compare.png}
+      \caption{Comparison of the cosmic proton flux predictions from three
+        different generator models in MicroBooNE~\cite{uBCosmicNote}.}
+      \label{fig:cosmicpflux}
+    \end{figure}
 
-    Discuss dirt neutrons, how they happen and estimated rates and energy
-    distributions.  Show how well we can separate or understand them. Show any
-    sort of data-driven correction we did to dirt neutron background and how it
-    affects our uncertainty. Talk about how well we can tag cryostat neutrons
-    with the PMTs.
+    Because of the difficulty on modeling the dirt background, we perform a
+    data-driven normalization of the dirt sample. A similar scaling was
+    performed in the MiniBooNE neutral current elastic cross section
+    measurement~\cite{Aguilar-Arevalo:2010cx} using different observable
+    variables. In MicroBooNE, the contribution from dirt events can be seen
+    most clearly in the $z$ distribution of reconstructed flashes since most of
+    the dirt interactions that produce a signal in the detector occur upstream
+    as shown in Figure~\ref{fig:dirtneutronpos}. Figure~\ref{fig:dirtnzy} shows
+    the view from the side of the detector hall with the neutrino beam going
+    from left to right. The inner box shows the dimension of the MicroBooNE TPC
+    and the outer box shows the dimension of the outer walls of the building.
+    Figure~\ref{fig:dirtnx} shows the top view of the detector with the beam
+    again going from left to right. The inner box shows the dimension of the
+    MicroBooNE TPC and the outer circle shows the dimensions of the outer wall
+    of the building.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/backgrounds/allneutrons_dirt_zy.pdf}
+        \caption{Position in the $z-y$ plane (looking at the side of the detector hall).}
+        \label{fig:dirtnzy}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/backgrounds/allneutrons_dirt_zx.pdf}
+        \caption{Position in the $z-x$ plane (looking down at the detector hall).}
+        \label{fig:dirtnzx}
+      \end{subfigure}
+      \caption{Position of simulated neutrino interactions which produce a
+      neutron that enters and interacts in the MicroBooNE TPC.}
+      \label{fig:dirtneutronpos}
+    \end{figure}
+    Figure~\ref{fig:flashnodirt} shows a comparison of this distribution
+    between the 5e19 POT subset of neutrino-beam data and the expectation from
+    neutrino simulation and off-beam data \textit{without} the contribution
+    from dirt interactions. There is a clear excess in neutrino beam data
+    events in the upstream end of the detector ($z < 300$~cm).
+    Figure~\ref{fig:flashsubtract} shows the difference between the two
+    distribution in Fig.~\ref{fig:flashnodirt}, and Fig~\ref{fig:flashdirt}
+    shows the $z$ distribution of reconstructed flashes from simulated dirt
+    events. The shapes are similar, but the scale is not. We use these two
+    distributions to extract an overall normalization factor for the dirt
+    simulation.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/flashz_allevents_nodirt.pdf}
+      \caption{Comparison between neutrino beam data and the expectation from
+      simulation and off-beam data of the $z$ distribution of reconstructed
+      flashes \textit{without} the contribution from neutrino interactions in
+      the dirt.}
+      \label{fig:flashnodirt}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/backgrounds/flashz_allevents_nodirt-difference.pdf}
+        \caption{Difference between neutrino beam data and the expectation from
+        simulation and off-beam data \textit{without} the contribution from
+        neutrino interactions in the dirt.}
+        \label{fig:flashsubtract}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/backgrounds/flashz_allevents_onlydirt.pdf}
+        \caption{Distribution from dirt simulation.}
+        \label{fig:flashdirt}
+      \end{subfigure}
+      \caption{Distribution of the $z$ position of reconstructed flashes in
+      MicroBooNE.}
+    \end{figure}
+    
+    The normalization factor is determined by performing a weight-least-squares
+    regression on the $z$ distribution of the reconstructed flashes. The value
+    that we minimized is
+    \begin{equation*}
+      WLS = \sum_{i=0}^{N_{bins}} w_i r_i^2 /,,
+    \end{equation*}
+    where the sum is over the bins in the flash position distribution, $w_i$ is
+    the variance of the excess of measured events over the expectation in bin
+    $i$, and
+    \begin{equation*}
+      r_i = x_i^{(\textrm{data exc.})} - a\cdot y_i^{(\textrm{dirt})} \,.
+    \end{equation*}
+    Here $x_i$ is the number of the data excess events in bin $i$, $y_i$ is the
+    number of simulated dirt events in bin $i$, and $a$ is the dirt
+    normalization factor that we are trying to determine. Using the Python
+    SciPy~\cite{SciPy} Optimize library, we found that $WLS$ is minimized at $a
+    = 0.5$. The estimated uncertainty on this normalization factor is 50\%,
+    which covers the statistical variations in the first peak in the $z$ flash
+    distribution. Figure~\ref{fig:flashwithdirt} shows the distribution of the
+    $z$ position of the reconstructed flashes in the neutrino beam data
+    compared to the expectation from the neutrino simulation and off-beam data
+    including the normalized simulated dirt events. The brown bars show the
+    50\% uncertainty on the dirt normalization factor.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/flashz_allevents_withunc.pdf}
+      \caption{Comparison between neutrino beam data and the expectation from
+      simulation and off-beam data of the $z$ distribution of reconstructed
+      flashes \textit{with} the contribution from neutrino interactions in
+      the dirt.}
+      \label{fig:flashwithdirt}
+    \end{figure}
+
+    With the normalization, the total number of background dirt events
+    remaining after the NC elastic proton events selection is
+    \begin{equation*}
+     N_{\textrm{dirt}} = 9.5 \pm 1.4(stat.) \pm 4.8 (syst.) \,. 
+    \end{equation*}
+    The normalized distribution of remaining events is the one shown in
+    Fig.~\ref{fig:selecteddirt}.
+
   \subsubsection{Beam Induced TPC Background}
-    Talk about neutral-current elastic neutrons that are produced in the TPC
-    and how their distributions differ from NCEp ones. Also include BNB
-    backgrounds (CCQE where muon wasn't reconstructed, NCpi0, etc.) Discuss how
-    the optical signal would be different for each of these.
+
   \subsubsection{Cosmic Background}
-    Discuss the difference between cosmic tracks and beam proton tracks. How do
-    we separate them? What is the rate?
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
