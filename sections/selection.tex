@@ -1024,7 +1024,7 @@ the remaining backgrounds is described in detail.
     \end{figure}
 
   \subsubsection{Comparison of Event Selection on Neutrino Beam Data to
-  Expectation from Simulation and Off-Beam Data}
+  Expectation from Simulation and Off-Beam Data}\label{sec:datamcevent}
     Figures~\ref{fig:ncetheta}-{fig:ncestartz} show comparisons between the
     final selected events in the neutrino beam data and the neutrino simulation
     and off-beam data. The full Run I and simulated data sets are used in these
@@ -1188,6 +1188,19 @@ the remaining backgrounds is described in detail.
 % Background Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Remaining Backgrounds}\label{sec:effbg}
+  The remaining backgrounds after the final neutral current elastic
+  neutrino-proton event selection include events in which a neutrino
+  interaction occurred outside of the liquid argon cryostat, events in which a
+  neutrino interaction occurred in the liquid argon but outside of the active
+  TPC volume, events in which a neutrino interaction that was not an NC elastic
+  neutrino-proton interaction occurred within the active volume, and events in
+  which a cosmic interaction occurred at the same time as the neutrino beam
+  spill, and there was no neutrino interaction. In all of these cases except
+  the last one, tracks from the neutrino interaction produced scintillation
+  light within the cryostat that triggered the event readout, but it could have
+  been either a track from the neutrino event or cosmic-induced track that was
+  tagged as the proton candidate.
+
   \subsubsection{Beam Induced Dirt Background}\label{sec:dirt}
     The dirt background, described in Sec.~\ref{sec:beam}, consists of any
     selected events that are due to a neutrino interaction outside of the
@@ -1202,14 +1215,14 @@ the remaining backgrounds is described in detail.
     dirt events, and the pale yellow box shows the statistical uncertainty on
     the number of events. An overall data-driven normalization has been applied
     and is described below. The hatched histograms overlaying the yellow filled
-    histogram shows a different shows what type of particle was selected as the
-    NC elastic proton candidate. The blue hatched histograms include the events
-    in which a proton was selected with hatching diagonal for cosmic protons
-    and vertical hatching for neutrino beam induced protons. The red hatched
-    histograms include the events in which a track from an electromagnetic
-    shower was selected with diagonal hatching for cosmic showers and vertical
-    hatching for neutrino beam induced showers. The purple hatched histograms
-    include all other types of tracks.
+    histogram show what type of particle was selected as the NC elastic proton
+    candidate. The blue hatched histograms include the events in which a proton
+    was selected with hatching diagonal for cosmic protons and vertical
+    hatching for neutrino beam induced protons. The red hatched histograms
+    include the events in which a track from an electromagnetic shower was
+    selected with diagonal hatching for cosmic showers and vertical hatching
+    for neutrino beam induced showers. The purple hatched histograms include
+      all other types of tracks.
     \begin{figure}[ht]
       \centering
       \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_dirt_bacgkround_q2.pdf}
@@ -1253,7 +1266,7 @@ the remaining backgrounds is described in detail.
     the view from the side of the detector hall with the neutrino beam going
     from left to right. The inner box shows the dimension of the MicroBooNE TPC
     and the outer box shows the dimension of the outer walls of the building.
-    Figure~\ref{fig:dirtnx} shows the top view of the detector with the beam
+    Figure~\ref{fig:dirtnzx} shows the top view of the detector with the beam
     again going from left to right. The inner box shows the dimension of the
     MicroBooNE TPC and the outer circle shows the dimensions of the outer wall
     of the building.
@@ -1354,18 +1367,156 @@ the remaining backgrounds is described in detail.
     The normalized distribution of remaining events is the one shown in
     Fig.~\ref{fig:selecteddirt}.
 
-  \subsubsection{Beam Induced TPC Background}
+  \subsubsection{Beam Induced TPC and Cryostat Background}
+    The beam induced TPC and cryostat background includes all background events
+    in which there was a neutrino beam interaction inside the liquid argon
+    cryostat. This background can be separated into cryostat background events,
+    charged current TPC background events, and neutral current TPC background
+    events.
+    
+    Like the dirt background, the neutrino interactions in the cryostat
+    background occur outside of the active TPC volume, but they do occur inside
+    the liquid argon cryostat, making them easier to simulate for the reasons
+    described in Sec.~\ref{sec:dirt}. Like the other two background categories
+    in this section, the cryostat background is included in the simulated
+    neutrino data set with an overlaid cosmic data background.
+    Figure~\ref{fig:selectedcryo} shows the remaining cryostat background
+    events in the final NC elastic event selection as a function of
+    reconstructed $Q^2$. The green filled histogram includes all remaining
+    cryostat background events, and the pale green box represents the
+    statistical uncertainty on the number of events. The hatched histograms
+    overlaying the green filled histogram show what type of particle was
+    selected as the NC elastic proton candidate. The purple diagonally hatched
+    histogram includes events in which an overlaid cosmic track was selected,
+    the blue hatched histogram includes events in which a neutrino-induced
+    proton was selected, the red hatched histogram includes events in which a
+    track from a neutrino-induced electromagnetic shower was selected, and the
+    purple vertically hatched histogram includes events in which any other
+    neutrino-induced track was selected. Again, the majority of the tracks
+    selected as the proton candidate were actual protons. Cosmic tracks are the
+    next most common track selected as the proton candidate in these events.
+    Since real cosmic data is used as the background, we don't know how many of
+    the selected cosmic tracks were actual protons. The other background tracks
+    are negligible.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_cryo_bacgkround_q2.pdf}
+      \caption{Remaining background cryostat events after NC elastic proton
+      event selection as a function of $Q^2$.}
+      \label{fig:selectedcryo}
+    \end{figure}
+
+    The CC TPC background includes all events in which a charged current
+    neutrino interaction occurred in the active TPC volume.
+    Figure~\ref{fig:selectedcctpc} shows the remaining CC TPC background after
+    the NC elastic proton selection as a function of reconstructed $Q^2$. The
+    blue filled histogram includes all remaining CC TPC events, and the pale
+    blue box represents the statistical uncertainty on the number of events.
+    The type of particle selected as the proton candidate is shown in the
+    overlaid hatched histograms with the same color and hatching scheme as in
+    Fig.~\ref{fig:selectedcryo}. A large majority of the tracks selected as the
+    proton candidate are actual neutrino-induced protons. These background
+    proton tracks can be from charged current interaction in which a neutron is
+    ejected from the nucleus during the initial interaction which later
+    scatters a proton some distance from the interaction vertex. If the muon
+    from the charged current interaction is not correctly identified as a
+    neutrino-induced muon by the gradient-boosted decision tree classifier the
+    proton can be tagged as NC elastic. The proton tracks could also be primary
+    particles form a charged current interaction, but the muon from the
+    interaction is either not reconstructed or reconstructed poorly enough that
+    it is not associated with the same vertex as the proton and also not
+    identified correctly by the decision tree classifier. The next most common
+    tracks selected as the proton candidate are cosmic overlay tracks. Again,
+    we don't know how many of these tracks are actual protons. In these events,
+    the charged current interaction was either not reconstructed or poorly
+    reconstructed, and a nearby unrelated cosmic track was selected.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_cct_bacgkround_q2.pdf}
+      \caption{Remaining CC TPC events background after NC elastic proton event
+      selection as a function of $Q^2$.}
+      \label{fig:selectedcctpc}
+    \end{figure}
+
+    The NC TPC background includes all events in which a neutral current
+    neutrino interaction occurred in the active TPC volume, but the interaction
+    was not a neutral current elastic neutrino-proton interaction.
+    Figure~\ref{fig:selectednctpc} shows the remaining NC TPC background after
+    the NC elastic proton selection as a function of reconstructed $Q^2$. The
+    purple filled histogram includes all remaining NC TPC background events,
+    and the pale purple box represents the systematic uncertainty on the number
+    of events. The overlaid hatched histograms show which type of track was
+    selected as the proton candidate.  In the NC TPC background events the
+    selected track was almost always a neutrino-induced proton track.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_nct_bacgkround_q2.pdf}
+      \caption{Remaining NC TPC background events after NC elastic
+      proton event selection as a function of $Q^2$.}
+      \label{fig:selectednctpc}
+    \end{figure}
+    
+    The NC TPC background includes NC elastic neutrino-neutron interactions, NC
+    elastic interactions with a correlated neutron-proton pair in the nucleus,
+    also referred to as meson-exchange-current (MEC) interactions, and all
+    other nonelastic NC neutrino interactions. The NC elastic neutrino-neutron
+    and NC MEC interactions are the largest NC TPC backgrounds as shown in
+    Fig.~\ref{fig:ncnmecbgs}. The darkest purple histogram includes all NC
+    elastic neutrino-neutron selected events, the medium purple histograms
+    includes all NC MEC selected events, and the pale purple includes all other
+    background events. The NC elastic neutrino-neutron cross section is a
+    difficult background because the both of the final state particles in the
+    initial interaction, the neutrino and the neutron, and neutral making them
+    difficult to detect in the TPC. The neutron can then scatter a single
+    proton in the liquid argon. These neutrino-neutron NC elastic events also
+    depends on the strange axial form factor, but in the opposite way as the NC
+    elastic neutrino-proton cross section. If there were exactly as many
+    neutrino-neutron as neutron-proton NC elastic events selected, the
+    sensitivity to $G_A^s$ would disappear. The NC MEC events are difficult to
+    distinguish from a signal event because the final state particles are
+    usually a neutrino, a neutron, and a proton, with the proton being the only
+    easily detectable particle. NC MEC events have not been very well studied
+    because of very little data, and the uncertainty on the rate and $Q^2$
+    dependence is large. The uncertainty on these background events is
+    estimated in Sec.~\ref{sec:modeluncertainty}.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_ncn_ncmec_bacgkround_q2.pdf}
+      \caption{Remaining background NC TPC background events broken down by
+      interaction type after NC elastic proton event selection as a function of
+      $Q^2$.}
+      \label{fig:ncnmecbgs}
+    \end{figure}
 
   \subsubsection{Cosmic Background}
-
+    The cosmic background comes from both cosmic interactions that occur within
+    the 1.6~$\mu s$ neutrino beam spill window triggering the event readout and
+    from cosmic interactions that occur within the 1.6~$ms$ TPC readout window
+    that was triggered by a neutrino beam interaction. The latter is included
+    in the previous sections because they cosmic tracks are part of the
+    neutrino triggered events. The rate of cosmic interactions that trigger the
+    readout, referred to as in-time cosmic interactions, are determined from
+    the off-beam data stream. The exact same trigger logic is run in the
+    on-beam and off-beam data streams, but with the off-beam trigger being
+    offset in time from the neutrino beam spill. This allows us the determine
+    the cosmic in-time background almost exactly.  Figure~\ref{fig:selectedext}
+    shows the remaining off-beam events after the NC elastic proton selected
+    after scaling to the correct number of triggers in the on-beam data set as
+    shown in Sec.~\ref{sec:datamcevent}. The pale gray box represents the
+    statistical uncertainty on the number of events.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_ext_bacgkround_q2.pdf}
+      \caption{Remaining in-time cosmic background events after NC elastic
+      proton event selection as a function of $Q^2$.}
+      \label{fig:selectedext}
+    \end{figure}
+  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Systematic Uncertainty Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Estimation of Systematic Uncertainty}\label{sec:systematics}
-  Show how the ratio gets rid of a lot of measurement uncertainty like beam
-  flux and efficiencies. Give exact equation that we will be using for
-  analysis. Show how $\Delta s$ is still large at low $Q^2$.
   \subsubsection{Neutrino Beam Flux Uncertainty}\label{sec:fluxuncertainty}
     Reference public note, show plots
   \subsubsection{Measurement Uncertainty}\label{sec:detvar}
