@@ -835,7 +835,7 @@ the remaining backgrounds is described in detail.
       center of the reconstructed beam flash in the $z$ direction,
       \item the distance from the center of the reconstructed track to the
       center of the reconstructed beam flash in the $y$ direction,
-      \item whether of not the reconstructed track is in the neutrino beam
+      \item whether or not the reconstructed track is in the neutrino beam
       direction,
       \item the distance between any reconstructed tracks with a decision tree
       muon ID score greater than 0.5 and the reconstructed beam flash in the
@@ -1365,9 +1365,11 @@ the remaining backgrounds is described in detail.
      N_{\textrm{dirt}} = 9.5 \pm 1.4(stat.) \pm 4.8 (syst.) \,. 
     \end{equation*}
     The normalized distribution of remaining events is the one shown in
-    Fig.~\ref{fig:selecteddirt}.
+    Fig.~\ref{fig:selecteddirt}. The effect on the overall systematic
+    uncertainty on the NC elastic proton selection due to the uncertainty on
+    the number of dirt events is shown in Sec.~\ref{sec:modeluncertainty}.
 
-  \subsubsection{Beam Induced TPC and Cryostat Background}
+  \subsubsection{Beam Induced TPC and Cryostat Background}\label{sec:tpcbackgrounds}
     The beam induced TPC and cryostat background includes all background events
     in which there was a neutrino beam interaction inside the liquid argon
     cryostat. This background can be separated into cryostat background events,
@@ -1472,13 +1474,7 @@ the remaining backgrounds is described in detail.
     depends on the strange axial form factor, but in the opposite way as the NC
     elastic neutrino-proton cross section. If there were exactly as many
     neutrino-neutron as neutron-proton NC elastic events selected, the
-    sensitivity to $G_A^s$ would disappear. The NC MEC events are difficult to
-    distinguish from a signal event because the final state particles are
-    usually a neutrino, a neutron, and a proton, with the proton being the only
-    easily detectable particle. NC MEC events have not been very well studied
-    because of very little data, and the uncertainty on the rate and $Q^2$
-    dependence is large. The uncertainty on these background events is
-    estimated in Sec.~\ref{sec:modeluncertainty}.
+    sensitivity to $G_A^s$ would disappear. 
     \begin{figure}[ht]
       \centering
       \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/ncselection_ncn_ncmec_bacgkround_q2.pdf}
@@ -1486,6 +1482,51 @@ the remaining backgrounds is described in detail.
       interaction type after NC elastic proton event selection as a function of
       $Q^2$.}
       \label{fig:ncnmecbgs}
+    \end{figure}
+    The NC MEC events are difficult to distinguish from a signal event because
+    the final state particles are usually a neutrino, a neutron, and a proton,
+    with the proton being the only easily detectable particle. NC MEC events
+    have not been very well studied because of very little data, and there is a
+    large uncertainty and variation between nuclear MEC models even in the
+    charged current sector where there is more experimental data. In the
+    version of the GENIE Monte Carlo neutrino generator that was used for this
+    analysis, only one model for NC MEC events is available referred to as the
+    ``empirical MEC model". However, for CC MEC interactions there are two
+    models available: the empirical model and the Nieves
+    model~\cite{Nieves:2011pp,Nieves:2011yp}. We can look at the difference
+    between the two CC MEC models in MicroBooNE simulation to estimate the
+    correct scale and uncertainty on the number of NC MEC events.
+    Figure~\ref{fig:ccmec} shows the number of CC MEC events in the MicroBooNE
+    simulation as a function of true $Q^2$ for each of the two models scaled to
+    5e19 POT. The two models were also simulated with different nuclear and FSI
+    models, which have a much smaller effect on the number of events than the
+    MEC model.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/CCMEC_compare.pdf}
+      \caption{Comparison of the number of CC MEC events in MicroBooNE
+      simulation between the two models as a function of true $Q^2$.}
+      \label{fig:ccmec}
+    \end{figure}
+
+    To cover the difference in the MEC models in this analysis, we multiply all
+    MEC events by a correction factor so that the total number is the average
+    of the two models, and apply an uncertainty so that the prediction of
+    either model is one standard deviation from the scaled number of events.
+    This is shown in Fig.~\ref{fig:ccmecscale} with the simulated events for
+    the two models the same as in Fig~\ref{fig:ccmec} and the black points
+    showing the scaled events with one standard deviation systematic
+    uncertainty bars. All MEC events above $Q^2 = 0.5$~GeV$^2$ are given a
+    correction factor of one. The MEC correction factor and uncertainty is
+    applied to both NC and CC MEC events. The effect on the overall systematic
+    uncertainty of the NC elastic proton selection due to the MEC uncertainty
+    is shown in Sec.~\ref{sec:modeluncertainty}.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/backgrounds/CCMEC_compare_withnew.pdf}
+      \caption{Corrected number of CC MEC events as a function of true $Q^2$ with
+      one standard deviation systematic uncertainty bars.}
+      \label{fig:ccmecscale}
     \end{figure}
 
   \subsubsection{Cosmic Background}
@@ -1517,18 +1558,513 @@ the remaining backgrounds is described in detail.
 % Systematic Uncertainty Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Estimation of Systematic Uncertainty}\label{sec:systematics}
+  The estimation of the systematic uncertainty due to the neutrino beam flux,
+  the detector physics modeling, and the nuclear and cross section physics
+  models are described in this section. Since the measured neutrino beam data
+  that passes the selection is compared directly to the expectation from
+  simulation and off-beam data, the systematic uncertainty is estimated for and
+  applied to the simulation only, and the data is unaltered.
   \subsubsection{Neutrino Beam Flux Uncertainty}\label{sec:fluxuncertainty}
-    Reference public note, show plots
-  \subsubsection{Measurement Uncertainty}\label{sec:detvar}
-    Effects of detector variation MC
-  \subsubsection{Nuclear Model Uncertainty}\label{sec:modeluncertainty}
-    MEC based on CC change between Tunes 1 and 3 \\
-    Separate CC MEC change from nuc. model based on NC MEC change \\
-    Pauli blocking based on previous CCQE Genie MC reweighting \\
-    Nuclear model from Tunes 1 and 3 differences \\
-    FSI from nucleon MFP reweighting and Tunes 1 and 3 differences?
-  \subsubsection{Form Factor Uncertainty}\label{sec:ffuncertainty}
-    Describe z-exp uncertainty from z-exp papers \\
-    Describe how it is implemented here
+    The systematic uncertainties on the neutrino beam flux prediction at
+    MicroBooNE have evaluated in detail in Ref.~\cite{uBFluxNote}.
+    Figure~\ref{fig:ubflux} shows the calculated neutrino flux with the
+    associated uncertainty. The region with the largest uncertainty is below
+    the peak of the elastic neutrino cross section. Figure~\ref{fig:fluxq2}
+    shows the uncertainty on the number of simulated neutrino interactions in
+    5e19 POT of MicroBooNE data due to the flux uncertainty as a function of
+    true neutrino energy. Figure~\ref{fig:fluxenuall} includes all simulated
+    neutrino interactions and Fig.~\ref{fig:fluxenunce} only includes simulated
+    NC elastic neutrino-proton interactions.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/systematics/flux_true_wunc.pdf}
+      \caption{Neutrino flux prediction with systematic uncertainty at
+      MicroBooNE~\cite{uBFluxNote}.}
+      \label{fig:ubflux}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/flux_evts_enu.pdf}
+        \caption{All simulated neutrino interactions.}
+        \label{fig:fluxenuall}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/flux_evts_nce_enu.pdf}
+        \caption{Simulated NC elastic neutrino-proton interactions.}
+        \label{fig:fluxenunce}
+      \end{subfigure}
+      \caption{The uncertainty on the number of simulated events due to the
+      neutrino beam flux uncertainty as a function of $E_{\nu}$.}
+      \label{fig:fluxq2}
+    \end{figure}
 
+    Since we are interested in a specific range of negative four-momentum
+    transfer squared, it is useful to know the effect of the neutrino flux
+    uncertainty as a function of $Q^2$. Figure~\ref{fig:qevenu} shows the
+    relationship between the true four-momentum transfer squared and the true
+    neutrino energy in simulated NC elastic neutrino-proton interactions in
+    MicroBooNE. The color scale represents the number of events in arbitrary
+    units with yellow being the highest and dark blue being the lowest. The
+    dashed white lines represent the $Q^2$ range of interest in this analysis.
+    The interactions with the lowest neutrino energy and the highest fractional
+    uncertainty have a four-momentum transfer squared below the range of
+    interest. Figure~\ref{fig:q2frac} shows the fractional uncertainty on the
+    number of simulated NC elastic neutrino-proton interactions due to the
+    neutrino flux uncertainty as a function of true $Q^2$. The dashed blue line
+    represents the lower end of the $Q^2$ interest range.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/flux_enuq2_hist2d.pdf}
+      \caption{The relationship between true $Q^2$ and true $E_{\nu}$ in
+      simulated NC elastic neutrino-proton interactions in MicroBooNE.}
+      \label{fig:qevenu}
+    \end{figure}
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/flux_evts_nce_q2_frunc.pdf}
+      \caption{Fractional uncertainty on the number of simulated NC elastic
+      neutrino-proton interactions due to the beam flux uncertainty as a
+      function of $Q^2$.}
+      \label{fig:q2frac}
+    \end{figure}
+    Figure~\ref{fig:fluxq2} shows the uncertainty on the number of simulated
+    neutrino interactions in 5e19 POT of MicroBooNE data due to the flux
+    uncertainty as a function of true neutrino energy.
+    Figure~\ref{fig:fluxq2all} includes all simulated neutrino interactions and
+    Fig.~\ref{fig:fluxq2nce} only includes simulated NC elastic neutrino-proton
+    interactions.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/flux_evts_enu.pdf}
+        \caption{All simulated neutrino interactions.}
+        \label{fig:fluxq2all}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/flux_evts_nce_enu.pdf}
+        \caption{Simulated NC elastic neutrino-proton interactions.}
+        \label{fig:fluxq2nce}
+      \end{subfigure}
+      \caption{The uncertainty on the number of simulated events due to the
+      neutrino beam flux uncertainty as a function of $E_{\nu}$.}
+      \label{fig:fluxq2}
+    \end{figure}
+
+    Figure~\ref{fig:systflux} shows the NC elastic proton selection on
+    simulation and off-beam data with the statistical and systematic
+    uncertainty due to the uncertainty on the neutrino beam flux as a function
+    of reconstructed $Q^2$. In this figure, and all of the similar figures in
+    this section, the color filled histograms include simulated neutrino data
+    with true NC elastic proton events in peach and the gray filled histogram
+    includes off-beam data events all scaled to the expected Run I 1.7e20 POT
+    of data.  The inner error bar represents the statistical uncertainty on the
+    number of events, and the outer error bar represents the combined
+    statistical and systematic uncertainty due to the flux uncertainty.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_fluxsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to the uncertainty on the
+      neutrino beam flux.}
+      \label{fig:systflux}
+    \end{figure}
+
+
+  \subsubsection{Detector Physics Uncertainty}\label{sec:detvar}
+    The uncertainty on the expected number of events due to mis-modeling of the
+    detector physics in the simulation is estimated by generating simulated
+    events with variations in the detector physics parameters. First, a set of
+    events are generated, propagated through the detector geometry, and
+    reconstructed all with the default MicroBooNE simulation parameters. Then,
+    the same generated events are propagated through the detector geometry with
+    a given parameter varied by one standard deviation of the estimated
+    uncertainty on the parameter. This is done for all detector physics
+    parameters that are expected to have a large effect on the final event
+    selection. The events simulated with the default parameters can be directly
+    compared to the events simulated with the varied parameters to determine
+    the effect. 
+    
+    The detector physics effects that are expected to have the largest effect
+    on the NC elastic proton selection in simulation are the dynamic induced
+    charge on the wires, the space charge effect, and the single PE background
+    rate. Full MicroBooNE simulation samples were generated to test each of
+    these three effects. 
+
+    In the default MicroBooNE simulation, charge induction is only simulated on
+    the wire closest to the drifting charge on each of the wire planes.  An
+    estimated induced charged is added to the ten closest wires to the drifting
+    charge in a detector variation sample. The estimation is not a full 2D
+    simulation of effect of the drifting charge on the wires, which will be
+    added to later version of MicroBooNE simulations. Figure~\ref{fig:dicevd}
+    shows event displays of a simulated proton on the second induction plane
+    event using the default settings without the dynamic induced charge
+    estimation, Fig~\ref{fig:dicevdcv}, and with the dynamic induced charge
+    estimation in the alternative sample, Fig.~\ref{fig:dicevddic}. At the
+    bottom of both events display, an individual wire signal is shown from one
+    wire in the middle of the track.  The track was selected as an NC elastic
+    proton in the default simulation, but not in the alternative simulation.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/p2_CV_crop.png} \\
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/p2_CV_crop_wire.png}
+        \caption{Using the default detector physics parameters.}
+        \label{fig:dicevdcv}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/p2_DIC_crop.png} \\
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/p2_DIC_crop_wire.png}
+        \caption{With the estimated dynamic induced charge on the wires.}
+        \label{fig:dicevddic}
+      \end{subfigure}
+      \caption{Comparison of an event display of the second induction plane
+      using the default detector physics parameters and using the estimated
+      dynamic induced charge on the
+      wires.}
+      \label{fig:dicevd}
+    \end{figure}
+
+    Figure~\ref{fig:dicchange} shows the total number of selected events as a
+    function of reconstructed $Q^2$ in the default detector physics sample and
+    the dynamic induced charge estimation sample. The effect is much larger in
+    the first bin (a 40\% change) than the higher $Q^2$ bins (a 25\% change).
+    Figure~\ref{fig:dicchangeall} includes all simulated events passing the NC
+    elastic proton selection, and Fig.~\ref{fig:dicchangence} only includes
+    simulated true NC elastic proton events passing the NC elastic proton
+    selection. The percent change as a function of $Q^2$ bin is similar between
+    the two. To account for the difference due to not having a full dynamic
+    induced charge simulation, a 40\% uncertainty in the negative direction is
+    added to the first reconstructed $Q^2$ bin, and 25\% uncertainty in the
+    negative direction to each of the higher reconstructed $Q^2$ bins. No
+    uncertainty in the positive direction is attributed to the dynamic induced
+    charge model because the default simulation includes no model at all, and
+    adding induced charge isn't expected to increase the number of events
+    selected.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/ncselection_syst_DIC.pdf}
+        \caption{Including all simulated events.}
+        \label{fig:dicchangeall}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/ncselection_syst_DIC_nce.pdf}
+        \caption{Only NC elastic proton events.}
+        \label{fig:dicchangence}
+      \end{subfigure}
+      \caption{Change in the number of simulated events passing the NC elastic
+      proton selection as a function of reconstructed $Q^2$ between the default
+      detector physics and with the estimated dynamic induced charge on the
+      wires.}
+      \label{fig:dicchange}
+    \end{figure}
+    
+    Figure~\ref{fig:systdic} shows the NC elastic proton selection on
+    simulation and off-beam data with the statistical and systematic
+    uncertainty due to the dynamic induced charge on the wires as a function of
+    reconstructed $Q^2$. The inner error bar represents the statistical
+    uncertainty on the number of selected events and the outer error bar
+    represents the combined statistic and systematic uncertainty due to the
+    induced charge.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_dicsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to the dynamic induced
+      charge on the wires.}
+      \label{fig:systdic}
+    \end{figure}
+
+    The space charge effect is due to the build up of positive ions in areas of
+    the detector that lead to a distortion of the electric field. The effect in
+    MicroBooNE is described in detail in Ref.~\cite{uBSCENote}. In the detector
+    physics variation sample, a data-driven correction is applied to the
+    electric field distortion, which will be included in future MicroBooNE
+    simulations.  Figure~\ref{fig:scechange} shows the change in the number of
+    simulated events passing the NC elastic proton selection as a function of
+    reconstructed $Q^2$ between the default detector physics sample and the
+    space charge correction sample. Figure~\ref{fig:scechangeall} includes all
+    passing simulated events, and Fig.~\ref{fig:scechangence} only includes
+    true NC elastic proton events. The change in the number of selected events
+    between the two samples is small.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/ncselection_syst_SCE.pdf}
+        \caption{Including all simulated events.}
+        \label{fig:scechangeall}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/ncselection_syst_SCE_nce.pdf}
+        \caption{Only NC elastic proton events.}
+        \label{fig:scechangence}
+      \end{subfigure}
+      \caption{Change in the number of simulated events passing the NC elastic
+      proton selection as a function of reconstructed $Q^2$ between the default
+      detector physics and with the space charge correction.}
+      \label{fig:scechange}
+    \end{figure}
+
+    To test the effect of the rate of the single photoelectron background in
+    the PMTs, a simulation sample was generated which varies the single PE rate
+    by $\pm 20\%$. The flash produced by short single proton tracks can be
+    small and near the PE threshold for optical pre-selection. Additionally,
+    the NC elastic proton selection is dependent on the reconstructed position
+    of the beam flash which can be affected by the background PEs in the PMTs,
+    especially for smaller flashes. This is because the reconstructed position
+    of the flash is weighted by the number of PEs in each PMT, and the single
+    PE background is uniform in MicroBooNE. Figure~\ref{fig:spechange} shows the
+    change in the number of simulated events passing the NC elastic proton
+    selection as a function of reconstructed $Q^2$ when the single PE
+    background rate is varied by $\pm 20\%$. Figure~\ref{fig:spechangeall}
+    includes all passing simulated events, and Fig.~\ref{fig:spechangence} only
+    includes true NC elastic proton events. The small reduction in the number
+    of selected events when the single PE rate is decreased by 20\% (dashed
+    line) is mainly due to events with flashes near the PE threshold being cut
+    in the optical pre-selection. The large reduction when the single PE rate
+    is increased by 20\% is mainly due to the distance between the center of
+    the reconstructed flash and track increasing. 
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/ncselection_syst_PE.pdf}
+        \caption{Including all simulated events.}
+        \label{fig:spechangeall}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/ncselection_syst_PE_nce.pdf}
+        \caption{Only NC elastic proton events.}
+        \label{fig:spechangence}
+      \end{subfigure}
+      \caption{Change in the number of simulated events passing the NC elastic
+      proton selection as a function of reconstructed $Q^2$ when the single PE
+      background rate is varied.}
+      \label{fig:spechange}
+    \end{figure}
+    Even though increasing and decreasing the single PE rate by 20\% both have
+    a negative effect on the number of events, it is due to different effects,
+    and a smaller variation could increase the number of selected events. To
+    account for this we apply a symmetric uncertainty of 20\% which is the
+    percent change in the number of selected events when the single PE rate was
+    increased. Figure~\ref{fig:systspe} shows the NC elastic proton selection
+    on simulation and off-beam data with the statistical and systematic
+    uncertainty due to the single PE background rate as a function of
+    reconstructed $Q^2$. The inner error bar represents the statistical
+    uncertainty on the number of selected events and the outer error bar
+    represents the combined statistic and systematic uncertainty due to the
+    single PE rate.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_spesyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to the single PE
+      background rate.}
+      \label{fig:systspe}
+    \end{figure}
+
+  \subsubsection{Model Uncertainty}\label{sec:modeluncertainty}
+    There is systematic uncertainty on the number of events in the NC elastic
+    proton selection due to the nuclear models and the neutrino-nucleon cross
+    section models. The uncertainty on the cross section model is due to the
+    uncertainty on the electromagnetic and charged current axial form factors
+    used in the model. The uncertainty on the nuclear models is much larger and
+    comes from several different effects.
+
+    The estimated of the uncertainty due to the MEC model was discussed in
+    Sec.~\ref{sec:tpcbackgrounds}. The effect of this uncertainty on the NC
+    elastic proton selection is shown in Fig.~\ref{fig:systmec} as a function
+    of $Q^2$. The color filled histograms include the simulated neutrino events
+    with NC elastic neutrino-proton events in peach, and the gray filled
+    histogram includes the off-beam data all scaled to the expected selection
+    in the 1.7e20 POT Run I data. The inner error bars represent the
+    statistical uncertainty on the number of events, and the outer error bar
+    represents the combined statistical and systematic uncertainty due to the
+    estimated uncertainty on the MEC model. Although the uncertainty on the MEC
+    model is large, as shown in Fig.~\ref{fig:ccmecscale}, the number of
+    selected MEC events is small enough that the effect on the overall
+    selection uncertainty is small.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_mecsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to the uncertainty on the
+      MEC model.}
+      \label{fig:systmec}
+    \end{figure}
+
+    The GENIE version used in this analysis implements a relativistic Fermi gas
+    (RFG) nuclear momentum model~\cite{Bodek:1981wr}. The model assumes that the
+    nucleons in the target nucleus have a uniform momentum distribution up to
+    the Fermi momentum $k_F$. Neutrino-nucleon interactions are only allowed if
+    the outgoing nucleon momentum is greater than $k_F$. This effect is
+    referred to as Pauli blocking (or Pauli suppression). The Fermi momentum in
+    argon is assumed to be $k_F = 0.0295$. In the GENIE Reweighting tool, the
+    uncertainty in the amount of Pauli blocking is accounted for by varying the
+    Fermi momentum by $\pm 35\%$~\cite{Andreopoulos:2015wxa}. However, this is
+    only implemented in the GENIE Reweighting tool for charged current
+    quasi-elastic (CCQE) interactions. Since Pauli blocking is a nuclear
+    effect, we assume that the uncertainty due Pauli blocking as a function of
+    true $Q^2$ is the same for NC elastic and CCQE interactionss in argon and
+    apply the uncertainty found for CCQE interactions to NC elastic
+    interactions, as well.  Figure~\ref{fig:pauliblock} shows the uncertainty
+    due to Pauli blocking on CCQE interactions as a function of true $Q^2$ for
+    an arbitrary number of simulated interactions. The solid line shows the
+    number of simulated CCQE interactions using the default value of $k_F =
+    0.0295$, the upper dashed line shows the number of simulated CCQE
+    interactions using $k_F = 0.0295(1 - 0.35)$, and the lower dashed line
+    shows the number of simulated CCQE interactions using $k_F = 0.0295(1 +
+    0.35)$ (higher value of $k_F$ corresponds to greater suppression). The
+    effect is largest at true $Q^2$ values less than 0.1~GeV$^2$.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/FermiGasModelKf_Genie.pdf}
+      \caption{The systematic uncertainty due to Pauli blocking on simulated
+      CCQE events as a function of true $Q^2$ using the GENIE Reweighting
+      tool.}
+      \label{fig:pauliblock}
+    \end{figure}
+
+    Figure~\ref{fig:systpauli} shows the effect on the NC elastic proton events
+    selection as a function of reconstructed $Q^2$ due to applying the Pauli
+    blocking uncertainty to NC elastic and CCQE events. The inner error bar
+    represents the statistical uncertainty on the number of events, and the
+    outer error bar represents the systematic uncertainty due to Pauli
+    blocking.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_kfsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to Pauli blocking.}
+      \label{fig:systpauli}
+    \end{figure}
+
+    The GENIE Reweighting package also includes tools to determine the
+    uncertainty on the simulation due to the probability of the nucleon
+    re-interacting in the nucleus. This is done for by varying the mean free
+    path of the nucleon, $N_{mfp}$, in the argon nucleus which is proportional
+    to the total rescattering probability. Figure~\ref{fig:systnmfp} shows the
+    systematic uncertainty on the number of events due to varying $N_{mpf}$ by
+    $\pm 20\%$ for all events using the GENIE Reweighting tool. The inner error
+    bars represent the statistical uncertainty on the number of selected
+    events, and the outer error bars represent the combined statistical and
+    systematic uncertainty due to the FSI probability. 
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_nmfpsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to the nucleon
+      rescattering probability in the argon nucleus.}
+      \label{fig:systnmfp}
+    \end{figure}
+
+    To determine the uncertainty due to the choice of the nuclear model itself,
+    simulation samples were generated with alternative nuclear momentum and FSI
+    models. The nuclear momentum model is changed from the default RFG model to
+    a local Fermi gas (LFG) model~\cite{Leitner:2008ue}. The FSI model changed
+    from the hA GENIE model to the hA2014 GENIE model~\cite{Alam:2015nkk}. The
+    NC elastic neutrino-nucleon cross section is unchanged in the alternative
+    simulation sample, so the effect of changing the Fermi gas and FSI models
+    was tested in NC elastic interactions. Figure~\ref{fig:ncfg} shows the
+    change in the number of simulated NC elastic events in 5e19 POT of data for
+    the two different simulation sets as a function of reconstructed $Q^2$. The
+    blue lines show the events simulated with the RFG nuclear momentum model
+    and the hA FSI model, and the orange lines show the events simulated with
+    the LFG nuclear momentum model and the hA2014 FSI model. The corresponding
+    colored boxes show the statistical uncertainty on the number of events.
+    Figure~\ref{fig:ncfgp} only includes the NC elastic \textit{proton} events,
+    and Fig.~\ref{fig:ncfgn} includes the NC elastic \textit{neutron} events. For
+    both interaction types, the change in the number of events between models
+    is within statistical uncertainty. The overall change in the number of
+    events in the NC elastic proton selection is about 1\%.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/NCEp_syst_compare.pdf}
+        \caption{NC elastic neutrino-proton events.}
+        \label{fig:ncfgp}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/systematics/NCEn_syst_compare.pdf}
+        \caption{NC elastic neturino-neutron events.}
+        \label{fig:ncfgn}
+      \end{subfigure}
+      \caption{The change in the number of NC elastic events with different
+      nuclear momentum and FSI models as a function of reconstructed $Q^2$.}
+      \label{fig:ncfg}
+    \end{figure}
+
+    The estimation of the uncertainty on the number of dirt interactions in
+    MicroBooNE was described in Sec.~\ref{sec:dirt}. Figure~\ref{fig:systdirt}
+    shows the systematic uncertainty on the NC elastic proton selection due to
+    the dirt uncertainty. The inner error bars represent the statistical
+    uncertainty on the number of events, and the outer error bars represent the
+    combined statistical and systematic uncertainty due to the number of dirt
+    events.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4in]{figures/analysis/systematics/ncselection_dirtsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty due to the number of dirt
+      interactions.}
+      \label{fig:systdirt}
+    \end{figure}
+
+    The uncertainty on the NC elastic proton selection due to the electric,
+    magnetic, and charged current axial form factor z expansion models was
+    found to be small. The uncertainty on the models were taken directly from
+    the Refs.~\cite{Ye:2017gyb,Meyer:2016oeg} and extrapolated to the NC elastic
+    proton selection. The total uncertainty on the selection due to the form
+    factor models was found to be $0.5\%$.
+
+    Table~\ref{tab:systuncertainties} shows the contribution from each of the
+    systematic effects to the overall uncertainty on the number of expected
+    events in the NC elastic proton selection. If an asymmetric systematic
+    uncertainty is applied, the larger of the two is shown in the table.
+    \begin{table}[ht]
+      \caption{Contributions to the systematic uncertainty on the number of
+      simulated events passing the NC elastic proton selection.
+      \label{tab:systuncertainties}}
+      \centering
+      \begin{tabularx}{9cm}{ l r }
+        \hline
+        Source & Uncertainty \% \\
+        \hline
+        Neutrino Beam Flux & 9.8 \\
+        \hline
+        Dynamic Induced Charged & 27.5 \\
+        Space Charge & 5.0 \\
+        Single PE Rate & 20.0 \\
+        \hline
+        MEC Model & 5.9 \\
+        Pauli Blocking & 4.9 \\
+        Fermi Gas and FSI Models & 1.0 \\
+        FSI Interaction Probability & 5.5 \\
+        \hline
+        Dirt Events & 3.2 \\
+        \hline
+        Form Factor Model & 1.7 \\
+        \hline
+      \end{tabularx}
+    \end{table}
+
+    Figure~\ref{fig:systall} shows the total combined systematic uncertainty on
+    the NC elastic proton selection from all of the effects desribed in this
+    section. The inner error bars represent the statistical uncertainty on the
+    number of events, and the outer error bars represent the combined
+    statistical and systematic uncertainty.
+    \begin{figure}[ht]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/systematics/ncselection_totalsyst_q2.pdf}
+      \caption{The NC elastic proton selection on simulation and off-beam data
+      with statistical and systematic uncertainty.}
+      \label{fig:systall}
+    \end{figure}
 
