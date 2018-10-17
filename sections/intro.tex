@@ -26,62 +26,64 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
 
   The $g_1$ spin structure function can be written as a combination of the spin
   contribution from each of the quark flavors~\cite{Bass:2007zzb},
-  \begin{equation*}
-    g_1(x) \frac{1}{2}\sum_q e_q^2 \Delta q(x) \,,
-  \end{equation*}
+  \begin{equation}
+    g_1(x) = \frac{1}{2}\sum_q e_q^2 \Delta q(x) \,,
+  \end{equation}
   where $q$ is the quark flavor ($q = u,d,s$), $e_q$ is the electric charge of
-  the quark, and $\Delta q$ is the contribution from the quark spin
-  contribution to the nucleon spin,
-  \begin{equation*}
+  the quark, and $\Delta q$ is the contribution of the quark spin to the
+  nucleon spin,
+  \begin{equation}
     \Delta q(x) = \big(q^{\uparrow} + \bar{q}^{\uparrow}\big)(x) 
       - \big(q^{\downarrow} + \bar{q}^{\downarrow}\big)(x) \,.
-  \end{equation*}
+  \end{equation}
   Here $q^{\uparrow}(x)$ \big($q^{\downarrow}(x)$\big) is the probability of
-  finding a quark with momentum fraction $x$ with its spin polarized in the
+  finding a quark with momentum fraction $x$ with its spin in the same
   (opposite) direction of the nucleon's spin, and $\bar{q}^{\uparrow}(x)$
   \big($\bar{q}^{\downarrow}(x)$\big) is the probability of finding an
-  antiquark with momentum fraction $x$ with its spin polarized in the
-  (opposite) direction of the nucleon's spin. Integrating over the quark spin
-  structure gives the net quark spin contribution to the nucleon spin
-  \begin{equation*}
+  antiquark with momentum fraction $x$ with its spin in the same (opposite)
+  direction of the nucleon's spin. Integrating over the quark spin structure
+  gives the net quark spin contribution to the nucleon spin
+  \begin{equation}
     \Delta q = \int_0^1 \Big[\big(q^{\uparrow} + \bar{q}^{\uparrow}\big)(x)
       - \big(q^{\downarrow} + \bar{q}^{\downarrow}\big)(x) \Big] dx \,.
-  \end{equation*}
+  \end{equation}
 
   \subsubsection{The Ellis-Jaffe Sum Rule}
 
   The Ellis-Jaffe sum rule~\cite{Ellis:1973kp} relates the integral of the
   $g_1$ spin structure function to the axial charges~\cite{Thomas:2001kw},
-  \begin{align*}
+  \begin{align}
     g_A &= \Delta u - \Delta d \\
     g_A^{(8)} &= \Delta u + \Delta d - 2\Delta s \\
     g_A^{(0)} &= \Delta u + \Delta d + \Delta s \,.
-  \end{align*}
+  \end{align}
   where $g_A$ is the isovector axial charge, $g_A^{(8)}$ is the $SU(3)$ octet
   axial charge, and $g_A^{(0)}$ is the flavor-singlet axial charge. For the
   proton, the integral of the $g_1$ spin structure function is
-  \begin{align*}
+  \begin{equation}
+    \begin{aligned}
     S_p &= \int_0^1 dx g_{1p}(x)  \\
         &= \int_0^1 dx \Big[\frac{4}{18}\Delta u(x) 
         + \frac{1}{18} \Delta d(x) + \frac{1}{18} \Delta s(x) \Big] \,, \\
         &= \frac{4}{18}\Delta u + \frac{1}{18}\Delta d + \frac{1}{18}\Delta s \,, \\
         &= \frac{g_A}{12} + \frac{g_A^{(8)}}{38} + \frac{g_A^{(0)}}{9} \,.
-  \end{align*}
+    \end{aligned}
+  \end{equation}
   The axial charges can be determined through experimental measurements.  The
   isovector axial charge, $g_A$, can be obtained in neutron
   $\beta$-decay~\cite{Dubbers:1991bh}. Assuming $SU(3)$ symmetry, $g_A^{(8)}$
   can be obtained though hyperon $\beta$-decay. If the net strange contribution
   to the nucleon spin is assumed to be negligible, the flavor-singlet charge is
   equal to the $SU(3)$ octet charge,
-  \begin{equation*}
+  \begin{equation}
      \Delta s \sim 0 \Rightarrow g_A^{(0)} = g_A^{(8)} \,.
-  \end{equation*}
+  \end{equation}
 
   \subsubsection{Experimental Tests of the Ellis-Jaffe Sum Rule}
   One of the first experiments to test the Ellis-Jaffe sum rule through
   inclusive DIS was the European Muon Collaboration (EMC) at CERN in
   1989~\cite{Ashman:1987hv,Ashman:1989ig}. The EMC scattered polarized muons
-  off of a polarized proton target and detected the scattered muon in a forward
+  off a polarized proton target and detected the scattered muon in a forward
   muon spectrometer. Figure~\ref{fig:emcej} shows the EMC measurement of the
   integral of the $g_1$ spin structure function as a function of the lower
   bound on the integral, $x_m$, and the expected value of the integral at $x_m
@@ -90,9 +92,12 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   the discrepancy comes from the assumption that $\Delta s = 0$, and not the
   $SU(3)$ symmetry assumption, the extracted non-zero value of $\Delta s$ to
   resolve the difference is
-  \begin{equation*}
+  \begin{equation}
     \Delta s_{\textrm{EMC}} = -0.095 \pm 0.016 \pm 0.023 \,.
-  \end{equation*}
+  \end{equation}
+  This implies not only that the overall spin polarization of the strange
+  quarks and antiquarks in the nucleon sea is nonzero, but that they are
+  polarized in the opposite direction of the proton.
   \begin{figure}[h]
     \centering
     \includegraphics[angle=0,width=5.5in]{figures/intro/strfunctions/EMC_Ellis-Jaffe.png}
@@ -100,9 +105,6 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
       the EMC experiment~\cite{Ashman:1989ig}.}
     \label{fig:emcej}
   \end{figure}
-  This implies not only that the overall spin polarization of the strange
-  quarks and antiquarks in the nucleon sea is nonzero, but that they are
-  polarized in the opposite direction of the proton.
 
   After the EMC result, many subsequent polarized target inclusive DIS
   experiments tested the Ellis-Jaffe sum rule over the next few decades.
@@ -115,7 +117,7 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   beam at DESY by the
   HERMES~\cite{Ackerstaff:1997ws,Ackerstaff:1999ey,Airapetian:2006vy}
   collaboration. A more recent measurements of the violation of the Ellis-Jaffe
-  sum rule from polarized muon inclusive DIS off of a polarized target in the
+  sum rule from polarized muon inclusive DIS off a polarized target in the
   COMPASS experiment in 2007 gives~\cite{Alexakhin:2006oza} $\Delta
   s_{\textrm{COMPASS}} = -0.08 \pm 0.01 \pm 0.02$, and from the HERMES
   experiment in 2007 gives~\cite{Airapetian:2006vy} $\Delta s_{\textrm{HERMES}}
@@ -124,20 +126,21 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   The nucleon spin structure can also be studied through semi-inclusive deep
   inelastic scattering (SIDIS). In SIDIS, in addition to detecting the
   scattered lepton, at least one of the final state pions or kaons is detected.
-  If the detected hadron has a high enough energy fraction, it can be assumed
-  that it contains the quark that was struck by the lepton~\cite{Bass:2007zzb}.
-  A factor is included in the measured spin structure functions that describes
-  the probability of a struck quark producing a pion or kaon with the measured
-  energy fraction. This factor is called a fragmentation function, and it can
-  be used to reconstruct individual quark flavor contributions to the nucleon
-  spin. Several experiments has made measurements of the strange quark spin
-  through SIDIS including COMPASS~\cite{Alekseev:2009ac,Alekseev:2010ub} at
-  CERN and HERMES~\cite{Airapetian:2003ct,Airapetian:2004zf,Airapetian:2008qf}
-  at DESY.  Measurements of the strange quark polarization in the nucleon
-  through SIDIS tend to favor much smaller values of $\Delta s$ that are
-  consistent with zero. While these results depend less on $SU(3)$ flavor
-  symmetry than inclusive DIS results, they do depend strongly on the choice of
-  fragmentation functions. Results from global analysis of DIS and SIDIS
+  If the detected hadron has a large enough fraction of the energy transfer, it
+  can be assumed that it contains the quark that was struck by the
+  lepton~\cite{Bass:2007zzb}.  A factor is included in the measured spin
+  structure functions that describes the probability of a struck quark
+  producing a pion or kaon with the measured energy fraction. This factor is
+  called a fragmentation function, and it can be used to reconstruct individual
+  quark flavor contributions to the nucleon spin. Several experiments have made
+  measurements of the strange quark spin through SIDIS including
+  COMPASS~\cite{Alekseev:2009ac,Alekseev:2010ub} at CERN and
+  HERMES~\cite{Airapetian:2003ct,Airapetian:2004zf,Airapetian:2008qf} at DESY.
+  Measurements of the strange quark polarization in the nucleon through SIDIS
+  tend to favor much smaller values of $\Delta s$ that are consistent with
+  zero. While these results depend less on $SU(3)$ flavor symmetry than
+  inclusive DIS results, they do depend strongly on the choice of fragmentation
+  functions. Results from global analyses of both DIS and SIDIS
   data~\cite{deFlorian:2008mr,deFlorian:2009vb,Blumlein:2010rn,Nocera:2014gqa,Leader:2014uua}
   tend to give negative values of $\Delta s$.
   
@@ -164,7 +167,7 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   scattering is sensitive to the weak currents and are great tools for
   measuring the axial form factor, $G_A(Q^2)$.
   See Refs.~\cite{Lyubushkin:2008pe}~and~\cite{Formaggio:2013kya} for detailed
-  reviews of the many measurements of $G_A^s(Q^2)$ through charged current
+  reviews of the many measurements of $G_A(Q^2)$ through charged current
   quasi-elastic (CCQE) scattering. Neutral current (NC) elastic
   neutrino-nucleon scattering ($\nu N \rightarrow \nu N$) specifically is
   sensitive to the NC form factor $G_A^{NC}(Q^2)$ which contains
@@ -175,25 +178,27 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   At the limit where the negative four-momentum transfer squared, $Q^2$, goes
   to zero, the NC axial form factor becomes a combination of the net spin
   contribution from each of the quarks to the nucleon spin~\cite{Bass:2007zzb},
-  \begin{equation*}
-    G_A^{NC}(Q^2 = 0) = \frac{1}{2}(\Delta u - \Delta s - \Delta s)
-  \end{equation*}
+  \begin{equation}
+    G_A^{NC}(Q^2 = 0) = \frac{1}{2}(\Delta u - \Delta d - \Delta s)
+  \end{equation}
 
-  The reconstructed four-momentum transfer is
-  determined entirely from the nucleon kinetic energy using
-  \begin{align*}
-    Q^2_N &= -q^2 = -(\bf{p'}_N - \bf{p}_N)^2 \\
-          &= -(E'_N - E_N)^2 + (\bar{p}'_N - \bar{p}_N)^2 \\
+  The reconstructed $Q^2$ is determined entirely from the recoil nucleon
+  kinetic energy using
+  \begin{equation}
+    \begin{aligned}
+    Q^2_N &= -q^2 = -(p'_N - p_N)^2 \\
+          &= -(E'_N - E_N)^2 + (\bf{p}'_N - \bf{p}_N)^2 \\
           &= 2 T_N M_N,
-  \end{align*}
-  where $\bf{p}$ is four-momentum, $E$ is energy, $\bar{p}$ is
-  three-momentum, $M$ is mass, $T$ is kinetic energy determined by the length
-  of the track, the $N$ subscript represents the nucleon in the
-  neutrino-nucleon interaction, the prime represents the final state, and the
-  nucleon momentum in the nucleus is assumed to be small compared to the
-  final nucleon momentum. This means that the ability to measure the axial
-  form factor at low $Q^2$ in NC elastic neutrino-nucleon scattering depends
-  on the experimental nucleon energy threshold.
+    \end{aligned}
+  \end{equation}
+  where $p$ is four-momentum, $E$ is energy, $\bf{p}$ is three-momentum, $M$ is
+  mass, $T$ is kinetic energy determined by the length of the track, the $N$
+  subscript represents the nucleon in the neutrino-nucleon interaction, the
+  prime represents the final state, and the nucleon momentum in the nucleus is
+  assumed to be small compared to the final nucleon momentum. This means that
+  the ability to measure the axial form factor at low $Q^2$ in NC elastic
+  neutrino-nucleon scattering depends on the experimental nucleon energy
+  threshold.
 
   Two previous neutrino experiments have performed a measurement of $\Delta
   s$ through neutral current elastic neutrino-nucleon scattering. The first
@@ -202,27 +207,41 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   Fermilab in 2010.
 
   \subsubsection{The BNL E734 Experiment}\label{sec:e734}
-  The main target and detector of the E734 experiment was 170~tons and was
-  made of a combination of liquid scintillator cells and proportional drift
-  tubes (PDTs). The liquid scintillator composed 80\% of the target and was
-  used for calorimetry and timing, while the PDTs were used for position
-  information. Additionally, there was a electromagnetic shower counter and a
-  muon spectrometer just downstream of the main detector. The full detector
-  schematic is shown in Fig.~\ref{fig:e734detector}.
+  The main target and detector of the E734 experiment was 170~tons and was made
+  of a combination of liquid scintillator cells and proportional drift tubes
+  (PDTs). The liquid scintillator composed 80\% of the target and was used for
+  calorimetry and timing, while the PDTs were used for position information.
+  Additionally, there was a electromagnetic shower counter and a muon
+  spectrometer just downstream of the main detector. The full detector
+  schematic is shown in Fig.~\ref{fig:e734detector}.  The E734 detector sat in
+  a neutrino beam at BNL that could run in either neutrino of antineutrino mode
+  with a mean energy of 1.3~GeV for neutrino and 1.2~GeV for antineutrinos.
+  Note that we are using natural units with the speed of light, $c$, set equal
+  to one.
   \begin{figure}[h]
     \centering
     \includegraphics[angle=0,width=5.5in]{figures/intro/experiments/E734detector.pdf}
     \caption{Schematic of the BNL E734 detector~\cite{Ahrens:1986xe}.}
     \label{fig:e734detector}
   \end{figure}
-  The E734 detector sat in a neutrino beam at BNL that could run in either
-  neutrino of antineutrino mode with a mean energy of 1.3~GeV for neutrino
-  and 1.2~GeV for antineutrinos.
 
   A simultaneous fit to the neutrino-proton and antineutrino-proton neutral
-  current elastic cross sections in the negative four-momentum squared range
-  between $Q^2 = 0.45$~GeV$^2$ and $Q^2 = 1.05$~GeV$^2$ was performed to
-  extract the neutral current axial form factor.
+  current elastic cross sections in the range between $Q^2 = 0.45$~GeV$^2$ and
+  $Q^2 = 1.05$~GeV$^2$ was performed to extract the neutral current axial form
+  factor.  In the parameter estimation, the NC axial form factor was assumed to
+  have the form
+  \begin{equation}\label{eq:axdipole}
+    G_A^{NC}(Q^2) = \frac{1}{2}\frac{g_A}{(1+Q^2/M_A^2)^2}(1+\eta) \,,
+  \end{equation}
+  where $g_A$ is the weak coupling constant, $M_A$ is the axial mass, and
+  $\eta$ is a factor that encodes the difference between the charged current
+  axial form factor and the strange axial form factor. This form assumes that
+  both parts of the form factor have the exact same shape. If the difference is
+  only due to the net spin contribution of the strange quark, $\Delta s$, then
+  $\Delta s = -\eta g_A$ which was found to be $-0.15 \pm 0.09$ in this
+  analysis. Figure~\ref{fig:e734xsec} shows the measured data and the cross
+  section fits. Figure~\ref{fig:e734eta} shows the bounds on the axial mass
+  $M_A$ and $\eta$ from the fit. 
   \begin{figure}[h]
     \centering
     \begin{subfigure}[t]{2.5in}
@@ -240,20 +259,6 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
     current elastic cross section.}
     \label{fig:e734results}
   \end{figure}
-  Figure~\ref{fig:e734xsec} shows the measured data and the cross section
-  fits. Figure~\ref{fig:e734eta} shows the bounds on the axial mass $M_A$ and
-  $\eta$ from the fit. In the parameter estimation, the NC axial form factor
-  was assumed to have the form
-  \begin{equation}\label{eq:axdipole}
-    G_A^{NC}(Q^2) = \frac{1}{2}\frac{g_A}{(1+Q^2/M_A^2)^2}(1+\eta) \,,
-  \end{equation}
-  where $g_A$ is the weak coupling constant, $M_A$ is the axial mass, and
-  $\eta$ is a factor that encodes the difference between the charged current
-  axial form factor and the strange axial form factor. This form assumes that
-  both parts of the form factor have the exact same shape. If the difference
-  is only due to the net spin contribution of the strange quark, $\Delta s$,
-  then $\Delta s = -\eta g_A$ which was found to be $-0.15 \pm 0.09$ in this
-  analysis.
 
   A later analysis of the E734 NC elastic data was
   performed~\cite{Garvey:1992cg} in which the strange part of the electric
@@ -283,24 +288,25 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   An additional analysis of the E734 data considering ratios of neutral
   current elastic interactions to charged current elastic interactions was
   performed~\cite{Alberico:1998qw}. Specifically, they looked at the
-  asymmetry
-  \begin{equation*}
+  neutrino-antineutrino asymmetry
+  \begin{equation}
     \mathcal{A}_p(Q^2) = \frac{\Big(\frac{d\sigma}{dQ^2}\Big)_{\nu p \rightarrow \nu p} - \Big(\frac{d\sigma}{dQ^2}\Big)_{\bar{\nu} p \rightarrow \bar{\nu} p} }{\Big(\frac{d\sigma}{dQ^2}\Big)_{\nu n \rightarrow \mu^- p} - \Big(\frac{d\sigma}{dQ^2}\Big)_{\bar{\nu} p \rightarrow \mu^+ n}} \,.
-  \end{equation*}
-  This asymmetry has an enhancement in the strange axial and magnetic form
-  factors. It was found that the experimental uncertainty was too large to
+  \end{equation}
+  This asymmetry has an enhanced sensitivity to the strange axial and magnetic
+  form factors. It was found that the experimental uncertainty was too large to
   determine $\Delta s$ and that a large factor of the uncertainty was due to
-  the uncertainty on the axial mass. This analysis also assumed the dipole
-  form of the axial form factor in Eq.~\ref{eq:axdipole}.
+  the uncertainty on the axial mass. This analysis also assumed the dipole form
+  of the axial form factor in Eq.~\ref{eq:axdipole}.
 
   A global analysis of the strange quark contribution to the electromagnetic
   and axial form factors performed in Ref.~\cite{Pate:2008va} included E734 NC
   elastic neutrino-proton scattering data. The analysis combined the E734 data
   with parity-violating elastic polarized-electron-proton scattering data from
   the G0~\cite{Armstrong:2005hs} and HAPPEx~\cite{Aniol:2004hp} experiments.
-  The electron-proton data is sensitive to the strange contribution to the
-  electric and magnetic form factors. The analysis found the extracted $\Delta
-  s$ to be consistent with negative values.
+  The electron-proton data are sensitive to the strange contribution to the
+  electric and magnetic form factors but not very sensitive to the strange
+  axial form factor. The analysis found the extracted $\Delta s$ to be
+  consistent with negative values.
 
   \subsubsection{The MiniBooNE Experiment}\label{sec:miniboonence}
   The main target and detector of the MiniBooNE experiment was 800 tons of
@@ -318,12 +324,12 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   in either neutrino or antineutrino mode with an average neutrino energy of
   $\sim$800~MeV~\cite{Aguilar-Arevalo:2008yp}.
 
-  A $\Delta s$ fit to the ratio of the neutrino-proton to the
-  neutrino-nucleon NC elastic cross section in the proton kinetic energy
-  between $T = 350$~MeV and $T = 800$~MeV. This corresponds to a negative
-  four-momentum transfer range of $Q^2 = 0.66$~GeV$^2$ to $Q^2 =
-  1.5$~GeV$^2$. Figure~\ref{fig:miniboonedeltas} shows the measured ratio and
-  the fits to the data.
+  The MiniBooNE collaboration performed a $\Delta s$ fit to the ratio of the
+  neutrino-proton to the neutrino-nucleon NC elastic cross section in the
+  proton kinetic energy between $T = 350$~MeV and $T = 800$~MeV. This
+  corresponds to a range of $Q^2 = 0.66$~GeV$^2$ to $Q^2 = 1.5$~GeV$^2$.
+  Figure~\ref{fig:miniboonedeltas} shows the measured ratio and the fits to the
+  data.
   \begin{figure}[h]
     \centering
     \includegraphics[angle=0,width=4.5in]{figures/intro/experiments/miniboone_deltas.png}
@@ -334,10 +340,9 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   \end{figure}
   In the analysis, the dipole shape in Eq.~\ref{eq:axdipole} was used for the
   axial form factor. When the value of the axial mass was held to $M_A =
-  1.35$~GeV$^2$ a value of $\Delta s = 0.08 \pm 0.26$ was found, and when the
-  axial mass was held to $M_A = 1.23$~GeV$^2$ a value of $\Delta s = 0.00 \pm
-  0.30$. Both of these values are consistent with the E734 measurement and
-  with zero.
+  1.35$~GeV a value of $\Delta s = 0.08 \pm 0.26$ was found, and when the axial
+  mass was held to $M_A = 1.23$~GeV a value of $\Delta s = 0.00 \pm 0.30$. Both
+  of these values are consistent with the E734 measurement and with zero.
 
   A later analysis of the MiniBooNE data was performed which included a
   two-body current contribution to the cross section~\cite{Golan:2013jtj}.  The
@@ -348,20 +353,19 @@ Quarks, nucleons, neutrinos. Electromagnetic and weak forces.
   $\mathcal{A}_p(Q^2)$ assuming the dipole form of the axial form factor in
   Eq.~\ref{eq:axdipole} and including two-body currents resulted in an axial
   mass value of $M_A = 1.1^{+0.13}_{-0.15}$~GeV and $\Delta s =
-  -0.4^{+0.5}_{-0.3}$. This result of $\Delta s$ is consistent with the
+  -0.4^{+0.5}_{-0.3}$. This result of $\Delta s$ is consistent both with the
   original MiniBooNE result and with zero.
 
   Very recently, another re-analysis of the MiniBooNE result was performed
   using updated lattice QCD calculations of the strange electric and magnetic
   form factors and the measured MiniBooNE NC elastic nucleon cross section
-  was performed~\cite{Sufian:2018qtw}. Notably, this analysis used
-  z-expansion fit to the NC axial form factor (described in
-  Sec.~\ref{sec:zexpansion}). A value of $\Delta s = -0.196\pm 0.127\pm
-  0.041$ was found. The result was used to predict the BNL E734 NC elastic
-  $\nu p$ and $\bar{\nu} p$ measurement and was found to be consistent. The
-  NC elastic cross section calculated using the results are shown compared to
-  MiniBooNE data in Fig.~\ref{fig:sufianuboone} and compared to E734 data in
-  Fig.~\ref{fig:sufiane734}.
+  ~\cite{Sufian:2018qtw}. Notably, this analysis used a z-expansion fit to the
+  NC axial form factor (described in Sec.~\ref{sec:zexpansion}). A value of
+  $\Delta s = -0.196\pm 0.127\pm 0.041$ was found. The result was used to
+  predict the BNL E734 NC elastic $\nu p$ and $\bar{\nu} p$ measurements and
+  was found to be consistent. The NC elastic cross sections calculated using the
+  results are shown compared to MiniBooNE data in Fig.~\ref{fig:sufianuboone}
+  and compared to E734 data in Fig.~\ref{fig:sufiane734}.
   \begin{figure}[h]
     \centering
     \begin{subfigure}[t]{2.5in}
