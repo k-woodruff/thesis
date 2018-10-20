@@ -2,7 +2,15 @@
 %The next line produces an indented paragraph to start the document
  %unit.  The LaTeX defaults start most units without indentations.
 \hspace{\parindent}
-Outline the analysis section.
+This section describes the analysis tools used to extract the strange axial
+form factor parameters from the number of events in data and simulation that
+pass the NC elastic proton selection. First, the method for determining the
+expected number of events in data given different model and systematic
+parameter values is discussed. Next, the formula for calculating the likelihood
+of the observed data given a set of parameter values, and the technique used to
+sample the probability distribution of the parameters is described. Last, the
+results of the measured probability distributions of the strange axial form
+factor parameters are shown.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Comparison to Simulation
@@ -70,17 +78,17 @@ Outline the analysis section.
     $E_{\nu}^{(NRF)}$, the interaction four-momentum transfer, $Q^2$, and the
     physics model, including the model parameters.
 
-    To determine the effect of the NC elastic axial form factor parameters
-    $\Delta s$ and $M_A^s$ (or $a_0^s$, $a_1^s$, and $a_2^s$) on the data, we
-    calculate the NC elastic cross section given these new parameters and the
-    cross section given the initial simulation parameters for each NC elastic
-    event in the Monte Carlo simulation. To get an accurate weight, the
-    denominator needs to be calculated exactly as the cross section was
-    calculated in the initial GENIE simulation. However, there is no reason
-    that a different model can't be used for the numerator. For the numerator
-    in elastic interactions, we use the LLewellyn-Smith neutrino-nucleon
-    elastic cross section parameterization described in Sec.~\ref{sec:probe}
-    with the z expansion vector and axial form factors described in
+    To determine the effect of the strange axial form factor parameters $\Delta
+    s$ and $M_A^s$ (or $a_0^s$, $a_1^s$, and $a_2^s$) on the data, we calculate
+    the NC elastic cross section given these new parameters and the cross
+    section given the initial simulation parameters for each NC elastic event
+    in the Monte Carlo simulation. To get an accurate weight, the denominator
+    needs to be calculated exactly as the cross section was calculated in the
+    initial GENIE simulation. However, there is no reason that a different
+    model can't be used for the numerator. For the numerator in elastic
+    interactions, we use the LLewellyn-Smith neutrino-nucleon elastic cross
+    section parameterization described in Sec.~\ref{sec:probe} with the $z$
+    expansion vector and strange axial form factors described in
     Sec.~\ref{sec:zexpansion}.
 
     To determine the effect of a set of NC elastic cross section parameters
@@ -142,7 +150,71 @@ Outline the analysis section.
     Eqn.~\ref{eq:expected}. The set of model parameters, $\theta$, contains the
     systematic model parameters described in Sec.~\ref{sec:systematics} and the
     strange axial form factor parameters, $a_0^s$, $a_1^s$, and $a_2^s$
-    described in Sec.~\ref{sec:ncaxial}.
+    described in Sec.~\ref{sec:ncaxial}. In this analysis, only the statistical
+    uncertainty is contained in $\sigma_i$, and the systematic uncertainty is
+    handled by sampling the systematic parameter values contained in $\theta$
+    as described in Sec.~\ref{sec:mcmc}. 
+
+    The likelihood calculation depends on nine different parameters, the three
+    parameters of the strange axial form factor and the six systematic
+    parameters described in Sec.~\ref{sec:systematics}. Calculating likelihood
+    distributions for nine parameters would be computationally very time
+    consuming. Figure~\ref{fig:likelihoods} shows the likelihood distributions
+    calculated on a grid over the three strange axial form factor parameters,
+    $a_0^s$, $a_1^s$, and $a_2^s$, while setting all of the systematic
+    uncertainties to zero. Figures~\ref{fig:lka0a1m20}~and~\ref{fig:lka0a1p10}
+    show the grids of likelihood values for $a_0^s$ and $a_1^s$ with $a_2^s$
+    held at $-20$ and $10$, respectively.
+    Figures~\ref{fig:lka0a2m3}~and~\ref{fig:lka0a2p2} show the grids of
+    likelihood values for $a_0^s$ and $a_2^s$ with $a_1^s$ held to $-3$ and
+    $2$, respectively.  Figures~\ref{fig:lka1a2m0}~and~\ref{fig:lka1a2p1} show
+    the grids of likelihood values for $a_1^s$ and $a_2^s$ with $a_0^s$ held to
+    $0$ and $1$, respectively. Even ignoring the systematic parameters and just
+    varying three parameters is computationally difficult and can only be done
+    for discrete values of the parameters. The sampling method described in
+    Sec.~\ref{sec:mcmc} makes calculating the distributions in larger
+    dimensions achievable.
+    \begin{figure}[h]
+      \centering
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/results/lnlike_a0a1_a2-20_tempo.pdf}
+        \caption{With $a_2^s = -20$.}
+        \label{fig:lka0a1m20}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/results/lnlike_a0a1_a210_tempo.pdf}
+        \caption{With $a_2^s = 10$.}
+        \label{fig:lka0a1p10}
+      \end{subfigure}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/results/lnlike_a0a2_a1-3_tempo.pdf}
+        \caption{With parameter $a_1^s = -3$.}
+        \label{fig:lka0a2m3}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/results/lnlike_a0a2_a12_tempo.pdf}
+        \caption{With $a_1^s = 2$.}
+        \label{fig:lka0a2p2}
+      \end{subfigure}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/results/lnlike_a1a2_a00_tempo.pdf}
+        \caption{With parameter $a_0^s = 0$.}
+        \label{fig:lka1a2m0}
+      \end{subfigure}
+      \hspace{2pt}
+      \begin{subfigure}[t]{2.8in}
+        \includegraphics[angle=0,width=2.8in]{figures/analysis/results/lnlike_a1a2_a01_tempo.pdf}
+        \caption{With $a_0^s = 1$.}
+        \label{fig:lka1a2p1}
+      \end{subfigure}
+      \caption{Calculated likelihood values at discrete $a_0^s$, $a_1^s$, and
+      $a_2^s$ with zero systematic uncertainty.}
+      \label{fig:likelihoods}
+    \end{figure}
+
+    \FloatBarrier
     
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -199,7 +271,7 @@ Outline the analysis section.
           = \int_{\theta}P(D^{obs}|\theta)P(\theta|\mathcal{M})d\theta \,.
     \end{equation*}
 
-  \subsubsection{Markov Chain Monte Carlo}
+  \subsubsection{Markov Chain Monte Carlo}\label{sec:mcmc}
     There is no way to calculate an exact solution to our posterior
     distribution analytically, but it can be estimated it numerically by
     sampling. Most sampling techniques would be computationally impossible due
@@ -227,31 +299,461 @@ Outline the analysis section.
     likelihood, $P(D^{obs}|\theta)$, and the prior, $P(\theta)$, need to be
     calculated.
 
-    The Metropolis sampling methods is used for both the parameter estimation
-    of the strange axial form factor parameters and the systematic nuisance
-    parameters. We don't expect the posterior distributions of the systematic
-    parameters to look different than their priors, and sampling them allows us
-    to account for the effect that they have on the data.  First, a Metropolis
-    step is proposed for new $a_0^2$, $a_1^s$, and $a_2^s$ values. The proposed
-    step is determined by drawing from a three-dimensional Gaussian
-    distribution centered at the current position of $a_0^s$, $a_1^s$, and
-    $a_s^2$. The width of the Gaussian in each dimension is optimized to the
-    data and the parameters. The likelihood value at the proposed position is
-    evaluated at the current position of the systematic nuisance parameters.
-    Then, a step is taken in all of the systematic nuisance parameters at once,
-    and the likelihood is evaluated at the current position of $a_0s$, $a_1^s$,
-    and $a_2^s$. The proposed positions of each of the six parameters in the
-    step are independent of each other and of the current parameter values. The
-    proposed systematic steps are drawn from Gaussian distributions
-    representing the estimated true distribution of the parameter value. This
-    is repeated iteratively until the posterior distribution has been
-    sufficiently covered.
+    Gibbs sampling as used in this analysis is also a random walk in the
+    N-dimensional parameter space, but it samples the posterior directly. We
+    cannot sample the posterior directly for the strange axial form factor
+    parameters that we want to infer from the data, but we can make an
+    approximation that allows us to use Gibbs sampling for our nuisance
+    parameters. At each Gibbs sampling iteration, subvectors of parameters,
+    $\theta_i \in \theta$, are cycled through and sampled conditionally on the
+    position of the previous subvector
+    $P(\theta_i^t|\theta_{-i}^{t-1},D^{obs})$, where $t$ is the current
+    iteration, $\theta_{-i}^{t-1}$ represents the current position all of the
+    other subvectors, $\theta_{-i}^{t-1} =
+    (\theta_0^t,...,\theta_{i-1}^t,\theta_{i+1}^{t-1},...,\theta_d^{t-1})$, and
+    $d$ is the number of subvectors in $\theta$.  Since the posterior is being
+    sampled directly, the sample is also conditional on the data, $D^{obs}$.
+    This is where the approximation comes in. If we assume that the nuisance
+    parameters are independent of the data, then
+    \begin{equation}\label{eq:gibbsstep}
+      P(\theta_i|\theta_{-i},D^{obs}) \approx P(\theta_i|\theta_{-i}) \,.
+    \end{equation}
+    The assumption being made here is that these parameter distributions, the
+    position and variance of the nuisance parameters, would not change very
+    much based on the data we are comparing to, $D^{obs}$. 
+
+    The Metropolis and Gibbs sampling methods are combined for the parameter
+    estimation.  First, a Metropolis step is proposed for new $a_0^s$, $a_1^s$
+    and $a_2^s$ values. The likelihood value at the proposed position is
+    evaluated conditionally on the current position of the systematic nuisance
+    parameters.  Then, a Gibbs step is taken in all of the systematic
+    parameters at once ($\theta_i$ is all of the nuisance parameters), and the
+    likelihood is evaluated conditionally on the current position of $a_0^s$,
+    $a_1^s$, and $a_2^s$. The proposed positions of each of the six parameters
+    in the step are independent of each other and of the current parameter
+    values.  This is repeated iteratively until the posterior distribution has
+    been sufficiently covered.
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Joint Estimation
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Results}\label{sec:results}
-  Lots of plots! $\Delta s$!
+
+  \subsubsection{MCMC Sampling without Systematic Nuisance Parameters}
+    The three strange axial form factor parameters are sampled first assuming no
+    systematic uncertainty. The main reason for doing this is to see if we get
+    something reasonable as a proof of concept. The extracted parameters don't
+    inform us about the true strange axial form factor when the systematic
+    uncertainty isn't accounted for.
+    
+    To sample without the systematic uncertainty, the proposal distribution for
+    each systematic nuisance parameter is set to zero. The proposal distribution
+    for the strange axial form factors was determined empirically to maximize the
+    coverage of the allowed parameter space. The final proposal distribution used
+    for the strange axial form factor parameters is a multivariate normal
+    distribution with a small amount of covariance between each of the
+    parameters. The covariance is included because of the strong anti-correlation
+    in the parameter likelihood distributions in Sec.~\ref{sec:likelihood}. If
+    the covariance were not included, the final sampled distributions would
+    eventually be the same, but it would take longer the to cover the parameter
+    space. The metric used to determine the sampling performance is the
+    acceptance rate. If the proposed step is too large, most moves will be
+    rejected (a low acceptance rate), and it will take a long time to cover the
+    parameter space. If the proposed stop is too small, most moves will be
+    accepted (a high acceptance rate), and it will take a long time to cover more
+    than just a small portion of the parameter space~\cite{Brooks:2011}.
+    
+    The proposal distribution used for the strange axial form factors is a
+    multivariate normal centered at the current position of the MCMC chain with
+    covariance:
+    \begin{equation}\label{eq:axproposal}
+      \Sigma = 
+      \begin{bmatrix}
+        0.075 & -0.1 & -0.2 \\
+        -0.1  &  1.5 & -2.0 \\
+        -0.2  & -2.0 &  30  
+      \end{bmatrix} \,,
+    \end{equation}
+    which gives a acceptance rate when ignoring systematic parameters of 0.55.
+    Figure~\ref{fig:gasproposals} shows the covariance between the three
+    parameters in the proposal distribution.
+    \begin{figure}[h]
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/proposals_nosyst_a0a1.pdf}
+      \hspace{2pt}
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/proposals_nosyst_a0a2.pdf}
+      \begin{flushright}
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/proposals_nosyst_a1a2.pdf}
+      \end{flushright} 
+      \caption{Two-dimensional views of the multivariate normal proposal
+      distribution of the strange axial form factor parameters.}
+      \label{fig:gasproposals}
+    \end{figure}
+
+    The prior distributions on the strange axial form factor parameters are
+    used to encode bounds on the coefficients $a_k^s$ for $k=0,\ldots,6$
+    introduced in Sec.~\ref{sec:ncaxial}. Following the $z$ expansion form
+    factor analyses in Refs.~\cite{Hill:2010yb,Bhattacharya:2011ah}, we enforce
+    $|a_k^s| \le 10$. Recall that $a_3^s,\ldots,a_6^s$ are linear combinations
+    of $a_0^s$, $a_1^s$, and $a_2^s$, making the coefficient bounds:
+    \begin{align}\label{eq:axprior}
+      |a_0^s| \le 10 \,, \hspace{5mm}
+      |a_1^s| \le 10 \,, \hspace{5mm}
+      |a_2^s| &\le 10 \,, \\
+      |-20 a_0^s - 10a_1^s - 4a_2^s| &\le 10 \,, \\
+      | 45 a_0^s + 20a_1^s + 6a_2^s| &\le 10 \,, \\
+      |-36 a_0^s - 15a_1^s - 4a_2^s| &\le 10 \,, \\
+      | 10 a_0^s + 4a_1^s + a_2^s| &\le 10 \,.
+    \end{align}
+    The optimal value of $t_0$ from Eq.~\ref{eq:topt} is used for the mapping
+    of $Q^2$ to $z(Q^2)$,
+    \begin{equation}
+      \begin{aligned}
+        t_0^{\textrm{optimal}}(Q^2) &= t_{cut}\Big(1 - \sqrt{1+Q^2_{\textrm{max}}/t_{cut}}\Big) \\
+                                    &= 9m_{\pi}^2 \Big(1-\sqrt{1+1.0\,\textrm{GeV}^2/(9m_{\pi}^2)}\Big) \\
+                                    &= -0.28\, \textrm{GeV}\,.
+      \end{aligned}
+    \end{equation}
+    
+    Figures~\ref{fig:chainns}-\ref{fig:samplesws} show the results of 50,000 MCMC steps
+    in $a_0^s$, $a_1^s$, and $a_2^s$ with the systematic parameters held at
+    zero. Figure~\ref{fig:chainns} shows the chains of MCMC samples for
+    $a_0^s$, $a_1^s$, and $a_2^s$. Figure~\ref{fig:samplesns} shows the 50,000
+    samples of the posterior distributions for each of the two-parameter pairs
+    of the strange axial form factor parameters. The correlation between the
+    $a_0^s$ and $a_1^s$ posterior distributions and the correlation between the
+    $a_1^s$ and $a_2^s$ posterior distributions are similar to the correlations
+    in the corresponding likelihood distributions even after introducing the
+    coefficient bounds and allowing all three parameters to vary
+    simultaneously. There doesn't appear to be correlation between the $a_0^s$
+    and $a_2^s$ posterior distributions, however, even though one exists
+    between the likelihood distributions.
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/samples_chain_nosyst_a0.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/samples_chain_nosyst_a1.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/samples_chain_nosyst_a2.pdf}
+      \caption{MCMC chains of the strange axial form factor parameters after
+      50,000 steps with the systematic parameters held to zero.}
+      \label{fig:chainns}
+    \end{figure}
+    \begin{figure}[h]
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/samples_nosyst_a1a0.png}
+      \hspace{2pt}
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/samples_nosyst_a2a0.png}
+      \begin{flushright}
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/samples_nosyst_a2a1.png}
+      \end{flushright} 
+      \caption{Two-dimensional views of the 50,000 MCMC samples of the
+      posterior distributions of the strange axial form factor parameters with
+      the systematic parameters held to zero.}
+      \label{fig:samplesns}
+    \end{figure}
+  
+
+  \subsubsection{MCMC Sampling with Systematic Nuisance Parameters}
+    The prior distributions of the systematic nuisance parameters are described
+    in Sec.~\ref{sec:systematics}. Since we don't expect the NC elastic proton
+    selection in data to increase our knowledge of the mean and variance of the
+    systematic parameters significantly, the posterior distributions of the
+    systematic parameters should look similar to the prior distributions. The
+    best proposal distributions of the parameters are therefore their prior
+    distributions since they are our best estimate of their posteriors which we
+    are not actually trying to measure.
+
+    For each of the systematic proposals, we sample a standard Gaussian with a
+    mean of zero and a variance of one and translate the sampled value to an
+    effect on the data. In the case of the dynamic induced charge the negative
+    of the absolute value is used because the uncertainty is only in one
+    direction. Each simulated event passing the NC elastic proton selection is
+    multiplied by a weight equal to the sampled parameter value times the
+    effect of the parameter on the event for each parameter. We assume there is
+    no correlation between the parameters and that there is a correlation of
+    one between bins for a given parameter. The effect of each parameter on the
+    event is described in Sec.~\ref{sec:systematics}. For the single PE
+    background rate the effect is the same for every event, and the weight is 
+    \begin{equation}
+      w_{\textrm{S.P.E}} = 1 + 0.2\cdot r_{\textrm{S.P.E}} \,,
+    \end{equation}
+    where $r_{\textrm{S.P.E.}}$ is the randomly sampled single PE value. The
+    effect of the dirt normalization uncertainty is the same for all dirt
+    events and zero for all non-dirt events,
+    \begin{equation}
+      w_{\textrm{dirt}} = 
+      \begin{cases}
+        1 &\textrm{non-dirt events} \\
+        1 + 0.5\cdot r_{\textrm{dirt}}  &\textrm{dirt events}
+      \end{cases} \,,
+    \end{equation}
+    where $r_{\textrm{dirt}}$ is the randomly sampled dirt parameter value. The
+    effect of the dynamic induced charge is applied to all simulated events and depending
+    on the reconstructed $Q^2$ value of the event,
+    \begin{equation}
+      w_{\textrm{D.I.C.}} = 
+      \begin{cases}
+        1 - 0.4\cdot |r_{\textrm{D.I.C.}}|  &Q^2_{reco} < 0.175 \,\textrm{GeV}^2 \\
+        1 - 0.25\cdot |r_{\textrm{D.I.C.}}|  &Q^2_{reco} \ge 0.175 \,\textrm{GeV}^2
+      \end{cases} \,,
+    \end{equation}
+    where $r_{\textrm{D.I.C.}}$ is the randomly sampled induced charged
+    parameter value. The effect of the neutrino flux uncertainty is applied to
+    all simulated events depending on the true neutrino energy of the event as
+    shown in Fig.~\ref{fig:ubflux}
+    \begin{equation}
+      w_{\textrm{flux}} = 1 + f_{\textrm{flux}}(E_{\nu})\cdot r_{\textrm{flux}} \,,
+    \end{equation}
+    where $f_{\textrm{flux}}(E_{\nu})$ is the fractional uncertainty for the
+    given true neutrino energy, and $r_{\textrm{flux}}$ is the randomly sampled
+    flux parameter value. The MEC uncertainty weight is applied only to
+    simulated true MEC events and is dependent on the true $Q^2$ value of the
+    event as shown in Fig.~\ref{fig:ccmecscale},
+    \begin{equation}
+      w_{\textrm{MEC}} = 
+      \begin{cases}
+        1 &\textrm{non-MEC events} \\
+        1 + f_{\textrm{MEC}}(Q^2_{true})\cdot r_{\textrm{MEC}}  &\textrm{MEC events}
+      \end{cases} \,,
+    \end{equation}
+    where $f_{\textrm{MEC}}(Q^2_{true})$  is the fractional uncertainty for the given
+    true $Q^2$, and $r_{\textrm{MEC}}$ is the randomly sampled MEC parameter
+    value. Finally, the Pauli blocking uncertainty weight is applied only to
+    all simulated events depending on the true $Q^2$ value of the event as
+    shown in Fig~\ref{fig:pauliblock},
+    \begin{equation}
+      w_{\textrm{P.B.}} = 1 + f_{\textrm{P.B.}}(Q^2_{true})\cdot r_{\textrm{P.B.}} \,,
+    \end{equation}
+    where $f_{\textrm{P.B.}}(Q^2_{true})$ is the fractional uncertainty for the
+    given true $Q^2$, and $r_{\textrm{P.B.}}$ is the randomly sampled Pauli
+    blocking parameter value.  The asymmetry in the uncertainty is ignored to
+    make it easier to evaluate the probability distribution. This is expected
+    to be inconsequential because the asymmetry is small, the overall
+    uncertainty is small relative to the other sources of uncertainty, and the
+    larger of the negative or positive uncertainties is used at each true $Q^2$
+    bin which is the conservative choice.
+
+    The strange axial form factor parameters are treated the same as when the
+    systematic parameters were held to zero. The proposal distribution is the
+    same multivariate normal in Eq.~\ref{eq:axproposal} center at the current
+    position, and the prior distributions are the same in
+    Eq.~\ref{eq:axprior} used to enforce the coefficient bounds.
+
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/samples_chain_wsyst_a0_50000.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/samples_chain_wsyst_a1_50000.pdf} \\
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/samples_chain_wsyst_a2_50000.pdf}
+      \caption{MCMC chains of the strange axial form factor parameters after
+      50,000 steps with the systematic parameters included.}
+      \label{fig:chainws}
+    \end{figure}
+    Figures~\ref{fig:chainws}-\ref{fig:samplesws} show the results of 50,000
+    MCMC steps in $a_0^s$, $a_1^s$, and $a_2^s$ with the systematic parameters
+    included.  Figure~\ref{fig:chainws} shows the chains of MCMC samples for
+    $a_0^s$, $a_1^s$, and $a_2^s$. Figure~\ref{fig:samplesws} shows the 50,000
+    samples of the posterior distributions for each of the two-parameter pairs
+    of the strange axial form factor parameters. The correlations between the
+    parameters are similar to the case with no systematic uncertainty, but with
+    larger variance.
+    \begin{figure}[h]
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/samples_wsyst_a1a0_50000.png}
+      \hspace{2pt}
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/samples_wsyst_a2a0_50000.png}
+      \begin{flushright}
+      \includegraphics[angle=0,width=2.8in]{figures/analysis/results/samples_wsyst_a2a1_50000.png}
+      \end{flushright} 
+      \caption{Two-dimensional views of the 50,000 MCMC samples of the
+      posterior distributions of the strange axial form factor parameters with
+      the systematic parameters included.}
+      \label{fig:samplesws}
+    \end{figure}
+
+    A bimodal shape in the $a_0^s$ and $a_1^s$ posterior distributions is
+    slightly visible in Figs.~\ref{fig:chainws}~and~\ref{fig:samplesws} and
+    becomes much more apparent when we look at the two-dimensional histogram of
+    the samples in $a_1^s$ and $a_0^s$ shown in Fig.~\ref{fig:hist2da1a0}.
+    Figure~\ref{fig:hist1dws} shows the one-dimensional histograms of the
+    samples of $a_0^s$, $a_1^s$, and $a_2^s$. The bimodal nature of the $a_0^s$
+    posterior distribution is very obvious in one dimension with one clear mode
+    at $a_0^s = -0.1$ and another at $a_0^s = 1.3$. The $a_1^s$ posterior
+    distribution also shows a slight bimodal shape in one dimension, but it is
+    not nearly as pronounced as in $a_0^s$.
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/hist2d_a1a0_wsyst.pdf} \\
+      \caption{Two-dimension histogram of the MCMC samples of the posterior
+      distribution for the $a_0^s$ and $a_1^s$ parameters.}
+      \label{fig:hist2da1a0}
+    \end{figure}
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=1.87in]{figures/analysis/results/hist1d_a0_wsyst.pdf} 
+      \includegraphics[angle=0,width=1.87in]{figures/analysis/results/hist1d_a1_wsyst.pdf} 
+      \includegraphics[angle=0,width=1.87in]{figures/analysis/results/hist1d_a2_wsyst.pdf}
+      \caption{One-dimensional histograms of the strange axial form factor
+      parameter samples.}
+      \label{fig:hist1dws}
+    \end{figure}
+
+    Figure~\ref{fig:postpred} shows the posterior predictive distribution of of
+    the number of expected events passing the NC elastic proton selection in
+    Run I. The posterior predictive distribution is a prediction of what the
+    data would look like based on the posterior distribution of the parameters.
+    It is used to check how well the model fits the data. If the posterior
+    predictive distribution is very different than the observed data, it shows
+    that the model is unable to fit the data. In Fig.~\ref{fig:postpred}, the
+    blue distributions at each value of reconstructed $Q^2$ are the posterior
+    predictive distributions, and the black points are the observed
+    neutrino-beam data events in Run I that pass the NC elastic proton
+    selection and the corresponding statistical uncertainty.
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=5.in]{figures/analysis/results/posterior_predict_modes.pdf} 
+      \caption{The posterior predictive distribution of the number of selected
+      events compared to Run I neutrino-beam data as a function of
+      reconstructed $Q^2$.}
+      \label{fig:postpred}
+    \end{figure}
+
+    To understand the different $a_0^s$ and $a_1^s$ modes better, the posterior
+    was divided into two samples: one with $a_0^s$ sample values less than 0.5
+    and one with $a_0^s$ sample values greater than 0.5. The posterior
+    predictive distributions were determined for each sample and the median of
+    each sample is plotted in Fig.~\ref{fig:postpred} in red and yellow. Mode
+    1, in red, is the sample with $a_0^s$ sample values less than 0.5, and Mode
+    2, in yellow, is the sample with $a_0^s$ values greater than 0.5. The
+    results are what would be expected. The Mode 1 sample, with low $a_0^s$
+    values and high $a_1^s$ corresponds to a larger number of selected events
+    at low $Q^2$ and a steeper slope in that region. The strange axial form
+    factor contributes negatively to the NC elastic neutrino-proton cross
+    section, as shown in Sec.~\ref{sec:strangeness}, so a large negative value
+    for the $0$th order term in the $z$ expansion corresponds to a larger cross
+    section at low $Q^2$. The Mode 2 sample, with more positive values of
+    $a_0^s$, corresponds to a smaller number of selected events at low $Q^2$
+    and a shallower slope in that region. It isn't clear from the posterior
+    predictive distribution why there are two distinct modes, however.
+
+  \subsubsection{Distributions of $\Delta s$ and $M_A^s$}
+
+    To transform the strange axial form factor $z$ expansion coefficients into
+    $\Delta s$, we use the relationship derived in Sec.~\ref{sec:ncaxial}
+    between $\Delta s$ and the coefficients,
+    \begin{equation}
+      \Delta s = a_0^s + a_1^s z_0 + a_2^s z_0^2 
+        + a_3^s z_0^3 + a_4^s z_0^4 + a_5^s z_0^5 + a_6^s z_0^6 \,.
+    \end{equation}
+    Recall that the coefficients $a_3^s,\ldots,a_6^s$ are linear combinations
+    of the first three coefficients as shown in Eq.~\ref{eq:coefficients}.
+    Additionally, the strange axial mass can be redefined in terms of the slope
+    of the strange axial form factor at $Q^2=0$, \begin{equation}
+    \begin{aligned} M_A^s &= \sqrt{2\frac{G_A^s(Q^2=0)}{G_A^{s\prime}(Q^2=0)}}
+    \\ &= \sqrt{2 \Delta s/(a_1^s + 2a_2^s z_0 + 3a_3^s z_0^2 + 4a_4^s z_0^3 +
+    5a_5^s z_0^4 + 6a_6^s z_0^5)} \,.  \end{aligned} \end{equation}
+
+    The dependence of $M_A^s$ on the square root of $\Delta s$ leads to an
+    interesting looking relationship in the posterior distribution between the
+    two parameters. Figure~\ref{fig:hist2dmads} shows the two-dimensional
+    histogram of the samples from the posterior distribution in terms of
+    $M_A^s$ and $\Delta s$. There is a clear difference in the shape of the
+    distribution for $\Delta s$ above or below zero. When $\Delta s$ is
+    positive, there is a positive correlation between $\Delta s$ and $M_A^s$,
+    and when $\Delta s$ is negative, there is a negative correlation between
+    the two.  \begin{figure}[h] \centering
+    \includegraphics[angle=0,width=4.5in]{figures/analysis/results/hist2d_dsMA.pdf}
+    \caption{Two-dimensional histogram of the MCMC samples transformed to
+    $\Delta s$ and $M_A^s$.} \label{fig:hist2dmads} \end{figure}
+
+    Figures~\ref{fig:hist1dds}~and~\ref{fig:hist1dma} show the one-dimensional
+    histograms of the samples MCMC of the posterior distribution in terms of
+    $Delta s$, in Fig.~\ref{fig:hist1dds}, and $M_A^s$, in
+    Fig.~\ref{fig:hist1dma}. The one-dimensional distributions make it clear
+    how large the variance of the parameters is. The mode, and 68\% and 95\%
+    credible intervals are shown for both parameters. The credible intervals
+    used here are the highest posterior density intervals (HPDs). The HPD is
+    defined as the narrowest interval that contains the given percentage of the
+    data.  \begin{figure}[h] \centering
+    \includegraphics[angle=0,width=4.5in]{figures/analysis/results/hist1d_ds.pdf}
+    \caption{One-dimensional histogram of the MCMC samples transformed to
+    $\Delta s$ with 68\% and 95\% credible intervals.} \label{fig:hist1dds}
+    \end{figure}
+
+    For $\Delta s$, the mode of the samples is at $\Delta s = -0.6$ with a 95\%
+    credible interval of $-2 < \Delta s < 4$. The 68\% credible interval is
+    separated into two distinct intervals around each of the two modes as shown
+    in Fig.~\ref{fig:hist1dds}. For, $M_A^s$, the mode of the samples is at
+    $M_A^s = 0.7$~GeV with a 95\% credible interval of $0\, \textrm{GeV} <
+    M_A^s < 2.1\, \textrm{GeV}$.
+    \begin{figure}[h]
+      \centering
+      \includegraphics[angle=0,width=4.5in]{figures/analysis/results/hist1d_MA.pdf} 
+      \caption{One-dimensional histogram of the MCMC samples transformed to
+      $M_A^s$ with 68\% and 95\% credible intervals.}
+      \label{fig:hist1dma}
+    \end{figure}
+    
+\subsection{Conclusions}
+  The measurement of the strange quark spin structure in the nucleon through NC
+  elastic neutrino-proton scattering remains an intriguing and important cross
+  check to measurements performed through deep inelastic scattering of
+  polarized charged-leptons and nucleons. MicroBooNE remains a good prospect
+  for carrying out this measurement because of its high resolution and neutrino
+  energy range. The machinery to identify protons in liquid argon TPCs and
+  select NC elastic events has been developed and is in a promising state. The
+  limiting factor of the measurement of $\Delta s$ in MicroBooNE is currently
+  the understanding of the detector physics that effect both the energy
+  reconstruction of TPC objects and the reconstruction of optical flashes in
+  the PMTs.
+
+  \subsubsection{Discussion of Results and Prospects for a Future MicroBooNE $\Delta s$ Measurement}
+    The 68\% credible interval around $\Delta s$ is larger than the previous
+    two NC elastic neutrino measurements of $\Delta s$ described in
+    Sec.~\ref{sec:neutrinos}. If we ignore the second mode in the $\Delta s$
+    posterior distribution, the 68\% interval ranges from less than negative
+    one to greater than positive one. However, the potential to drastically
+    reduce the uncertainty on the $\Delta s$ measurement exists. Due to the
+    fact that liquid argon TPCs are such a new technology, the ability to
+    identify protons, select low-$Q^2$ events with a reasonable efficiency, and
+    understand the relationship between simulated events in MicroBooNE and
+    measured data events are all hindered by the understanding of the detector
+    physics.
+
+    The largest source of systematic uncertainty on the expected number of
+    events is the dynamic induced charge, described in Sec.~\ref{sec:detvar}. A
+    full, two-dimensional simulation of the induced charge on each of the wire
+    is currently being incorporated into the MicroBooNE simulation, which
+    should have a huge effect on the uncertainty in the simulation. The dynamic
+    induced charge and other sources of uncertainty on the reconstruction of
+    TPC objects effect the use of calorimetry to identify particles, as well. A
+    lot of work has gone in to calibrating the energy deposited in the detector
+    and the charge collected on the wires, but the track reconstruction needs
+    to be precise enough to precisely determine the shape of the energy
+    deposited along the distance of the track. Improvements in our
+    understanding of the TPC physics will lead to reduced systematic
+    uncertainty on the NC elastic proton selection, as well as a higher
+    selection efficiency because we will be able to make more precise cuts on
+    reconstructed variables.
+    
+    The next largest effect is due to the optical model. The uncertainty on the
+    simulation of the light in MicroBooNE effects several aspects of this
+    analysis. As discussed in Sec.~\ref{sec:detvar}, the rate of a single PE
+    background shifts the center of the reconstructed flashes causing an
+    increase or reduction in the number of events selected.  Additionally,
+    because the light is not well modeled in MicroBooNE, the PE threshold for
+    events to be reconstructed was raised to reduce the disagreement between
+    the measured data and the expectation from simulation.  Since single, low
+    energy protons produce flashes near the threshold, this has a large effect
+    on the efficiency of the selection. Future iterations of MicroBooNE
+    simulation will have improvements to the optical model including a
+    treatment of Cherenkov light production and the time dependence of the
+    single PE rate leading to an increase in the selection efficiency and
+    reduction of systematic uncertainty.
+
+    The large variance in the posterior distribution of $\Delta s$ is mainly
+    due to a disagreement between the observed data and the expectation from
+    simulation that cannot be accounted for easily in the model. Once the
+    detector model has improved, a more precise measurement of $\Delta s$ will
+    be achievable. Several improvements are currently being made, and a better
+    measurement should be possible in the next iteration of MicroBooNE the
+    simulation model.
 
 
 %This is the end of analysis section
