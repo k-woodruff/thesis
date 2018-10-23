@@ -34,19 +34,17 @@ algorithms used by MicroBooNE are described in this section.
     nucleus. Within GENIE the nuclear models and neutrino-nucleon cross
     sections are configurable by the user. This analysis uses the GENIE version
     v2.12.2 default settings with the addition of the empirical MEC cross
-    section model. The details of the physics models for each of the four
-    processes (the nuclear physics model, the cross section model, the
-    neutrino-induced hadron production model, and the intranuclear hadron
-    transport model) within GENIE as well as the simulated cosmic ray
-    generation are described in this section. The uncertainties in the analysis
-    due to the models in this section are explored in
-    Sec.~\ref{sec:modeluncertainty}.
+    section model~\cite{Alam:2015nkk}. The details of the physics models for
+    each of the four processes (the nuclear physics model, the cross section
+    model, the neutrino-induced hadron production model, and the
+    intranuclear hadron transport model) within GENIE as well as the
+    simulated cosmic ray generation are described in this section. The
+    uncertainties in the analysis due to the models in this section are
+    explored in Sec.~\ref{sec:modeluncertainty}.
 
     First, the relativistic Fermi gas (RFG) nuclear model~\cite{Smith:1972xh}
-    is used for all processes. It has been modified in GENIE to incorporate
-    short-range nucleon-nucleon correlations using the model by Bodek and
-    Ritchie~\cite{Bodek:1981wr}. The mass density for the argon nucleus is
-    taken from review articles~\cite{DeJager:1987qc} and the two-parameter
+    is used for all processes. The mass density for the argon nucleus is taken
+    from review articles~\cite{DeJager:1987qc} and the two-parameter
     Woods-Saxon density function is used~\cite{Woods:1954zz}
     \begin{equation}\label{eq:woodssaxon}
       \rho(r) = N_0\frac{1}{1+e^{(r-c)/z}} \,,
@@ -67,21 +65,20 @@ algorithms used by MicroBooNE are described in this section.
 
     The hadrons produced in neutrino-nucleon interactions in a nucleus are
     modeled separately from the nuclear model and the free-nucleon cross
-    section model. This is because hadron production in empirical neutrino
-    scattering measurements does not match nuclear and neutrino-nucleon cross
-    section models. The hadron discrepancy is corrected for in GENIE using the
-    AGKY model~\cite{Yang:2009zx} that was developed to account for the data seen in
-    the MINOS~\cite{Adamson:2007gu} neutrino scattering experiment and tuned using
-    bubble chamber experimental data.
+    section model. This is because the hadron production models do not match
+    the measured neutrino cross sections.  The hadron discrepancy is corrected
+    for in GENIE using the AGKY model~\cite{Yang:2009zx} that was developed to
+    account for the data seen in the MINOS~\cite{Adamson:2007gu} neutrino
+    scattering experiment and tuned using bubble chamber experimental data.
 
-    Finally, the transport of the final state hadrons through the argon atom is
-    modeled. The hadrons produced in the neutrino-nucleon interactions can
+    Finally, the transport of the final state hadrons through the argon nucleus
+    is modeled. The hadrons produced in the neutrino-nucleon interactions can
     rescatter as the exit the nucleus which changes the observable final state
     particle distributions. The intranuclear transport model is implemented by
     the GENIE subpackage called INTRANUKE. INTRANUKE uses a cascade model in
     which the hadron sees a nucleus of isolated nucleons. The interaction
     probability is calculated based on the free nucleon cross section and the
-    nucleon density~\cite{Andreopoulos:2015wxa}
+    nucleon density in the nucleus~\cite{Andreopoulos:2015wxa}
     \begin{equation}
       \lambda(E,r) = \frac{1}{\sigma_{hN,tot} \rho(r)} \,,
     \end{equation}
@@ -97,23 +94,24 @@ algorithms used by MicroBooNE are described in this section.
     flux described in Sec.~\ref{sec:beam}. The 1.6~$\mu$s long spill containing
     $5\times 10^{12}$ protons on target is simulated.  In addition to neutrino
     events, cosmic ray events are also simulated with the
-    CORSIKA~\cite{Heck:1998vt} cosmic ray generator. CORSIKA uses the FLUKA cosmic
-    ray model and models the flux of protons, and helium, nitrogen, magnesium,
-    and iron atoms on the atmosphere. To simulate real detector events both
-    neutrino and cosmic ray interactions can be generated in the same
+    CORSIKA~\cite{Heck:1998vt} cosmic ray generator. CORSIKA uses the FLUKA
+    interaction and transport simulator~\cite{Battistoni:1997tq} to model
+    hadronic interactions in the atmosphere.  To simulate real detector events
+    both neutrino and cosmic ray interactions can be generated in the same
     simulation. We can also combine real cosmic data taken when the neutrino
     beam was turned off with simulated neutrino interactions in the same events
     to closely model the real detector data.
 
     In the standard simulation neutrino interactions are only generated within
-    the liquid argon filled cryostat. Additional special samples are made to
-    study how secondary particles from neutrino interactions outside the
-    cryostat contribute to our signal background. One special sample that we
-    generate is a large \textit{dirt} sample in which neutrino interactions
-    that happen in the dirt and detector hall outside of the cryostat are
-    generated.  The neutrino interactions are allowed to happen anywhere in
-    fifty feet of simulated dirt outside of the detector hall or anywhere in
-    the detector hall outside of the cryostat. These are known as dirt events.
+    the liquid argon filled cryostat, including interactions generated on the
+    cryostat itself. Additional special samples are made to study how secondary
+    particles from neutrino interactions outside the cryostat contribute to our
+    signal background. One special sample that we generate is a large
+    \textit{dirt} sample in which neutrino interactions that happen in the dirt
+    and detector hall outside of the cryostat are generated.  The neutrino
+    interactions are allowed to happen anywhere in fifty feet of simulated dirt
+    outside of the detector hall or anywhere in the detector hall outside of
+    the cryostat. These are known as dirt events.
 
     All of the Monte Carlo samples that are generated and used in this analysis
     are listed here.
@@ -239,16 +237,16 @@ interaction.
     The algorithm used to preferentially reconstruct cosmic tracks is called
     \textit{PandoraCosmic}. It is implemented in the Pandora Software
     Development Kit~\cite{Acciarri:2017hat} used by MicroBooNE. In
-    PandoraCosmic, 1D hits are first clustered in 2D per wire readout plane.
-    All of the reconstructed hits output by the hit finding algorithm on a
-    given wire plane are used as input. The hits are clustered into
-    unambiguous, continuous lines of hits. These initial clusters are meant to
-    have a high purity, meaning all of the hits in the cluster were induced by
-    the same true particle. The clusters in a 2D plane are then merged pairwise
-    in an attempt to improve the completeness of the cluster, meaning most of
-    the hits on that wire plane induced by a true particle are included in a
-    single merged cluster. The 2D clusters are then matched across the three
-    wire planes. The 3D track reconstruction algorithm checks each plane for
+    PandoraCosmic, 1D hits are first clustered in 2D per wire plane.  All of
+    the reconstructed hits output by the hit finding algorithm on a given wire
+    plane are used as input. The hits are clustered into unambiguous,
+    continuous lines of hits. These initial clusters are meant to have a high
+    purity, meaning all of the hits in the cluster were induced by the same
+    true particle. The clusters in a 2D plane are then merged pairwise in an
+    attempt to improve the completeness of the cluster, meaning most of the
+    hits on that wire plane induced by a true particle are included in a single
+    merged cluster. The 2D clusters are then matched across the three wire
+    planes. The 3D track reconstruction algorithm checks each plane for
     clusters which are likely to have come from the same true particle.  All
     possible combinations of 2D cluster matching are considered by the
     algorithm. The most suitable set of cluster combinations are projected into
@@ -288,14 +286,14 @@ interaction.
     line-like collections of hits and adds new hits to the cluster based on the
     2D trajectory of the current set of hits.  The algorithm stops when there
     are no additional hits along the trajectory of the cluster and is followed
-    by an additional stage that combines cluster which start and end near each
+    by an additional stage that combines clusters which start and end near each
     other. Next, 3D tracks are formed using the projection matching algorithm
     (PMA)~\cite{Antonello:2012hu} which was developed for the ICARUS experiment
     and implemented in LArSoft. PMA works by proposing nodes and lines
     connecting the nodes in 3D, projecting the 3D lines onto the 2D planes, and
     determining the most likely positions of the nodes in 3D based on the fit
     of the 2D projections to the existing 2D reconstructed clusters from the
-    previous stage. The algorithm start with a two-node hypothesis and adds
+    previous stage. The algorithm starts with a two-node hypothesis and adds
     nodes to the 3D line until a maximum number of nodes, which is based on the
     number of hits on the wires, has been reached.
 
@@ -305,11 +303,9 @@ interaction.
     trajectory. At each point along the track, the difference in the total
     charge between the current point and the previous trajectory point is
     calculated. This gives us the change in charge as a function of distance
-    along the track, which we label $dQ/dx$. The change in charge is determined
-    by adding the total charge of each of the reconstructed wire hits between
-    the two points on the track. The charge difference and the $dQ/dx$ values
-    are found for each of the three wire planes. The $dQ/dx$ values can be
-    converted to energy loss per unit distance, $dE/dx$, by multiplying the
+    along the track, which we label $dQ/dx$. The $dQ/dx$ values along each
+    track are found for each of the three wire planes. The $dQ/dx$ values can
+    be converted to energy loss per unit distance, $dE/dx$, by multiplying the
     $dQ/dx$ by a measured conversion factor. This conversion factor depends on
     the strength of the electric field and the gain of the readout electronics
     and is determined empirically~\cite{uBCalibrationNote}.

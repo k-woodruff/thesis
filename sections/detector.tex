@@ -19,8 +19,10 @@ this section.
   recent analysis of the data in~\cite{Aguilar-Arevalo:2018gpe}. If the excess
   is due to the $\nu_{\mu}$ to $\nu_e$ oscillations, it cannot be described by
   the standard three neutrino oscillation model, and it may be due to new
-  physics.  The MiniBooNE experiment is unable to distinguish between electrons
-  and photons at these low energies, and the excess might be due to a photon
+  physics such a fourth generation of neutrinos that do not interact through
+  any of the standard model forces.  The MiniBooNE experiment uses an oil
+  Cerenkov detector which is unable to distinguish between electrons and
+  photons at these low energies, and the excess might be due to a photon
   background. None of the known photon production mechanisms account for the
   excess of events seen.
 
@@ -47,7 +49,7 @@ this section.
   neutrino cross sections. Because of the high tracking and calorimetry
   resolution, the fine details of the neutrino interaction final states are
   visible~\cite{Adams:2018fud}. This allows MicroBooNE to study unknown
-  properties of scattering off if nucleons in a nucleus.  MicroBooNE's high
+  properties of scattering off nucleons in a nucleus.  MicroBooNE's high
   resolution also allows it to search for exotic physics like neutrinos from
   supernova explosions and proton decay events. Lastly, MicroBooNE provides
   important research and development for future liquid argon TPC programs such
@@ -76,33 +78,33 @@ this section.
   proton bunches that are 2~ns wide and 19~ns apart. At this stage, a fraction
   of the 8~GeV protons are extracted to be sent to the Booster neutrino target.
   A kicker magnet is used to extract all 81 proton bunches in a turn which we
-  refer to as a spill. One spill is 1.6~$\mu$s long and contains $5\times
+  refer to as a spill. One spill is 1.6~$\mu$s long and contains up to $5\times
   10^{12}$ protons.
 
-  The proton target is a beryllium cylinder 71.1~cm long and 0.51~cm thick that
-  is aligned with the proton beam. The interactions of the protons in the
-  beryllium produce secondary hadrons including charged and neutral pion,
-  kaons, and nucleons. The decay of the charged pions, charged and neutral
-  kaons, and muons from pion and kaon decays all contribute to the neutrino
-  flux at the MicroBooNE detector. The charged pions and kaons are focused by a
-  pulsed toroidal electromagnet operating at a maximum frequency of 5~Hz which
-  is the limiting factor in the beam spill frequency. In neutrino mode, the
-  magnet focuses positive particles and defocuses negative particles.  The
-  positive pions and kaons then pass through an air-filled decay pipe where
-  they quickly decay into positive muons (anti-muons) and neutrinos. In
-  anti-neutrino mode, which is not used in this analysis, negative pions and
-  kaons are focused which decay into negative muons and anti-neutrinos. The
-  anti-muons and neutrinos next pass through a beam stop made of steel and
-  concrete to filter out remaining protons, pions, and kaons.  Finally, the
-  anti-muons and neutrinos pass through almost 500~meters of dirt where the
-  anti-muons stop and decay, and a (mostly) pure neutrino beam remains.  The
-  predicted neutrino flux at MicroBooNE is shown in Fig.~\ref{fig:beamflux} per
-  $1\times 10^6$ protons on the target (POT). The neutrino flux prediction is
-  based on Geant4~\cite{Agostinelli:2002hh} (describe in Sec.~\ref{sec:detsim})
-  based Monte Carlo simulation of protons interacting with the beryllium target
-  and the magnetic focusing horn. The production rate of the secondary hadrons
-  are determined from external proton-beryllium experimental
-  data~\cite{Catanesi:2007ab}.
+  The proton target is a beryllium cylinder 71.1~cm long and 0.51~cm in
+  diameter that is aligned with the proton beam. The interactions of the
+  protons in the beryllium produce secondary hadrons including charged and
+  neutral pions, kaons, and nucleons. The decay of the charged pions, charged
+  and neutral kaons, and muons from pion and kaon decays all contribute to the
+  neutrino flux at the MicroBooNE detector. The charged pions and kaons are
+  focused by a pulsed toroidal electromagnet operating at a maximum frequency
+  of 5~Hz which is the limiting factor in the beam spill frequency. In neutrino
+  mode, the magnet focuses positive particles and defocuses negative particles.
+  The positive pions and kaons then pass through an air-filled decay pipe where
+  they quickly decay predominantly into positive muons (anti-muons) and muon
+  neutrinos. In anti-neutrino mode, which is not used in this analysis,
+  negative pions and kaons are focused which decay into negative muons and
+  anti-neutrinos. The anti-muons and neutrinos next pass through a beam stop
+  made of steel and concrete to filter out remaining protons, pions, and kaons.
+  Finally, the anti-muons and neutrinos pass through almost 500~meters of dirt
+  where the anti-muons stop and decay, and a (mostly) pure neutrino beam
+  remains.  The predicted neutrino flux at MicroBooNE is shown in
+  Fig.~\ref{fig:beamflux} per $1\times 10^6$ protons on the target (POT). The
+  neutrino flux prediction is based on Geant4~\cite{Agostinelli:2002hh}
+  (describe in Sec.~\ref{sec:detsim}) based Monte Carlo simulation of protons
+  interacting with the beryllium target and the magnetic focusing horn. The
+  production rate of the secondary hadrons are determined from external
+  proton-beryllium experimental data~\cite{Catanesi:2007ab}.
 
   \begin{figure}[h]
     \centering
@@ -171,12 +173,12 @@ this section.
   horizontally, perpendicular to the beam direction. To produce this uniform,
   horizontal electric field, a 10~m$\times$2.6~m cathode plane makes up one
   face of the TPC. This face is vertical and parallel to the beam. A voltage of
-  -70~kV is applied to the anode plane which results in a 273~V/cm electric
+  --70~kV is applied to the anode plane which results in a 273~V/cm electric
   field across the 2.3~m TPC width.  There are three wire planes at the anode,
   perpendicular to the electron drift direction and parallel to the cathode
   plane, that are strung with thousands of wires spaced 3~mm apart.  The three
   planes are all parallel to each other and are also spaced 3~mm apart.  The
-  wires on the first plane have a small negative voltage (-200~V), the middle
+  wires on the first plane have a small negative voltage (--200~V), the middle
   plane has no voltage, and the last plane has a small positive voltage
   (+440~V). When the electrons approach the first wire plane, they induce a
   signal on the closest wires, and are then attracted to the next plane because
@@ -192,7 +194,9 @@ this section.
   this process is shown in Fig.~\ref{fig:tpccartoon}. The wires are read out
   for 1.6~ms per event to ensure that the ionization electrons have time to
   traverse the entire width of the detector. One 1.6~ms readout window is
-  referred to as a frame.
+  referred to as a frame. In MicroBooNE the electron drift lifetime is
+  greater than 6 ms, which is twice as long as what is required to perform
+  analyses due to the high purity of the liquid argon~\cite{uBPurityNote}. 
 
   \begin{figure}[h]
     \centering
@@ -219,13 +223,13 @@ this section.
   protons on target (POT) is shown in Fig.~\ref{fig:interactions}. These were
   determined using a Monte Carlo simulation described in
   Sec.~\ref{sec:simulation}. The plots shows the expected number of events up
-  to $1\times 10^{21}$ POT. MicroBooNE is approved to run for a total of
-  $1.3\times 10^{21}$ POT. Figure~\ref{fig:interactionsnc} shows the expected
+  to $1\times 10^{21}$~POT. MicroBooNE is approved to run for a total of
+  $1.3\times 10^{21}$~POT. Figure~\ref{fig:interactionsnc} shows the expected
   number of the subset of neutral current interactions with NC elastic
   interactions in red. This line includes interactions on both proton and
   neutrons, so we expect the number of NC elastic proton events to be about
   half this. The integrated number of all expected NC elastic neutrino-proton
-  events from $1.3\times 10^{21}$ POT is approximately 30,000.
+  events from $1.3\times 10^{21}$~POT is approximately 30,000.
 
   The MicroBooNE detector is positioned just below the surface of the Earth,
   with no substantial overburden for shielding cosmic rays. The rate of cosmic
@@ -246,14 +250,12 @@ this section.
   Liquid argon also produces scintillation light. Tens of thousands of photons
   are produced per MeV of deposited energy ~\cite{Acciarri:2016smi}. The
   scintillation photons have a vacuum wavelength of 128~nm and do not
-  re-interact with the argon assuming there is no significant amount of
-  contaminants. In MicroBooNE, the electron drift lifetime is greater than 6
-  ms, which is twice as long as what is required to perform
-  analyses~\cite{uBPurityNote}. The light collection system in MicroBooNE
-  consists of 32 photomultiplier tubes (PMTs) behind the TPC anode wire planes.
-  Each PMT is shielded by an acrylic plate coated in tetraphenyl-butadiene
-  (TPB) that shifts the ultraviolet photons to the visible spectrum before they
-  interact with the PMT.
+  re-interact with the argon assuming there is not a significant amount of
+  contaminants. The light collection system in MicroBooNE consists of 32
+  photomultiplier tubes (PMTs) behind the TPC anode wire planes.  Each PMT is
+  shielded by an acrylic plate coated in tetraphenyl-butadiene (TPB) that
+  shifts the ultraviolet photons to the visible spectrum before they interact
+  with the PMT.
 
   The light collection system in MicroBooNE is particularly useful for timing
   information. Since each TPC event is read out over several milliseconds, it
@@ -274,20 +276,21 @@ this section.
 
   An event is saved when there is a coincidence between the accelerator beam
   signal and the PMT trigger implemented in the MicroBooNE data acquisition
-  (DAQ) software. The PMT trigger is based on a $23 \mu$s window of PMT data
+  (DAQ) software. The PMT trigger is based on a 23~$\mu$s window of PMT data
   which include the time of the neutrino beam spill. To form a trigger, first
   pulses are found on the thirty-two individual PMT signals using
   constant-fraction discriminators that open a 100~ns discriminator window, and
   a new window cannot be opened until the previous window has closed and there
   has been a 15~ns time period without the signal going above the discriminator
-  threshold.  The discriminator threshold is 10~ADC counts which corresponds to
-  approximately 0.5 photoelectrons (PE) in the PMT. The maximum of the PMT
-  signal during the discriminator window is saved as the pulse height.  Next,
-  coincident pulses across the different PMTs are found and combined.  Pulse
-  windows that occur at the same time are combined and their pulse heights are
-  summed. If the sum of the coincident pulse heights is above 20 ADC counts,
-  corresponding to approximately 6.5 PE, and the time of the coincident pulses
-  is within the neutrino beam-spill window, the event is saved.
+  threshold.  The discriminator threshold in an individual PMT is 10~ADC counts
+  which corresponds to approximately 0.5 photoelectrons (PE) in the PMT. The
+  maximum of the PMT signal during the discriminator window is saved as the
+  pulse height.  Next, coincident pulses across the different PMTs are found
+  and combined.  Pulse windows that occur at the same time are combined and
+  their pulse heights are summed. If the sum of the coincident pulse heights
+  across all 32 PMTs is above 20 ADC counts, corresponding to approximately 6.5
+  PE, and the time of the coincident pulses is within the neutrino beam-spill
+  window, the event is saved.
 
 
 %This is the end of detector section
